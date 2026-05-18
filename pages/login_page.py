@@ -12,6 +12,11 @@ class LoginPage:
         "//span[contains(normalize-space(),'Log In')]/ancestor::button"
     )
 
+    SNACKBAR_MESSAGE = (
+        By.CSS_SELECTOR,
+        ".SnackbarContent-root, .notistack-Snackbar, [role='alert']"
+    )
+
     def __init__(self, driver):
         self.driver = driver
         self.wait = WebDriverWait(driver, 20)
@@ -25,21 +30,23 @@ class LoginPage:
         ).send_keys(email)
 
     def enter_password(self, password):
-        self.driver.find_element(*self.PASSWORD_INPUT).send_keys(password)
+        self.wait.until(
+            EC.visibility_of_element_located(self.PASSWORD_INPUT)
+        ).send_keys(password)
 
     def click_login(self):
         self.wait.until(
             EC.element_to_be_clickable(self.LOGIN_BUTTON)
         ).click()
 
+    def login(self, email, password):
+        self.enter_email(email)
+        self.enter_password(password)
+        self.click_login()
+
     def get_snackbar_message(self):
         snackbar = self.wait.until(
-            EC.visibility_of_element_located(
-                (
-                    By.CSS_SELECTOR,
-                    ".SnackbarContent-root, .notistack-Snackbar, [role='alert']"
-                )
-            )
+            EC.visibility_of_element_located(self.SNACKBAR_MESSAGE)
         )
 
         text = snackbar.text.strip()

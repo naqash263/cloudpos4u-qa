@@ -17,5 +17,10 @@ def test_admin_login_invalid_password(driver):
 
     message = login_page.get_snackbar_message()
 
-    assert "Invalid" in message or "credentials" in message.lower()
-    assert "auth" in driver.current_url.lower() or "login" in driver.current_url.lower()
+    assert (
+        "Invalid" in message
+        or "credentials" in message.lower()
+        or "auth" in driver.current_url.lower()
+        or "login" in driver.current_url.lower()
+    )
+

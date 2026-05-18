@@ -41,9 +41,10 @@ class LoginPage:
                 )
             )
         )
-        return snackbar.text
 
-    def login(self, email, password):
-        self.enter_email(email)
-        self.enter_password(password)
-        self.click_login()
+        text = snackbar.text.strip()
+
+        if not text:
+            text = snackbar.get_attribute("textContent").strip()
+
+        return text

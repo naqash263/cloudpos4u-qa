@@ -39,7 +39,7 @@ jobs:
           DB_USER: ${{ secrets.DB_USER }}
           DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
         run: |
-          pytest --html=reports/report.html --self-contained-html
+          pytest tests/ui tests/api --html=reports/report.html --self-contained-html
 
       - name: Upload test report
         if: always()

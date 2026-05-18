@@ -8,21 +8,24 @@ from selenium.webdriver.chrome.options import Options
 @pytest.fixture
 def driver(request):
     options = Options()
-    options.add_argument("--start-maximized")
 
     prefs = {
         "profile.default_content_setting_values.notifications": 2
     }
     options.add_experimental_option("prefs", prefs)
 
-    driver = webdriver.Chrome(options=options)
-
-    yield driver
-
     if os.getenv("CI") == "true":
         options.add_argument("--headless=new")
         options.add_argument("--no-sandbox")
         options.add_argument("--disable-dev-shm-usage")
+        options.add_argument("--disable-gpu")
+        options.add_argument("--window-size=1920,1080")
+    else:
+        options.add_argument("--start-maximized")
+
+    driver = webdriver.Chrome(options=options)
+
+    yield driver
 
     if request.node.rep_call.failed:
         os.makedirs("reports/screenshots", exist_ok=True)

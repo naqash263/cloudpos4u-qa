@@ -19,6 +19,11 @@ def driver(request):
 
     yield driver
 
+    if os.getenv("CI") == "true":
+        options.add_argument("--headless=new")
+        options.add_argument("--no-sandbox")
+        options.add_argument("--disable-dev-shm-usage")
+
     if request.node.rep_call.failed:
         os.makedirs("reports/screenshots", exist_ok=True)
 

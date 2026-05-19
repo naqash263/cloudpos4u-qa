@@ -1,8 +1,9 @@
-venv/
 .env
-.idea/
+venv/
+.jenkins_venv/
 __pycache__/
 .pytest_cache/
-reports/screenshots/
 reports/
 *.jtl
+.idea/
+.DS_Store

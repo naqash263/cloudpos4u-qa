@@ -1,10 +1,14 @@
 import os
+import allure
 from dotenv import load_dotenv
 from pages.login_page import LoginPage
 
 load_dotenv()
 
 
+@allure.feature("UI Authentication")
+@allure.story("Valid Admin Login")
+@allure.severity(allure.severity_level.CRITICAL)
 def test_admin_login_success(driver):
     base_url = os.getenv("BASE_URL")
     email = os.getenv("ADMIN_EMAIL")
@@ -12,7 +16,11 @@ def test_admin_login_success(driver):
 
     login_page = LoginPage(driver)
 
-    login_page.load(base_url)
-    login_page.login(email, password)
+    with allure.step("Open admin login page"):
+        login_page.load(base_url)
 
-    assert "auth" in driver.current_url.lower() or "login" in driver.current_url.lower()
+    with allure.step("Login with valid admin credentials"):
+        login_page.login(email, password)
+
+    with allure.step("Verify user is redirected away from login page"):
+        assert "login" not in driver.current_url.lower()

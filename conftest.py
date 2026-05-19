@@ -1,5 +1,6 @@
 import os
 import pytest
+import allure
 from datetime import datetime
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
@@ -42,6 +43,25 @@ def driver(request):
 
         driver.save_screenshot(screenshot_path)
         print(f"\nScreenshot saved: {screenshot_path}")
+
+        with open(screenshot_path, "rb") as image_file:
+            allure.attach(
+                image_file.read(),
+                name=f"{test_name}_failure_screenshot",
+                attachment_type=allure.attachment_type.PNG
+            )
+
+        allure.attach(
+            driver.current_url,
+            name="Current URL",
+            attachment_type=allure.attachment_type.TEXT
+        )
+
+        allure.attach(
+            driver.page_source,
+            name="Page Source",
+            attachment_type=allure.attachment_type.HTML
+        )
 
     driver.quit()
 

@@ -3,6 +3,7 @@ import pytest
 from datetime import datetime
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
+from selenium.webdriver.chrome.service import Service
 
 
 @pytest.fixture
@@ -15,6 +16,7 @@ def driver(request):
     options.add_experimental_option("prefs", prefs)
 
     if os.getenv("CI") == "true":
+        options.binary_location = "/usr/bin/chromium"
         options.add_argument("--headless=new")
         options.add_argument("--no-sandbox")
         options.add_argument("--disable-dev-shm-usage")
@@ -23,7 +25,11 @@ def driver(request):
     else:
         options.add_argument("--start-maximized")
 
-    driver = webdriver.Chrome(options=options)
+    if os.getenv("CI") == "true":
+        service = Service("/usr/bin/chromedriver")
+        driver = webdriver.Chrome(service=service, options=options)
+    else:
+        driver = webdriver.Chrome(options=options)
 
     yield driver
 

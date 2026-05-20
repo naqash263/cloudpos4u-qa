@@ -72,3 +72,18 @@ class APIClient:
         self.logger.info(f"Create order API response status: {response.status_code}")
 
         return response
+
+    def create_order_with_custom_headers(self, payload, headers=None, cookies=None):
+        return requests.post(
+            f"{self.base_url}/order/",
+            json=payload,
+            headers=headers or {},
+            cookies=cookies or {}
+        )
+
+    def get_all_dishes_with_custom_headers(self, headers=None, cookies=None):
+        return requests.get(
+            f"{self.base_url}/dish/all",
+            headers=headers or {},
+            cookies=cookies or {}
+        )

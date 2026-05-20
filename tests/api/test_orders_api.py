@@ -56,6 +56,7 @@ def test_create_cash_paid_order_api():
         assert len(data["data"]["items"]) > 0
 
 
+
 @allure.feature("API Order Management")
 @allure.story("Create Order Without Authentication")
 @allure.severity(allure.severity_level.CRITICAL)
@@ -100,3 +101,4 @@ def test_create_order_without_auth_should_fail():
 
         assert data["status"] == 401
         assert "Authentication required" in data["message"]
+

@@ -1,0 +1,288 @@
+{
+  "info": {
+    "_postman_id": "c89c6757-7df6-4d7f-a8eb-076e9154e919",
+    "name": "CloudPOS4U QA API Collection",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "25803228"
+  },
+  "item": [
+    {
+      "name": "Login Success",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Status code is 200\", function () {",
+              "    pm.response.to.have.status(200);",
+              "});",
+              "",
+              "const jsonData = pm.response.json();",
+              "",
+              "pm.test(\"Login success is true\", function () {",
+              "    pm.expect(jsonData.success).to.eql(true);",
+              "});",
+              "",
+              "pm.test(\"Access token exists\", function () {",
+              "    pm.expect(jsonData.accessToken).to.be.a(\"string\");",
+              "});",
+              "",
+              "pm.test(\"User role is Admin\", function () {",
+              "    pm.expect(jsonData.data.role).to.eql(\"Admin\");",
+              "});",
+              "",
+              "pm.environment.set(\"accessToken\", jsonData.accessToken);",
+              "pm.environment.set(\"branchId\", jsonData.data.branchId);",
+              "pm.environment.set(\"branchCode\", jsonData.data.branch.code);"
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "type": "text"
+          },
+          {
+            "key": "Accept",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"email\": \"{{email}}\",\n  \"password\": \"{{password}}\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{base_url}}/user/login",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "user",
+            "login"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Login Invalid Password",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Status code is 401\", function () {",
+              "    pm.response.to.have.status(401);",
+              "});",
+              "",
+              "const jsonData = pm.response.json();",
+              "",
+              "pm.test(\"Invalid credentials message exists\", function () {",
+              "    pm.expect(jsonData.message).to.eql(\"Invalid Credentials\");",
+              "});",
+              "",
+              "pm.test(\"No access token should be returned\", function () {",
+              "    pm.expect(jsonData.accessToken).to.be.undefined;",
+              "});"
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"email\": \"{{email}}\",\n  \"password\": \"WrongPassword123!\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{base_url}}/user/login",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "user",
+            "login"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "New Request",
+      "request": {
+        "method": "GET",
+        "header": []
+      },
+      "response": []
+    },
+    {
+      "name": "New Request",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Status code is 201\", function () {",
+              "    pm.response.to.have.status(201);",
+              "});",
+              "",
+              "const jsonData = pm.response.json();",
+              "",
+              "pm.test(\"Order created successfully\", function () {",
+              "    pm.expect(jsonData.success).to.eql(true);",
+              "    pm.expect(jsonData.message).to.eql(\"Order created!\");",
+              "});",
+              "",
+              "pm.test(\"Order number exists\", function () {",
+              "    pm.expect(jsonData.data.orderNumber).to.be.a(\"string\");",
+              "});",
+              "",
+              "pm.test(\"Payment method is Cash\", function () {",
+              "    pm.expect(jsonData.data.paymentMethod).to.eql(\"Cash\");",
+              "});",
+              "",
+              "pm.test(\"Payment status is Paid\", function () {",
+              "    pm.expect(jsonData.data.paymentStatus).to.eql(\"Paid\");",
+              "});",
+              "",
+              "pm.test(\"Order type is Takeaway\", function () {",
+              "    pm.expect(jsonData.data.orderType).to.eql(\"Takeaway\");",
+              "});",
+              "",
+              "pm.environment.set(\"orderNumber\", jsonData.data.orderNumber);"
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{accessToken}}",
+            "type": "text"
+          },
+          {
+            "key": "x-branch-id",
+            "value": "{{branchId}}",
+            "type": "text"
+          },
+          {
+            "key": "x-branch-code",
+            "value": "{{branchCode}}",
+            "type": "text"
+          },
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "type": "text"
+          },
+          {
+            "key": "Accept",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"customerDetails\": {\n    \"name\": \"Postman Test Customer\",\n    \"phone\": \"971500000000\",\n    \"email\": \"postmantest@example.com\",\n    \"guests\": 1,\n    \"addresses\": []\n  },\n  \"sourceChannel\": \"Walk-in\",\n  \"orderType\": \"Takeaway\",\n  \"tipAmount\": 0,\n  \"orderStatus\": \"In Progress\",\n  \"orderDate\": \"2026-05-19T10:00:00.000Z\",\n  \"bills\": {\n    \"subtotal\": {{dishPrice}},\n    \"discountAmount\": 0,\n    \"total\": {{dishPrice}},\n    \"tax\": 0,\n    \"totalWithTax\": {{dishPrice}},\n    \"tipAmount\": 0\n  },\n  \"appliedDeals\": [],\n  \"items\": [\n    {\n      \"id\": \"{{dishId}}\",\n      \"dishId\": \"{{dishId}}\",\n      \"name\": \"{{dishName}}\",\n      \"price\": {{dishPrice}},\n      \"pricePerQuantity\": {{dishPrice}},\n      \"quantity\": 1\n    }\n  ],\n  \"paymentMethod\": \"Cash\",\n  \"paymentStatus\": \"Paid\",\n  \"paymentData\": {},\n  \"notes\": \"Created by Postman API test\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{base_url}}/order/",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "order",
+            ""
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "New Request",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Status code is 401\", function () {",
+              "    pm.response.to.have.status(401);",
+              "});",
+              "",
+              "const jsonData = pm.response.json();",
+              "",
+              "pm.test(\"Authentication required message exists\", function () {",
+              "    pm.expect(jsonData.message).to.include(\"Authentication required\");",
+              "});"
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"customerDetails\": {\n    \"name\": \"Postman Test Customer\",\n    \"phone\": \"971500000000\",\n    \"email\": \"postmantest@example.com\",\n    \"guests\": 1,\n    \"addresses\": []\n  },\n  \"sourceChannel\": \"Walk-in\",\n  \"orderType\": \"Takeaway\",\n  \"tipAmount\": 0,\n  \"orderStatus\": \"In Progress\",\n  \"orderDate\": \"2026-05-19T10:00:00.000Z\",\n  \"bills\": {\n    \"subtotal\": {{dishPrice}},\n    \"discountAmount\": 0,\n    \"total\": {{dishPrice}},\n    \"tax\": 0,\n    \"totalWithTax\": {{dishPrice}},\n    \"tipAmount\": 0\n  },\n  \"appliedDeals\": [],\n  \"items\": [\n    {\n      \"id\": \"{{dishId}}\",\n      \"dishId\": \"{{dishId}}\",\n      \"name\": \"{{dishName}}\",\n      \"price\": {{dishPrice}},\n      \"pricePerQuantity\": {{dishPrice}},\n      \"quantity\": 1\n    }\n  ],\n  \"paymentMethod\": \"Cash\",\n  \"paymentStatus\": \"Paid\",\n  \"paymentData\": {},\n  \"notes\": \"Created by Postman API test\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{base_url}}/order/",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "order",
+            ""
+          ]
+        }
+      },
+      "response": []
+    }
+  ]
+}

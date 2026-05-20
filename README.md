@@ -702,6 +702,16 @@ This project demonstrates:
 
 ---
 
+## Postman Collection
+
+The repository includes a Postman collection for API validation:
+
+```text
+postman/
+  CloudPOS4U_QA_API_Collection.json
+  CloudPOS4U_Postman_Environment.json
+```
+---
 ##  Summary
 
 This framework demonstrates a full QA automation workflow on a real SaaS POS product.

@@ -1,7 +1,7 @@
 ````markdown
 # CloudPOS4U QA Automation Framework
 
-CloudPOS4U QA Automation Framework is a practical end-to-end automation testing project built for a real restaurant POS SaaS platform.
+CloudPOS4U.com QA Automation Framework is a practical end-to-end automation testing project built for a real restaurant POS SaaS platform.
 
 This framework covers UI automation, API automation, performance testing, reporting, logging, and CI/CD execution using Selenium, Pytest, Python Requests, Postman, JMeter, Allure, GitHub Actions, and Jenkins.
 
@@ -36,7 +36,7 @@ The purpose of this repository is to demonstrate a complete Automation QA workfl
 
 ## Project Overview
 
-This repository contains an automation testing framework for CloudPOS4U, a restaurant POS platform.
+This repository contains an automation testing framework for CloudPOS4U.com, a restaurant POS platform.
 
 The framework validates important business flows such as:
 

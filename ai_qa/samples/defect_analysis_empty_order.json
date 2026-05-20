@@ -1,0 +1,37 @@
+{
+  "defect_title": "Order API allows creation of order with empty items list",
+  "severity": "High",
+  "priority": "High",
+  "module": "Order Management API",
+  "environment": "CloudPOS4U test/staging environment",
+  "preconditions": [
+    "Admin user is authenticated",
+    "Valid accessToken cookie is available",
+    "Valid branch context is available"
+  ],
+  "steps_to_reproduce": [
+    "Login as admin user",
+    "Send POST request to /api/order/",
+    "Use valid customer details and billing data",
+    "Set items as an empty array",
+    "Submit the request"
+  ],
+  "expected_result": "API should reject the request with 400 or 422 validation error and should not create an order.",
+  "actual_result": "API returns 201 Created and creates an order with no items.",
+  "impact": "Invalid empty orders can affect sales reports, kitchen workflows, billing accuracy, and analytics.",
+  "possible_root_cause": "Backend validation may not enforce minimum items count before order creation.",
+  "suggested_fix": "Add server-side validation to reject order payloads where items is missing or empty.",
+  "automation_evidence": {
+    "test_name": "test_create_order_with_missing_items_should_fail",
+    "current_status": "xfail known defect",
+    "expected_status_code": "400 or 422",
+    "actual_status_code": 201
+  },
+  "attachments_to_review": [
+    "Allure report",
+    "Pytest HTML report",
+    "API request payload",
+    "API response body",
+    "Jenkins console output"
+  ]
+}

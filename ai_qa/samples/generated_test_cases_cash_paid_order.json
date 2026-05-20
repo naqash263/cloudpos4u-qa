@@ -1,0 +1,146 @@
+{
+  "feature": "Cash-paid takeaway order creation",
+  "application": "CloudPOS4U",
+  "test_cases": [
+    {
+      "test_id": "TC-ORDER-001",
+      "category": "Positive",
+      "scenario": "Create a takeaway order with one available dish and cash payment",
+      "preconditions": [
+        "Admin user exists",
+        "Admin user is logged in",
+        "At least one available dish exists",
+        "Branch context is valid"
+      ],
+      "steps": [
+        "Open admin login page",
+        "Login with valid admin credentials",
+        "Navigate to POS menu",
+        "Select first available dish",
+        "Select order type as Takeaway",
+        "Select payment method as Cash",
+        "Set payment status as Paid",
+        "Click Place Order"
+      ],
+      "test_data": {
+        "orderType": "Takeaway",
+        "paymentMethod": "Cash",
+        "paymentStatus": "Paid",
+        "quantity": 1
+      },
+      "expected_result": "Order is created successfully and invoice popup is displayed",
+      "automation_priority": "High",
+      "automation_layer": "UI"
+    },
+    {
+      "test_id": "TC-ORDER-002",
+      "category": "API Positive",
+      "scenario": "Create cash-paid takeaway order through API",
+      "preconditions": [
+        "Valid JWT token is available",
+        "Valid x-branch-id and x-branch-code are available",
+        "At least one available dish exists"
+      ],
+      "steps": [
+        "Send login API request",
+        "Extract accessToken, branchId, and branchCode",
+        "Send get all dishes API request",
+        "Select available dish",
+        "Build order payload",
+        "Send POST /api/order/ request"
+      ],
+      "test_data": {
+        "endpoint": "/api/order/",
+        "orderType": "Takeaway",
+        "paymentMethod": "Cash",
+        "paymentStatus": "Paid"
+      },
+      "expected_result": "API returns 201 Created, success true, orderNumber exists, and paymentStatus is Paid",
+      "automation_priority": "High",
+      "automation_layer": "API"
+    },
+    {
+      "test_id": "TC-ORDER-003",
+      "category": "Negative",
+      "scenario": "Create order without authentication",
+      "preconditions": [
+        "Order payload is valid",
+        "No JWT token or accessToken cookie is provided"
+      ],
+      "steps": [
+        "Build valid order payload",
+        "Send POST /api/order/ without Authorization header and cookie"
+      ],
+      "test_data": {
+        "authorization": null,
+        "cookie": null
+      },
+      "expected_result": "API returns 401 Authentication required",
+      "automation_priority": "High",
+      "automation_layer": "Security"
+    },
+    {
+      "test_id": "TC-ORDER-004",
+      "category": "Negative",
+      "scenario": "Create order with empty items list",
+      "preconditions": [
+        "Valid admin token exists",
+        "Branch context is valid"
+      ],
+      "steps": [
+        "Build order payload with items as empty array",
+        "Send POST /api/order/ request"
+      ],
+      "test_data": {
+        "items": []
+      },
+      "expected_result": "API should return 400 or 422 validation error and should not create an order",
+      "automation_priority": "High",
+      "automation_layer": "API"
+    },
+    {
+      "test_id": "TC-ORDER-005",
+      "category": "Negative",
+      "scenario": "Create order with invalid dish ID",
+      "preconditions": [
+        "Valid admin token exists",
+        "Branch context is valid"
+      ],
+      "steps": [
+        "Build order payload using non-existing dishId",
+        "Send POST /api/order/ request"
+      ],
+      "test_data": {
+        "dishId": "00000000-0000-0000-0000-000000000000"
+      },
+      "expected_result": "API should return 400, 404, or 422 and should not create an order",
+      "automation_priority": "High",
+      "automation_layer": "API"
+    },
+    {
+      "test_id": "TC-ORDER-006",
+      "category": "Performance",
+      "scenario": "Validate create order API response time under small concurrent load",
+      "preconditions": [
+        "JMeter test plan exists",
+        "Login token extraction works",
+        "Available dish can be extracted dynamically"
+      ],
+      "steps": [
+        "Run JMeter login request",
+        "Extract JWT and branch context",
+        "Run get dishes request",
+        "Extract dish data",
+        "Run create order request"
+      ],
+      "test_data": {
+        "threads": 5,
+        "ramp_up": 10,
+        "loop_count": 1
+      },
+      "expected_result": "Error rate is 0 percent and create order response time remains acceptable",
+      "automation_priority": "Medium",
+      "automation_layer": "Performance"
+    }
+  ]
+}

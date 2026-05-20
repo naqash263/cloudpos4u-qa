@@ -1,4 +1,5 @@
 import requests
+from utils.logger import get_logger
 
 
 class APIClient:
@@ -8,8 +9,11 @@ class APIClient:
         self.token = None
         self.branch_id = None
         self.branch_code = None
+        self.logger = get_logger(self.__class__.__name__)
 
     def login(self, email, password):
+        self.logger.info("Sending login API request")
+
         response = requests.post(
             f"{self.base_url}/user/login",
             json={
@@ -17,6 +21,8 @@ class APIClient:
                 "password": password
             }
         )
+
+        self.logger.info(f"Login API response status: {response.status_code}")
 
         if response.status_code == 200:
             data = response.json()
@@ -41,16 +47,28 @@ class APIClient:
         }
 
     def get_all_dishes(self):
-        return requests.get(
+        self.logger.info("Sending get all dishes API request")
+
+        response = requests.get(
             f"{self.base_url}/dish/all",
             headers=self.get_headers(),
             cookies=self.get_cookies()
         )
 
+        self.logger.info(f"Get all dishes API response status: {response.status_code}")
+
+        return response
+
     def create_order(self, payload):
-        return requests.post(
+        self.logger.info("Sending create order API request")
+
+        response = requests.post(
             f"{self.base_url}/order/",
             json=payload,
             headers=self.get_headers(),
             cookies=self.get_cookies()
         )
+
+        self.logger.info(f"Create order API response status: {response.status_code}")
+
+        return response

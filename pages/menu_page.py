@@ -1,9 +1,8 @@
 from selenium.webdriver.common.by import By
-from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
+from pages.base_page import BasePage
 
 
-class MenuPage:
+class MenuPage(BasePage):
 
     FIRST_ADD_BUTTON = (
         By.XPATH,
@@ -20,26 +19,15 @@ class MenuPage:
         "//*[contains(text(),'Print Receipt') or contains(text(),'Kitchen Draft') or contains(text(),'Invoice')]"
     )
 
-    def __init__(self, driver):
-        self.driver = driver
-        self.wait = WebDriverWait(driver, 20)
-
     def open_pos_menu_direct(self, base_url):
-        app_url = base_url
-        self.driver.get(f"{app_url}/menu")
+        app_url = base_url.replace("/secure-admin-login-8822", "")
+        self.open_url(f"{app_url}/menu")
 
     def add_first_product_to_cart(self):
-        self.wait.until(
-            EC.element_to_be_clickable(self.FIRST_ADD_BUTTON)
-        ).click()
+        self.click(self.FIRST_ADD_BUTTON)
 
     def place_order(self):
-        self.wait.until(
-            EC.element_to_be_clickable(self.PLACE_ORDER_BUTTON)
-        ).click()
+        self.click(self.PLACE_ORDER_BUTTON)
 
     def invoice_is_visible(self):
-        invoice = self.wait.until(
-            EC.visibility_of_element_located(self.INVOICE_POPUP)
-        )
-        return invoice.is_displayed()
+        return self.is_visible(self.INVOICE_POPUP)

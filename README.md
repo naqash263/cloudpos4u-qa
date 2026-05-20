@@ -31,7 +31,7 @@ The purpose of this repository is to demonstrate a complete Automation QA workfl
 16. [Screenshots on Failure](#screenshots-on-failure)
 17. [Database Testing](#database-testing)
 18. [Key QA Concepts Demonstrated](#key-qa-concepts-demonstrated)
-19. [Interview Summary](#interview-summary)
+19. [Summary](#summary)
 20. [Future Improvements](#future-improvements)
 
 ---
@@ -704,7 +704,7 @@ This project demonstrates:
 
 ---
 
-## Interview Summary
+##  Summary
 
 This framework demonstrates a full QA automation workflow on a real SaaS POS product.
 
@@ -725,10 +725,10 @@ The framework is designed to be:
 * Reusable
 * Scalable
 * CI/CD-ready
-* Interview-friendly
+* User-friendly
 * Suitable for real QA engineering workflows
 
-A suitable interview explanation:
+A suitable User explanation:
 
 ```text
 I built an end-to-end QA automation framework for CloudPOS4U, a restaurant POS SaaS platform. The framework includes Selenium UI automation, API automation with Python Requests and Postman, JMeter performance testing, PostgreSQL validation, Pytest HTML reports, Allure reporting with screenshots on failure, GitHub Actions, and Jenkins CI/CD. Jenkins runs UI, API, and performance tests, generates Pytest, Allure, and JMeter reports, and archives them as build artifacts.

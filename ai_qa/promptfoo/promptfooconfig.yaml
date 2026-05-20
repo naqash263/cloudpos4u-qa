@@ -1,0 +1,60 @@
+description: "CloudPOS4U AI Order Assistant Evaluation"
+
+prompts:
+  - file://prompts/order_extraction_prompt.txt
+
+providers:
+  - openai:gpt-4o-mini
+
+tests:
+  - description: "Extract takeaway chicken biryani and sweet lassi order"
+    vars:
+      customer_message: "I want 2 chicken biryani and 1 sweet lassi for takeaway"
+    assert:
+      - type: contains-json
+      - type: contains
+        value: '"intent"'
+      - type: contains
+        value: '"create_order"'
+      - type: contains
+        value: '"Takeaway"'
+      - type: contains
+        value: '"Chicken Biryani"'
+      - type: contains
+        value: '"Lassi (Sweet)"'
+      - type: contains
+        value: '"needsConfirmation": true'
+
+  - description: "Extract dine-in mutton biryani order"
+    vars:
+      customer_message: "Table order please, one mutton biryani and two garlic naan"
+    assert:
+      - type: contains-json
+      - type: contains
+        value: '"Dine-in"'
+      - type: contains
+        value: '"Mutton Biryani"'
+      - type: contains
+        value: '"Garlic Naan"'
+
+  - description: "Unknown menu item should be unavailable"
+    vars:
+      customer_message: "I want 1 pizza and 1 chicken karahi"
+    assert:
+      - type: contains-json
+      - type: contains
+        value: '"Chicken Karahi"'
+      - type: contains
+        value: '"unavailableItems"'
+      - type: contains
+        value: 'pizza'
+
+  - description: "Menu query should not create order"
+    vars:
+      customer_message: "Do you have kulfi falooda?"
+    assert:
+      - type: contains-json
+      - type: contains
+        value: '"menu_query"'
+      - type: contains
+        value: '"Kulfi Falooda"'

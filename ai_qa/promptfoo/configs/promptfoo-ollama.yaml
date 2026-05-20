@@ -1,0 +1,25 @@
+description: "CloudPOS4U AI Order Assistant Evaluation - Ollama"
+
+prompts:
+  - file://../prompts/order_extraction_prompt.txt
+
+providers:
+  - id: ollama:chat:llama3.1
+    config:
+      temperature: 0
+      num_predict: 500
+
+tests:
+  - description: "Extract takeaway chicken biryani and sweet lassi order"
+    vars:
+      customer_message: "I want 2 chicken biryani and 1 sweet lassi for takeaway"
+    assert:
+      - type: contains-json
+      - type: contains
+        value: '"create_order"'
+      - type: contains
+        value: '"Takeaway"'
+      - type: contains
+        value: '"Chicken Biryani"'
+      - type: contains
+        value: '"Lassi (Sweet)"'

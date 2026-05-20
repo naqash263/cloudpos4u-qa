@@ -1,0 +1,10 @@
+customer_message,expected_intent,expected_order_type,expected_item_1,expected_quantity_1,expected_item_2,expected_quantity_2,expected_unavailable
+"I want 2 chicken biryani and 1 sweet lassi for takeaway",create_order,Takeaway,Chicken Biryani,2,Lassi (Sweet),1,
+"Table order please, one mutton biryani and two garlic naan",create_order,Dine-in,Mutton Biryani,1,Garlic Naan,2,
+"Do you have kulfi falooda?",menu_query,Unknown,Kulfi Falooda,1,,,
+"I need one chicken karahi for delivery",create_order,Delivery,Chicken Karahi,1,,,
+"Please give 3 tandoori roti and 1 mutton karahi for parcel",create_order,Takeaway,Tandoori Roti,3,Mutton Karahi,1,
+"I want pizza and one chicken biryani",create_order,Unknown,Chicken Biryani,1,,,pizza
+"Can I get two gulab jamun and one kashmiri chai?",create_order,Unknown,Gulab Jamun,2,Kashmiri Chai,1,
+"One beef biryani cash payment takeaway",create_order,Takeaway,Beef Biryani,1,,,
+"I want salted lassi",create_order,Unknown,Lassi (Salted),1,,,

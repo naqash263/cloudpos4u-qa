@@ -1,0 +1,42 @@
+description: "CloudPOS4U AI Order Assistant Evaluation - LM Studio Dataset"
+
+prompts:
+  - file://../prompts/order_extraction_prompt.txt
+
+providers:
+  - id: openai:chat:google/gemma-4-e4b
+    config:
+      apiBaseUrl: http://localhost:1234/v1
+      apiKey: lm-studio
+      temperature: 0
+      max_tokens: 800
+
+tests:
+  - file://../datasets/order_assistant_cases.csv
+
+defaultTest:
+  assert:
+    # Output contract checks
+    - type: contains-json
+    - type: regex
+      value: '^\s*\{'
+    - type: regex
+      value: '\}\s*$'
+    - type: not-contains
+      value: "Okay"
+    - type: not-contains
+      value: "Thinking"
+    - type: not-contains
+      value: "break this down"
+    - type: not-contains
+      value: "First,"
+    - type: not-contains
+      value: "I need to"
+
+    # Dynamic business checks from CSV
+    - type: contains
+      value: '"intent": "{{expected_intent}}"'
+    - type: contains
+      value: '"orderType": "{{expected_order_type}}"'
+    - type: contains
+      value: '"{{expected_item_1}}"'

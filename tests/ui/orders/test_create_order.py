@@ -1,4 +1,5 @@
 import allure
+from pages import dashboard_page
 from pages.login_page import LoginPage
 from pages.menu_page import MenuPage
 from utils.config import Config
@@ -22,6 +23,9 @@ def test_create_cash_paid_order(driver):
 
     with allure.step("Open POS menu page"):
         menu_page.open_pos_menu_direct(Config.BASE_URL)
+
+    with allure.step("Wait until menu page is visible"):
+        menu_page.wait_for_visible(menu_page.FIRST_ADD_BUTTON)
 
     with allure.step("Add first available product to cart"):
         menu_page.add_first_product_to_cart()

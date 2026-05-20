@@ -1,5 +1,7 @@
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.common.by import By
+from selenium.common.exceptions import TimeoutException
 from utils.logger import get_logger
 
 
@@ -58,3 +60,22 @@ class BasePage:
     def current_url_contains(self, text):
         self.logger.info(f"Checking current URL contains: {text}")
         return text.lower() in self.driver.current_url.lower()
+
+    def wait_for_url_contains(self, text):
+        self.logger.info(f"Waiting for URL to contain: {text}")
+        return self.wait.until(
+            lambda driver: text.lower() in driver.current_url.lower()
+        )
+
+    def wait_for_url_not_contains(self, text):
+        self.logger.info(f"Waiting for URL to not contain: {text}")
+        return self.wait.until(
+            lambda driver: text.lower() not in driver.current_url.lower()
+        )
+    def find_elements(self, locator):
+        self.logger.info(f"Finding elements: {locator}")
+
+        return self.driver.find_elements(*locator)
+
+    def page_contains_text(self, text):
+        return text.lower() in self.driver.page_source.lower()

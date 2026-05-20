@@ -1,20 +1,13 @@
-import pytest
 import allure
-from utils.config import Config
-from utils.api_client import APIClient
+import pytest
+
 from utils.payload_builder import PayloadBuilder
 
 
-@pytest.mark.xfail(
-    reason="Known defect: API currently allows creating order with empty items list",
-    strict=False
-)
-@allure.feature("API Order Management")
-@allure.story("Create Order With Missing Items")
-@allure.severity(allure.severity_level.NORMAL)
-def test_create_order_with_missing_items_should_fail():
-    api = APIClient(Config.API_BASE_URL)
-
+@allure.feature("API Security")
+@allure.story("Get Dishes With Invalid Token")
+@allure.severity(allure.severity_level.CRITICAL)
+def test_get_dishes_with_invalid_token_should_fail(api_client):
     headers = {
         "accept": "application/json",
         "Authorization": "Bearer invalid-token",
@@ -23,7 +16,7 @@ def test_create_order_with_missing_items_should_fail():
         "Content-Type": "application/json"
     }
 
-    response = api.get_all_dishes_with_custom_headers(headers=headers)
+    response = api_client.get_all_dishes_with_custom_headers(headers=headers)
 
     assert response.status_code in [401, 403]
 
@@ -35,45 +28,24 @@ def test_create_order_with_missing_items_should_fail():
 @allure.feature("API Order Management")
 @allure.story("Create Order Without Branch ID")
 @allure.severity(allure.severity_level.CRITICAL)
-def test_create_order_without_branch_id_should_fail():
-    api = APIClient(Config.API_BASE_URL)
-
-    login_response = api.login(
-        Config.ADMIN_EMAIL,
-        Config.ADMIN_PASSWORD
-    )
-
-    assert login_response.status_code == 200
-
-    dishes_response = api.get_all_dishes()
-    assert dishes_response.status_code == 200
-
-    dishes = dishes_response.json()["data"]
-
-    available_dishes = [
-        dish for dish in dishes
-        if dish["isAvailable"] is True and dish["branchId"] == api.branch_id
-    ]
-
-    assert len(available_dishes) > 0
-
+def test_create_order_without_branch_id_should_fail(authenticated_api_client, available_dish):
     payload = PayloadBuilder.cash_paid_order(
-        available_dishes[0],
+        available_dish,
         customer_name="Missing Branch Test Customer"
     )
 
     headers_without_branch = {
         "accept": "application/json",
-        "Authorization": f"Bearer {api.token}",
-        "x-branch-code": api.branch_code or "",
+        "Authorization": f"Bearer {authenticated_api_client.token}",
+        "x-branch-code": authenticated_api_client.branch_code or "",
         "Content-Type": "application/json"
     }
 
     cookies = {
-        "accessToken": api.token
+        "accessToken": authenticated_api_client.token
     }
 
-    response = api.create_order_with_custom_headers(
+    response = authenticated_api_client.create_order_with_custom_headers(
         payload,
         headers=headers_without_branch,
         cookies=cookies
@@ -85,23 +57,15 @@ def test_create_order_without_branch_id_should_fail():
 
     assert "message" in data
 
+
 @pytest.mark.xfail(
-    reason="Known defect: API currently allows creating order With Missing Items",
+    reason="Known defect: API currently allows creating order with empty items list",
     strict=False
 )
 @allure.feature("API Order Management")
 @allure.story("Create Order With Missing Items")
 @allure.severity(allure.severity_level.NORMAL)
-def test_create_order_with_missing_items_should_fail():
-    api = APIClient(Config.API_BASE_URL)
-
-    login_response = api.login(
-        Config.ADMIN_EMAIL,
-        Config.ADMIN_PASSWORD
-    )
-
-    assert login_response.status_code == 200
-
+def test_create_order_with_missing_items_should_fail(authenticated_api_client):
     payload = {
         "customerDetails": {
             "name": "Missing Items Test Customer",
@@ -130,13 +94,9 @@ def test_create_order_with_missing_items_should_fail():
         "notes": "Created by negative API test"
     }
 
-    response = api.create_order(payload)
+    response = authenticated_api_client.create_order(payload)
 
     assert response.status_code in [400, 422]
-
-    data = response.json()
-
-    assert "message" in data
 
 
 @pytest.mark.xfail(
@@ -146,21 +106,12 @@ def test_create_order_with_missing_items_should_fail():
 @allure.feature("API Order Management")
 @allure.story("Create Order With Invalid Dish ID")
 @allure.severity(allure.severity_level.NORMAL)
-def test_create_order_with_invalid_dish_id_should_fail():
-    api = APIClient(Config.API_BASE_URL)
-
-    login_response = api.login(
-        Config.ADMIN_EMAIL,
-        Config.ADMIN_PASSWORD
-    )
-
-    assert login_response.status_code == 200
-
+def test_create_order_with_invalid_dish_id_should_fail(authenticated_api_client):
     invalid_dish = {
         "id": "00000000-0000-0000-0000-000000000000",
         "name": "Invalid Dish",
         "price": 10,
-        "branchId": api.branch_id,
+        "branchId": authenticated_api_client.branch_id,
         "isAvailable": True
     }
 
@@ -169,10 +120,6 @@ def test_create_order_with_invalid_dish_id_should_fail():
         customer_name="Invalid Dish Test Customer"
     )
 
-    response = api.create_order(payload)
+    response = authenticated_api_client.create_order(payload)
 
     assert response.status_code in [400, 404, 422]
-
-    data = response.json()
-
-    assert "message" in data

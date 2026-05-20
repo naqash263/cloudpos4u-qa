@@ -1,6 +1,7 @@
 import requests
 from utils.logger import get_logger
-
+from utils.api.cloudpos_api_client import APIClient
+from utils.api_client import APIClient
 
 class APIClient:
 
@@ -84,6 +85,39 @@ class APIClient:
     def get_all_dishes_with_custom_headers(self, headers=None, cookies=None):
         return requests.get(
             f"{self.base_url}/dish/all",
+            headers=headers or {},
+            cookies=cookies or {}
+        )
+
+    def ask_staff_ai(self, prompt, mode="general", language="English", history=None):
+        self.logger.info("Sending AI staff assistant request")
+
+        payload = {
+            "prompt": prompt,
+            "branchId": self.branch_id,
+            "mode": mode,
+            "language": language,
+            "history": history or []
+        }
+
+        response = requests.post(
+            f"{self.base_url}/ai/ask-staff",
+            json=payload,
+            headers=self.get_headers(),
+            cookies=self.get_cookies()
+        )
+
+        self.logger.info(f"AI staff assistant response status: {response.status_code}")
+
+        if response.status_code >= 400:
+            self.logger.info(f"AI staff assistant error response: {response.text}")
+
+        return response
+
+    def ask_staff_ai_with_custom_headers(self, payload, headers=None, cookies=None):
+        return requests.post(
+            f"{self.base_url}/ai/ask-staff",
+            json=payload,
             headers=headers or {},
             cookies=cookies or {}
         )

@@ -744,25 +744,37 @@ I built an end-to-end QA automation framework for CloudPOS4U, a restaurant POS S
 
 ---
 
+## GenAI QA Tests
+
+The framework includes GenAI QA tests for AI order extraction output validation.
+
+Covered areas:
+
+- JSON output parsing
+- Schema validation
+- Intent validation
+- Order type validation
+- Menu item extraction
+- Quantity extraction
+- Unavailable item handling
+- Optional live LM Studio validation
+
+Run stable GenAI QA tests:
+
+```bash
+pytest tests/ai -m "not ai_live"
+```
+---
+
+
 ## Future Improvements
 
 Planned improvements:
 
-* Add more API negative tests
-* Add schema validation for API responses
-* Add Jenkinsfile for pipeline-as-code
-* Add Docker Compose for local test execution
-* Add Allure trend history in Jenkins
-* Add Slack/Email notifications from Jenkins
-* Add more role-based permission tests
-* Add database cleanup after API test order creation
-* Add test data management strategy
-* Add cross-browser testing
-* Add Appium mobile automation if mobile app testing is required
-* Add LoadRunner learning notes for job alignment
-* Add Swagger/OpenAPI contract validation
+* Suggest If you have something
 
 ---
+
 
 ## Author
 

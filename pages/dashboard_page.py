@@ -6,7 +6,7 @@ class DashboardPage(BasePage):
 
     DASHBOARD_ELEMENT = (
         By.XPATH,
-        "//*[contains(text(),'Good Afternoon') or contains(text(),'Completed Orders') or contains(text(),'Sales')]"
+        "//*[contains(text(),'Good Afternoon') or contains(text(),'Total Revenue') or contains(text(),'Revenue Overview')]"
     )
 
     def dashboard_loaded(self):

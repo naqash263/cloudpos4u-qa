@@ -50,7 +50,7 @@ pipeline {
                         . .jenkins_venv/bin/activate
 
                         echo "Running Pytest UI and API tests..."
-                        pytest tests/ui tests/api \
+                        pytest tests/ui tests/api tests/ai -m "not ai_live" \
                           --html=reports/report.html \
                           --self-contained-html \
                           --alluredir=reports/allure-results

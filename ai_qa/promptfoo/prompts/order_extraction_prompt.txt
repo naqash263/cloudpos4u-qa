@@ -71,5 +71,34 @@ Return exactly this JSON shape:
   "needsConfirmation": true
 }
 
+Menu query rules:
+- If intent is "menu_query", still extract the mentioned menu item into items.
+- For menu queries, use quantity 1 by default.
+- Example: "Do you have kulfi falooda?" must return item name "Kulfi Falooda" with quantity 1.
+
+Item rules:
+- If quantity is not mentioned, use 1.
+- Match customer wording to available menu items.
+- "sweet lassi" means "Lassi (Sweet)".
+- "salted lassi" means "Lassi (Salted)".
+- Unknown items must go to unavailableItems.
+- If intent is "menu_query", still extract the mentioned menu item into items.
+- For menu_query, use quantity 1 by default.
+- For menu_query, needsConfirmation should be false.
+- Example: "Do you have kulfi falooda?" must return:
+{
+  "intent": "menu_query",
+  "orderType": "Unknown",
+  "paymentMethod": "Unknown",
+  "items": [
+    {
+      "name": "Kulfi Falooda",
+      "quantity": 1
+    }
+  ],
+  "unavailableItems": [],
+  "needsConfirmation": false
+}
+
 Customer message:
 {{customer_message}}

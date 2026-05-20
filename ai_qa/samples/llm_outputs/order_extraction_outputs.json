@@ -1,0 +1,96 @@
+[
+  {
+    "case_id": "AI-ORDER-001",
+    "customer_message": "I want 2 chicken biryani and 1 sweet lassi for takeaway",
+    "raw_output": {
+      "intent": "create_order",
+      "orderType": "Takeaway",
+      "paymentMethod": "Unknown",
+      "items": [
+        {
+          "name": "Chicken Biryani",
+          "quantity": 2
+        },
+        {
+          "name": "Lassi (Sweet)",
+          "quantity": 1
+        }
+      ],
+      "unavailableItems": [],
+      "needsConfirmation": true
+    },
+    "expected": {
+      "intent": "create_order",
+      "orderType": "Takeaway",
+      "items": [
+        {
+          "name": "Chicken Biryani",
+          "quantity": 2
+        },
+        {
+          "name": "Lassi (Sweet)",
+          "quantity": 1
+        }
+      ]
+    }
+  },
+  {
+    "case_id": "AI-ORDER-002",
+    "customer_message": "Do you have kulfi falooda?",
+    "raw_output": {
+      "intent": "menu_query",
+      "orderType": "Unknown",
+      "paymentMethod": "Unknown",
+      "items": [
+        {
+          "name": "Kulfi Falooda",
+          "quantity": 1
+        }
+      ],
+      "unavailableItems": [],
+      "needsConfirmation": false
+    },
+    "expected": {
+      "intent": "menu_query",
+      "orderType": "Unknown",
+      "items": [
+        {
+          "name": "Kulfi Falooda",
+          "quantity": 1
+        }
+      ]
+    }
+  },
+  {
+    "case_id": "AI-ORDER-003",
+    "customer_message": "I want pizza and one chicken biryani",
+    "raw_output": {
+      "intent": "create_order",
+      "orderType": "Unknown",
+      "paymentMethod": "Unknown",
+      "items": [
+        {
+          "name": "Chicken Biryani",
+          "quantity": 1
+        }
+      ],
+      "unavailableItems": [
+        "pizza"
+      ],
+      "needsConfirmation": true
+    },
+    "expected": {
+      "intent": "create_order",
+      "orderType": "Unknown",
+      "items": [
+        {
+          "name": "Chicken Biryani",
+          "quantity": 1
+        }
+      ],
+      "unavailableItems": [
+        "pizza"
+      ]
+    }
+  }
+]

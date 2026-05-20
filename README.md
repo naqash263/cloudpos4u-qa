@@ -1,5 +1,3 @@
-Yes — copy everything below and paste it directly into your `README.md` file.
-
 ````markdown
 # CloudPOS4U QA Automation Framework
 

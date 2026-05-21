@@ -3,7 +3,9 @@ import pytest
 
 from utils.payload_builder import PayloadBuilder
 
-
+@pytest.mark.api
+@pytest.mark.negative
+@pytest.mark.regression
 @allure.feature("API Security")
 @allure.story("Get Dishes With Invalid Token")
 @allure.severity(allure.severity_level.CRITICAL)
@@ -24,7 +26,9 @@ def test_get_dishes_with_invalid_token_should_fail(api_client):
 
     assert "message" in data
 
-
+@pytest.mark.api
+@pytest.mark.negative
+@pytest.mark.regression
 @allure.feature("API Order Management")
 @allure.story("Create Order Without Branch ID")
 @allure.severity(allure.severity_level.CRITICAL)
@@ -57,7 +61,10 @@ def test_create_order_without_branch_id_should_fail(authenticated_api_client, av
 
     assert "message" in data
 
-
+@pytest.mark.api
+@pytest.mark.negative
+@pytest.mark.known_defect
+@pytest.mark.regression
 @pytest.mark.xfail(
     reason="Known defect: API currently allows creating order with empty items list",
     strict=False
@@ -98,7 +105,10 @@ def test_create_order_with_missing_items_should_fail(authenticated_api_client):
 
     assert response.status_code in [400, 422]
 
-
+@pytest.mark.api
+@pytest.mark.negative
+@pytest.mark.known_defect
+@pytest.mark.regression
 @pytest.mark.xfail(
     reason="Known defect: API currently allows creating order with invalid dish ID",
     strict=False

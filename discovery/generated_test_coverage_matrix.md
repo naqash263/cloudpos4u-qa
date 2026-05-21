@@ -4,14 +4,14 @@
 
 ## 1. Executive QA Coverage Summary
 
-| Metric | Status | Details |
-| :--- | :--- | :--- |
+| Metric | Status | Details                                                                                                                                                             |
+| :--- | :--- |:--------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | **Overall Coverage** | **~65%** | Critical revenue workflows (Login, POS Order) are automated. High-risk API endpoints (Orders, Payments) have partial coverage. GenAI features are largely untested. |
-| **UI Automation** | **Low-Medium** | Core pages (Login, Dashboard, Menu) covered. Complex flows (Delivery, Dine-in, Split Payment) pending. |
-| **API Automation** | **Medium** | GET endpoints validated for schema. POST/PUT critical paths (Order Creation, Update) partially automated. Negative testing exists but needs expansion. |
-| **Performance** | **Low** | Only Login and Menu Load tested via JMeter. Order creation under load is a known gap. |
-| **Security** | **Critical Gap** | Auth endpoints validated for success/fail. RBAC, Token Expiry, and Injection vulnerabilities not yet automated. |
-| **GenAI Coverage** | **Zero** | AI Assistant, Insights, and Training routes exist but have no test cases defined. |
+| **UI Automation** | **Low-Medium** | Core pages (Login, Dashboard, Menu) covered. Complex flows (Delivery, Dine-in, Split Payment) pending.                                                              |
+| **API Automation** | **Medium** | GET endpoints validated for schema. POST/PUT critical paths (Order Creation, Update) partially automated. Negative testing exists but needs expansion.              |
+| **Performance** | **Low** | Only Login and Menu Load tested via JMeter. Order creation under load is a known gap. Done / Initial coverage done                                                                              |
+| **Security** | **Critical Gap** | Auth endpoints validated for success/fail. RBAC, Token Expiry, and Injection vulnerabilities not yet automated.                                                     |
+| **GenAI Coverage** | **Zero** | AI Assistant, Insights, and Training routes exist but have no test cases defined.                                                                                   |
 
 **Key Insight:** The system relies heavily on manual verification for complex order states (Delivery vs. Dine-in) and inventory logic. Automation should shift focus from "Page Load" to "Business Logic Validation" (e.g., Stock deduction after order).
 

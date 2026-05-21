@@ -1,10 +1,13 @@
 import allure
 from pages import dashboard_page
+import pytest
 from pages.login_page import LoginPage
 from pages.menu_page import MenuPage
 from utils.config import Config
 
-
+@pytest.mark.ui
+@pytest.mark.smoke
+@pytest.mark.regression
 @allure.feature("UI POS Order Management")
 @allure.story("Create Cash Paid Order")
 @allure.severity(allure.severity_level.BLOCKER)

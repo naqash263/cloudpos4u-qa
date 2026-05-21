@@ -1,8 +1,11 @@
 import allure
+import pytest
 from utils.config import Config
 from utils.api_client import APIClient
 
-
+@pytest.mark.api
+@pytest.mark.smoke
+@pytest.mark.regression
 @allure.feature("API Authentication")
 @allure.story("Login API Success")
 @allure.severity(allure.severity_level.CRITICAL)
@@ -27,7 +30,9 @@ def test_login_api_success():
         assert data["data"]["role"] == "Admin"
         assert data["data"]["status"] == "Active"
 
-
+@pytest.mark.api
+@pytest.mark.negative
+@pytest.mark.regression
 @allure.feature("API Authentication")
 @allure.story("Login API Invalid Password")
 @allure.severity(allure.severity_level.NORMAL)

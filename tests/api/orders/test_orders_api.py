@@ -1,8 +1,11 @@
 import allure
+import pytest
 
 from utils.payload_builder import PayloadBuilder
 
-
+@pytest.mark.api
+@pytest.mark.smoke
+@pytest.mark.regression
 @allure.feature("API Order Management")
 @allure.story("Create Cash Paid Order API")
 @allure.severity(allure.severity_level.BLOCKER)
@@ -28,7 +31,9 @@ def test_create_cash_paid_order_api(authenticated_api_client, available_dish):
     assert data["data"]["branchId"] == authenticated_api_client.branch_id
     assert len(data["data"]["items"]) > 0
 
-
+@pytest.mark.api
+@pytest.mark.negative
+@pytest.mark.regression
 @allure.feature("API Order Management")
 @allure.story("Create Order Without Authentication")
 @allure.severity(allure.severity_level.CRITICAL)

@@ -1,11 +1,14 @@
 import os
 import allure
+import pytest
 from dotenv import load_dotenv
 from pages.login_page import LoginPage
 
 load_dotenv()
 
-
+@pytest.mark.ui
+@pytest.mark.regression
+@pytest.mark.negative
 @allure.feature("UI Authentication")
 @allure.story("Invalid Admin Login")
 @allure.severity(allure.severity_level.NORMAL)

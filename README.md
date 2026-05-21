@@ -1,8 +1,7 @@
 # CloudPOS4U.com QA Automation Framework
 
-This repository contains a complete QA automation framework for CloudPOS4U, a restaurant POS platform.  
-The framework covers UI automation, API automation, GenAI QA testing, performance testing, reporting, and CI/CD execution.
-
+This repository contains a complete QA automation framework for CloudPOS4U, a restaurant POS platform.
+This framework covers UI automation, API automation,GenAI QA testing, performance testing, reporting, logging, and CI/CD execution using Selenium, Pytest, Python Requests, Postman, JMeter, Allure, GitHub Actions, and Jenkins.
 ---
 
 ## 1. Project Overview
@@ -11,7 +10,11 @@ CloudPOS4U QA Automation validates critical business workflows across:
 
 - Admin login
 - Dashboard access
+- POS menu access
 - POS order creation
+- Unauthorized access handling
+- Menu API performance
+- Order creation performance
 - API authentication
 - API order creation
 - Negative API validation
@@ -40,6 +43,20 @@ This framework is built as a practical senior QA automation portfolio using real
 | Backend/API | Node.js APIs |
 | Database | PostgreSQL |
 | Version Control | GitHub |
+
+---
+### Main tested URLs:
+
+```text
+Frontend/Admin URL:
+https://bakebite-pos.cloudpos4u.com
+
+Application URL:
+https://bakebite-pos.cloudpos4u.com
+
+API Base URL:
+https://bakebite-pos.cloudpos4u.com/api
+````
 
 ---
 
@@ -89,101 +106,132 @@ This framework is built as a practical senior QA automation portfolio using real
 
 ```
 cloudpos4u-qa/
-  pages/
-    base_page.py
-    login_page.py
-    dashboard_page.py
-    menu_page.py
-
-  tests/
-    helpers/
-      api_assertions.py
-
-    ui/
-      auth/
-        test_login.py
-        test_invalid_login.py
-      dashboard/
-        test_dashboard.py
-      orders/
-        test_create_order.py
-
-    api/
-      conftest.py
-      auth/
-        test_login_api.py
-      orders/
-        test_orders_api.py
-        test_negative_orders_api.py
-
-    ai/
-      conftest.py
-      contract/
-        test_json_output_parser.py
-        test_ai_order_extraction_contract.py
-      live/
-        test_lmstudio_live_order_extraction.py
-      real_api/
-        test_ai_staff_assistant_api.py
-        test_ai_analytics_endpoints.py
-        test_ai_provider_connectivity.py
-
-  utils/
-    api_client.py
-    config.py
-    db_client.py
-    logger.py
-    payload_builder.py
-
-    api/
-      base_client.py
-      auth_client.py
-      menu_client.py
-      order_client.py
-      ai_client.py
-      cloudpos_api_client.py
-
-  ai_qa/
-    parsers/
-      json_output_parser.py
-    promptfoo/
-      prompts/
-        order_extraction_prompt.txt
-      datasets/
-        order_assistant_cases.csv
-      configs/
-        promptfoo-lmstudio.yaml
-        promptfoo-openai.yaml
-        promptfoo-ollama.yaml
-      results/
-        lmstudio_dataset_eval_notes.md
-      run_promptfoo.sh
-    samples/
-      llm_outputs/
-        order_extraction_outputs.json
-
-  performance/
-    cloudpos4u-performance.jmx
-
-  postman/
-    CloudPOS4U_QA_API_Collection.json
-    CloudPOS4U_Postman_Environment.json
-
-  reports/
-    report.html
-    allure-results/
-    allure-report/
-    jmeter-report/
-    logs/
-
-  .github/
-    workflows/
-      qa-tests.yml
-
-  Jenkinsfile
-  pytest.ini
-  requirements.txt
-  README.md
+├── README.md
+├── Jenkinsfile
+├── pytest.ini
+├── requirements.txt
+├── .gitignore
+│
+├── conftest.py
+│
+├── pages/
+│   ├── base_page.py
+│   ├── login_page.py
+│   ├── dashboard_page.py
+│   └── menu_page.py
+│
+├── utils/
+│   ├── config.py
+│   ├── logger.py
+│   ├── payload_builder.py
+│   ├── db_client.py
+│   ├── api_client.py
+│   │
+│   └── api/
+│       ├── base_client.py
+│       ├── auth_client.py
+│       ├── menu_client.py
+│       ├── order_client.py
+│       ├── ai_client.py
+│       └── cloudpos_api_client.py
+│
+├── tests/
+│   ├── helpers/
+│   │   └── api_assertions.py
+│   │
+│   ├── ui/
+│   │   ├── auth/
+│   │   │   ├── test_login.py
+│   │   │   └── test_invalid_login.py
+│   │   ├── dashboard/
+│   │   │   └── test_dashboard.py
+│   │   └── orders/
+│   │       └── test_create_order.py
+│   │
+│   ├── api/
+│   │   ├── conftest.py
+│   │   ├── auth/
+│   │   │   └── test_login_api.py
+│   │   └── orders/
+│   │       ├── test_orders_api.py
+│   │       └── test_negative_orders_api.py
+│   │
+│   ├── ai/
+│   │   ├── conftest.py
+│   │   ├── contract/
+│   │   │   ├── test_json_output_parser.py
+│   │   │   └── test_ai_order_extraction_contract.py
+│   │   ├── live/
+│   │   │   └── test_lmstudio_live_order_extraction.py
+│   │   └── real_api/
+│   │       ├── test_ai_staff_assistant_api.py
+│   │       ├── test_ai_analytics_endpoints.py
+│   │       └── test_ai_provider_connectivity.py
+│   │
+│   └── db/
+│       └── test_order_db_validation.py
+│
+├── ai_qa/
+│   ├── build_genai_prompt.py
+│   ├── cloudpos4u_genai_qa_prompt.md
+│   ├── lmstudio_client.py
+│   ├── order_extraction_prompt_builder.py
+│   ├── run_lmstudio_coverage.py
+│   │
+│   ├── parsers/
+│   │   └── json_output_parser.py
+│   │
+│   ├── prompts/
+│   │   ├── test_case_generation_prompt.md
+│   │   ├── test_data_generation_prompt.md
+│   │   └── defect_analysis_prompt.md
+│   │
+│   ├── promptfoo/
+│   │   ├── run_promptfoo.sh
+│   │   ├── prompts/
+│   │   │   └── order_extraction_prompt.txt
+│   │   ├── datasets/
+│   │   │   └── order_assistant_cases.csv
+│   │   ├── configs/
+│   │   │   ├── promptfoo-lmstudio.yaml
+│   │   │   ├── promptfoo-openai.yaml
+│   │   │   └── promptfoo-ollama.yaml
+│   │   └── results/
+│   │       └── lmstudio_dataset_eval_notes.md
+│   │
+│   ├── samples/
+│   │   ├── generated_test_cases_cash_paid_order.json
+│   │   ├── defect_analysis_empty_order.json
+│   │   └── llm_outputs/
+│   │       └── order_extraction_outputs.json
+│   │
+│   ├── rag_eval/
+│   └── langsmith/
+│
+├── discovery/
+│   ├── discovery_commands.md
+│   ├── api_inventory.md
+│   ├── frontend_routes.md
+│   ├── test_inventory.md
+│   ├── workflows.md
+│   ├── generated_api_inventory.md
+│   ├── generated_frontend_routes.md
+│   ├── generated_automation_backlog.md
+│   └── generated_test_coverage_matrix.md
+│
+├── performance/
+│   └── cloudpos4u-performance.jmx
+│
+├── postman/
+│   ├── CloudPOS4U_QA_API_Collection.json
+│   └── CloudPOS4U_Postman_Environment.json
+│
+├── jenkins-cloudpos4u/
+│   └── Dockerfile
+│
+└── docs/
+    ├── PureCS_QA_Interview_Cheat_Sheet.md
+    └── GenAI_QA_Strategy.md
 ````
 
 ---

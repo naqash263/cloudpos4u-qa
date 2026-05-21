@@ -1,12 +1,15 @@
 import os
 import allure
+import pytest
 from dotenv import load_dotenv
 from pages.login_page import LoginPage
 from pages.dashboard_page import DashboardPage
 
 load_dotenv()
 
-
+@pytest.mark.ui
+@pytest.mark.smoke
+@pytest.mark.regression
 @allure.feature("UI Dashboard")
 @allure.story("Dashboard Load After Login")
 @allure.severity(allure.severity_level.CRITICAL)

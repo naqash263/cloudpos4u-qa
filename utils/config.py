@@ -16,3 +16,12 @@ class Config:
     DB_NAME = os.getenv("DB_NAME")
     DB_USER = os.getenv("DB_USER")
     DB_PASSWORD = os.getenv("DB_PASSWORD")
+    AI_TEST_PROVIDER = os.getenv("AI_TEST_PROVIDER", "")
+    AI_TEST_MODEL = os.getenv("AI_TEST_MODEL", "")
+    AI_TEST_API_KEY = os.getenv("AI_TEST_API_KEY", "")
+
+    AI_EMBEDDING_API_KEY = os.getenv("AI_EMBEDDING_API_KEY", "")
+    AI_EMBEDDING_MODEL = os.getenv(
+        "AI_EMBEDDING_MODEL",
+        "text-embedding-3-small"
+    )

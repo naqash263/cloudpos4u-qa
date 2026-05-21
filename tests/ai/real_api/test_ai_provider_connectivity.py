@@ -63,3 +63,4 @@ def test_embedding_provider_connectivity():
     data = response.json()
 
     assert data["success"] is True
+

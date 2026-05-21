@@ -1,4 +1,5 @@
 class AIClient:
+
     def ask_staff_ai(self, prompt, mode="general", language="English", history=None):
         payload = {
             "prompt": prompt,
@@ -48,7 +49,11 @@ class AIClient:
             json=payload
         )
 
-    def test_embedding_provider(self, openai_api_key="", embedding_model="text-embedding-3-small"):
+    def test_embedding_provider(
+        self,
+        openai_api_key="",
+        embedding_model="text-embedding-3-small"
+    ):
         payload = {
             "openAiApiKey": openai_api_key,
             "embeddingModel": embedding_model

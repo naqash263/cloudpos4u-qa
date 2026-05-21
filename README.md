@@ -1,233 +1,199 @@
-````markdown
-# CloudPOS4U QA Automation Framework
+# CloudPOS4U.com QA Automation Framework
 
-CloudPOS4U.com QA Automation Framework is a practical end-to-end automation testing project built for a real restaurant POS SaaS platform.
-
-This framework covers UI automation, API automation, performance testing, reporting, logging, and CI/CD execution using Selenium, Pytest, Python Requests, Postman, JMeter, Allure, GitHub Actions, and Jenkins.
-
-The purpose of this repository is to demonstrate a complete Automation QA workflow aligned with real-world QA engineering standards.
+This repository contains a complete QA automation framework for CloudPOS4U, a restaurant POS platform.  
+The framework covers UI automation, API automation, GenAI QA testing, performance testing, reporting, and CI/CD execution.
 
 ---
 
-## Table of Contents
+## 1. Project Overview
 
-1. [Project Overview](#project-overview)
-2. [Application Under Test](#application-under-test)
-3. [QA Scope](#qa-scope)
-4. [Technology Stack](#technology-stack)
-5. [Test Coverage](#test-coverage)
-6. [Project Structure](#project-structure)
-7. [Environment Variables](#environment-variables)
-8. [Setup Instructions](#setup-instructions)
-9. [Run Tests Locally](#run-tests-locally)
-10. [Allure Reporting](#allure-reporting)
-11. [JMeter Performance Testing](#jmeter-performance-testing)
-12. [Postman Collection](#postman-collection)
-13. [Jenkins CI/CD](#jenkins-cicd)
-14. [GitHub Actions CI/CD](#github-actions-cicd)
-15. [Logging](#logging)
-16. [Screenshots on Failure](#screenshots-on-failure)
-17. [Database Testing](#database-testing)
-18. [Key QA Concepts Demonstrated](#key-qa-concepts-demonstrated)
-19. [Summary](#summary)
-20. [Future Improvements](#future-improvements)
-
----
-
-## Project Overview
-
-This repository contains an automation testing framework for CloudPOS4U.com, a restaurant POS platform.
-
-The framework validates important business flows such as:
+CloudPOS4U QA Automation validates critical business workflows across:
 
 - Admin login
-- Invalid login validation
 - Dashboard access
-- POS menu access
-- Order creation
+- POS order creation
 - API authentication
 - API order creation
-- Unauthorized access handling
-- Menu API performance
-- Order creation performance
+- Negative API validation
+- Real AI API endpoints
+- GenAI output contract validation
+- Prompt regression testing
+- JMeter performance testing
 
-The framework was designed to demonstrate practical Automation QA skills using real application workflows instead of only demo websites.
+This framework is built as a practical senior QA automation portfolio using real product APIs and UI flows.
 
 ---
 
-## Application Under Test
+## 2. Technology Stack
 
-CloudPOS4U is a restaurant POS platform with the following stack:
-
-| Layer | Technology |
+| Area | Tools |
 |---|---|
-| Frontend | React |
-| Backend | Node.js |
+| UI Automation | Selenium WebDriver |
+| Test Framework | Pytest |
+| API Automation | Python Requests |
+| API Manual Validation | Postman |
+| GenAI QA | Promptfoo, LM Studio, Pytest AI Contract Tests |
+| Performance Testing | Apache JMeter |
+| Reporting | Pytest HTML, Allure Report, JMeter HTML Report |
+| CI/CD | GitHub Actions, Jenkins |
+| Browser | Chrome / Chromium |
+| Backend/API | Node.js APIs |
 | Database | PostgreSQL |
-| Hosting | VPS |
-| Testing Project | Python + Pytest |
+| Version Control | GitHub |
 
-Main tested URLs:
+---
 
-```text
-Frontend/Admin URL:
-https://bakebite-pos.cloudpos4u.com
+## 3. Current Test Coverage
 
-Application URL:
-https://bakebite-pos.cloudpos4u.com
+### UI Tests
 
-API Base URL:
-https://bakebite-pos.cloudpos4u.com/api
+| Area | Coverage |
+|---|---|
+| Authentication | Valid login and invalid login |
+| Dashboard | Dashboard loads after successful login |
+| POS Order Flow | Create cash-paid takeaway order |
+
+### API Tests
+
+| Area | Coverage |
+|---|---|
+| Auth API | Login success and invalid password |
+| Dish API | Get available dishes |
+| Order API | Create cash-paid order |
+| Security | Create order without authentication |
+| Negative API | Missing branch ID, invalid token |
+| Known Defects | Empty items and invalid dish ID marked with `xfail` |
+
+### GenAI QA Tests
+
+| Area | Coverage |
+|---|---|
+| Promptfoo | Dataset-driven prompt regression testing |
+| LM Studio | Local model evaluation |
+| JSON Parser | Extract JSON from clean, markdown, or reasoning text |
+| Schema Contract | Validate required LLM output fields |
+| Real AI APIs | `/api/ai/ask`, `/api/ai/ask-staff`, forecast, inventory, price intelligence, profit analysis |
+| Scope Control | Validate AI does not hallucinate unsupported menu access |
+
+### Performance Tests
+
+| Area | Coverage |
+|---|---|
+| Login API | JMeter load test |
+| Dish API | Authenticated menu/dish API test |
+| Order API | Create order transaction performance |
+
+---
+
+## 4. Project Structure
+
+```
+cloudpos4u-qa/
+  pages/
+    base_page.py
+    login_page.py
+    dashboard_page.py
+    menu_page.py
+
+  tests/
+    helpers/
+      api_assertions.py
+
+    ui/
+      auth/
+        test_login.py
+        test_invalid_login.py
+      dashboard/
+        test_dashboard.py
+      orders/
+        test_create_order.py
+
+    api/
+      conftest.py
+      auth/
+        test_login_api.py
+      orders/
+        test_orders_api.py
+        test_negative_orders_api.py
+
+    ai/
+      conftest.py
+      contract/
+        test_json_output_parser.py
+        test_ai_order_extraction_contract.py
+      live/
+        test_lmstudio_live_order_extraction.py
+      real_api/
+        test_ai_staff_assistant_api.py
+        test_ai_analytics_endpoints.py
+        test_ai_provider_connectivity.py
+
+  utils/
+    api_client.py
+    config.py
+    db_client.py
+    logger.py
+    payload_builder.py
+
+    api/
+      base_client.py
+      auth_client.py
+      menu_client.py
+      order_client.py
+      ai_client.py
+      cloudpos_api_client.py
+
+  ai_qa/
+    parsers/
+      json_output_parser.py
+    promptfoo/
+      prompts/
+        order_extraction_prompt.txt
+      datasets/
+        order_assistant_cases.csv
+      configs/
+        promptfoo-lmstudio.yaml
+        promptfoo-openai.yaml
+        promptfoo-ollama.yaml
+      results/
+        lmstudio_dataset_eval_notes.md
+      run_promptfoo.sh
+    samples/
+      llm_outputs/
+        order_extraction_outputs.json
+
+  performance/
+    cloudpos4u-performance.jmx
+
+  postman/
+    CloudPOS4U_QA_API_Collection.json
+    CloudPOS4U_Postman_Environment.json
+
+  reports/
+    report.html
+    allure-results/
+    allure-report/
+    jmeter-report/
+    logs/
+
+  .github/
+    workflows/
+      qa-tests.yml
+
+  Jenkinsfile
+  pytest.ini
+  requirements.txt
+  README.md
 ````
 
 ---
 
-## QA Scope
+## 5. Environment Variables
 
-The QA framework covers these testing layers:
-
-| Testing Layer              | Status                  |
-| -------------------------- | ----------------------- |
-| UI Automation              | Completed               |
-| API Automation             | Completed               |
-| Performance Testing        | Completed               |
-| CI/CD with GitHub Actions  | Completed               |
-| CI/CD with Jenkins         | Completed               |
-| Reporting with Pytest HTML | Completed               |
-| Reporting with Allure      | Completed               |
-| JMeter HTML Report         | Completed               |
-| Logging                    | Completed               |
-| Screenshot on Failure      | Completed               |
-| Database Validation        | Local/Staging Supported |
-
----
-
-## Technology Stack
-
-| Area                 | Tools / Technologies                       |
-| -------------------- | ------------------------------------------ |
-| Programming Language | Python                                     |
-| UI Automation        | Selenium WebDriver                         |
-| Test Framework       | Pytest                                     |
-| API Testing          | Python Requests, Postman                   |
-| Performance Testing  | Apache JMeter                              |
-| Reporting            | Pytest HTML, Allure, JMeter HTML Dashboard |
-| CI/CD                | GitHub Actions, Jenkins                    |
-| Browser              | Chrome / Chromium                          |
-| Driver               | ChromeDriver                               |
-| Database             | PostgreSQL                                 |
-| Environment Config   | python-dotenv                              |
-| Logging              | Python logging module                      |
-| Containerization     | Docker                                     |
-
----
-
-## Test Coverage
-
-### UI Automation Tests
-
-| Test Case              | Description                                              |
-| ---------------------- | -------------------------------------------------------- |
-| Valid Admin Login      | Verifies that a valid admin user can log in successfully |
-| Invalid Admin Login    | Verifies invalid credentials error handling              |
-| Dashboard Load         | Verifies that dashboard loads after successful login     |
-| Create Cash Paid Order | Verifies end-to-end order creation from POS UI           |
-
-### API Automation Tests
-
-| Test Case                  | Description                                                        |
-| -------------------------- | ------------------------------------------------------------------ |
-| Login API Success          | Validates successful API login and access token generation         |
-| Login API Invalid Password | Validates API response for invalid credentials                     |
-| Create Cash Paid Order API | Creates a real order using dynamic dish data                       |
-| Create Order Without Auth  | Verifies that protected order API rejects unauthenticated requests |
-
-### Performance Tests
-
-JMeter performance tests cover:
-
-| Flow             | Description                                |
-| ---------------- | ------------------------------------------ |
-| Login API        | Measures authentication API response time  |
-| Get Dishes API   | Measures authenticated dish/menu retrieval |
-| Create Order API | Measures transactional POS order creation  |
-
-JMeter test flow:
-
-```text
-Login
-→ Extract accessToken
-→ Extract branchId and branchCode
-→ Get all dishes
-→ Extract dishId, dishName, dishPrice
-→ Create order
-→ Generate performance report
-```
-
----
-
-## Project Structure
-
-```text
-cloudpos4u-qa/
-│
-├── pages/
-│   ├── base_page.py
-│   ├── login_page.py
-│   ├── dashboard_page.py
-│   └── menu_page.py
-│
-├── tests/
-│   ├── ui/
-│   │   ├── test_login.py
-│   │   ├── test_invalid_login.py
-│   │   ├── test_dashboard.py
-│   │   └── test_create_order.py
-│   │
-│   ├── api/
-│   │   ├── test_login_api.py
-│   │   └── test_orders_api.py
-│   │
-│   └── db/
-│       └── test_order_db_validation.py
-│
-├── utils/
-│   ├── api_client.py
-│   ├── config.py
-│   ├── db_client.py
-│   ├── logger.py
-│   └── payload_builder.py
-│
-├── performance/
-│   └── cloudpos4u-performance.jmx
-│
-├── reports/
-│   ├── report.html
-│   ├── allure-results/
-│   ├── allure-report/
-│   ├── jmeter-report/
-│   ├── jmeter-results.jtl
-│   └── logs/
-│
-├── .github/
-│   └── workflows/
-│       └── qa-tests.yml
-│
-├── conftest.py
-├── pytest.ini
-├── requirements.txt
-├── README.md
-└── .gitignore
-```
-
----
-
-## Environment Variables
-
-Create a `.env` file in the project root for local execution.
+Create a local `.env` file:
 
 ```env
-BASE_URL=https://bakebite-pos.cloudpos4u.com
+BASE_URL=https://bakebite-pos.cloudpos4u.com/auth
 API_BASE_URL=https://bakebite-pos.cloudpos4u.com/api
 
 ADMIN_EMAIL=your_admin_email
@@ -238,99 +204,208 @@ DB_PORT=5432
 DB_NAME=your_db_name
 DB_USER=your_db_user
 DB_PASSWORD=your_db_password
+
+AI_TEST_PROVIDER=
+AI_TEST_MODEL=
+AI_TEST_API_KEY=
+
+AI_EMBEDDING_API_KEY=
+AI_EMBEDDING_MODEL=text-embedding-3-small
 ```
 
 Important:
 
 ```text
-.env must never be committed to GitHub.
-```
-
-Recommended `.gitignore` entries:
-
-```gitignore
-venv/
-.env
-.idea/
-__pycache__/
-.pytest_cache/
-reports/
-*.jtl
+Do not commit real credentials, tokens, passwords, or API keys.
 ```
 
 ---
 
-## Setup Instructions
-
-### 1. Clone the Repository
-
-```bash
-git clone <your-repository-url>
-cd cloudpos4u-qa
-```
-
-### 2. Create Virtual Environment
+## 6. Install Dependencies
 
 ```bash
 python -m venv venv
 source venv/bin/activate
-```
 
-For Windows:
-
-```bash
-venv\Scripts\activate
-```
-
-### 3. Install Dependencies
-
-```bash
 pip install --upgrade pip
 pip install -r requirements.txt
 ```
 
-### 4. Verify Installation
+---
+
+## 7. Run Stable Regression Suite
+
+This command runs stable UI, API, and GenAI contract tests.
+
+It excludes:
+
+* `ai_live` tests because they require LM Studio running locally
+* `ai_api` tests because they call real project AI APIs and may depend on AI settings/data
 
 ```bash
-pytest --version
-python --version
+pytest tests/ui tests/api tests/ai -m "not ai_live and not ai_api"
+```
+
+Expected result currently:
+
+```text
+19 passed, 2 xfailed
+```
+
+The `xfailed` tests are known backend validation defects:
+
+* API allows creating order with empty items list
+* API allows creating order with invalid dish ID
+
+---
+
+## 8. Run UI Tests
+
+```bash
+pytest tests/ui -s
 ```
 
 ---
 
-## Run Tests Locally
-
-### Run UI and API Tests
+## 9. Run API Tests
 
 ```bash
-pytest tests/ui tests/api
+pytest tests/api -s
 ```
 
-### Run UI Tests Only
+---
+
+## 10. Run GenAI Contract Tests
+
+These tests validate parser behavior, JSON output schema, intent, order type, menu item extraction, quantity extraction, and unavailable item handling.
 
 ```bash
-pytest tests/ui
+pytest tests/ai -m "not ai_live and not ai_api" -s
 ```
 
-### Run API Tests Only
+---
+
+## 11. Run Real Project AI API Tests
+
+These tests call real CloudPOS4U.com AI endpoints.
 
 ```bash
-pytest tests/api
+pytest tests/ai -m ai_api -s
 ```
 
-### Run Tests with Console Output
+Currently covered endpoints:
+
+```text
+POST /api/ai/ask
+POST /api/ai/ask-staff
+GET  /api/ai/forecast
+GET  /api/ai/inventory-predictions
+GET  /api/ai/price-intelligence
+GET  /api/ai/profit-analysis
+```
+
+Provider connectivity tests are skipped unless these values are configured:
+
+```env
+AI_TEST_PROVIDER=
+AI_TEST_MODEL=
+AI_TEST_API_KEY=
+AI_EMBEDDING_API_KEY=
+```
+
+Recent result:
+
+```text
+7 passed, 2 skipped
+```
+
+---
+
+## 12. Run Live LM Studio AI Test
+
+Make sure LM Studio server is running:
+
+```text
+LM Studio → Developer → Start Server
+```
+
+Then run:
 
 ```bash
-pytest tests/ui tests/api -s
+pytest tests/ai -m ai_live -s
 ```
 
-### Run Tests with Pytest HTML Report
+Live LLM tests are not included in normal CI because they require a local model server.
+
+---
+
+## 13. Promptfoo GenAI Evaluation
+
+Promptfoo is used for prompt/model regression testing.
+
+It validates:
+
+* JSON-only output
+* Intent classification
+* Order type extraction
+* Payment method extraction
+* Menu item extraction
+* Quantity extraction
+* Unavailable item handling
+* Hallucination control
+* Local model behavior through LM Studio
+
+Run Promptfoo with LM Studio:
 
 ```bash
-pytest tests/ui tests/api --html=reports/report.html --self-contained-html
+./ai_qa/promptfoo/run_promptfoo.sh lmstudio no-cache
 ```
 
-Generated report:
+Run with OpenAI:
+
+```bash
+./ai_qa/promptfoo/run_promptfoo.sh openai no-cache
+```
+
+Run with Ollama:
+
+```bash
+./ai_qa/promptfoo/run_promptfoo.sh ollama no-cache
+```
+
+Current Promptfoo result:
+
+```text
+9 passed / 9 total
+100% pass rate
+```
+
+Promptfoo helped identify and fix a real prompt issue:
+
+```text
+Input: Do you have kulfi falooda?
+
+Issue:
+Model classified intent as menu_query but did not extract Kulfi Falooda as the queried item.
+
+Fix:
+Added explicit menu_query extraction rule.
+
+Result:
+All dataset cases passed after prompt update.
+```
+
+---
+
+## 14. Generate Pytest HTML Report
+
+```bash
+pytest tests/ui tests/api tests/ai -m "not ai_live and not ai_api" \
+  --html=reports/report.html \
+  --self-contained-html
+```
+
+Open:
 
 ```text
 reports/report.html
@@ -338,29 +413,18 @@ reports/report.html
 
 ---
 
-## Allure Reporting
+## 15. Generate Allure Report
 
-Allure is used for professional test reporting with:
-
-* Features
-* Stories
-* Severities
-* Steps
-* Environment details
-* Screenshot attachments on failure
-* Current URL attachment
-* Page source attachment
-
-### Run Tests with Allure Results
+Run tests with Allure results:
 
 ```bash
-rm -rf reports/allure-results
-rm -rf reports/allure-report
+rm -rf reports/allure-results reports/allure-report
 
-python -m pytest tests/ui tests/api --alluredir=reports/allure-results
+pytest tests/ui tests/api tests/ai -m "not ai_live and not ai_api" \
+  --alluredir=reports/allure-results
 ```
 
-### Add Environment Metadata
+Add environment metadata:
 
 ```bash
 cat > reports/allure-results/environment.properties <<EOF
@@ -372,12 +436,14 @@ Browser=Chrome/Chromium
 Framework=Pytest + Selenium + Requests
 Reporting=Allure
 CI=GitHub Actions + Jenkins
-Performance=JMeter
 Database=PostgreSQL
+GenAI_QA=Enabled
+Promptfoo=Enabled locally
+LMStudio=Optional live test
 EOF
 ```
 
-### Generate Allure Report Using Docker
+Generate Allure report using Docker:
 
 ```bash
 docker run --rm \
@@ -387,14 +453,14 @@ docker run --rm \
   generate reports/allure-results -o reports/allure-report --clean
 ```
 
-### Serve Allure Report
+Serve report:
 
 ```bash
 cd reports/allure-report
 python3 -m http.server 8089
 ```
 
-Open in browser:
+Open:
 
 ```text
 http://localhost:8089
@@ -402,15 +468,7 @@ http://localhost:8089
 
 ---
 
-## JMeter Performance Testing
-
-JMeter test plan location:
-
-```text
-performance/cloudpos4u-performance.jmx
-```
-
-### Run JMeter from Command Line
+## 16. Run JMeter Performance Test
 
 ```bash
 jmeter -n \
@@ -421,117 +479,41 @@ jmeter -n \
   -o reports/jmeter-report
 ```
 
-### Open JMeter Report
+Open:
 
 ```text
 reports/jmeter-report/index.html
 ```
 
-### JMeter Flow
-
-```text
-Login API
-→ Extract JWT token
-→ Extract branch context
-→ Get Dishes API
-→ Extract dish details
-→ Create Order API
-→ Generate JMeter report
-```
-
-### Important JMeter Metrics
-
-| Metric     | Meaning                                    |
-| ---------- | ------------------------------------------ |
-| Average    | Average response time                      |
-| Median     | Middle response time                       |
-| 90% Line   | 90% of requests completed within this time |
-| 95% Line   | 95% of requests completed within this time |
-| Error %    | Failed request percentage                  |
-| Throughput | Requests processed per second/minute       |
-
 ---
 
-## Postman Collection
+## 17. Jenkins Pipeline
 
-A Postman collection was created for exploratory and contract API testing.
+The repository includes a `Jenkinsfile` for pipeline-as-code.
 
-Collection includes:
-
-```text
-1. Login Success
-2. Login Invalid Password
-3. Get All Dishes
-4. Create Cash Paid Order
-5. Create Order Without Auth
-```
-
-Recommended project folder:
+Jenkins runs:
 
 ```text
-postman/
-  CloudPOS4U_QA_API_Collection.json
-  CloudPOS4U_Environment.json
-```
-
-Postman environment variables:
-
-| Variable    | Purpose                         |
-| ----------- | ------------------------------- |
-| base_url    | API base URL                    |
-| email       | Admin email                     |
-| password    | Admin password                  |
-| accessToken | JWT token from login response   |
-| branchId    | Branch ID from login response   |
-| branchCode  | Branch code from login response |
-| dishId      | Dynamic dish ID                 |
-| dishName    | Dynamic dish name               |
-| dishPrice   | Dynamic dish price              |
-
-Postman validates:
-
-* HTTP status codes
-* Login token
-* User role
-* Dish list response
-* Dynamic dish extraction
-* Order creation
-* Unauthorized request rejection
-
----
-
-## Jenkins CI/CD
-
-Jenkins is configured inside Docker and executes the QA pipeline.
-
-Jenkins Docker image includes:
-
-* Python
-* Pytest
-* Selenium
-* Chromium
-* ChromeDriver
-* JMeter
-* Allure CLI
-
-### Jenkins Pipeline Flow
-
-```text
-1. Start Jenkins build
-2. Inject credentials securely using Jenkins Credentials
-3. Install Python dependencies
-4. Run UI and API tests
+1. Prepare workspace
+2. Create Python virtual environment
+3. Install dependencies
+4. Run stable UI/API/AI contract tests
 5. Generate Pytest HTML report
-6. Generate Allure results
-7. Generate Allure HTML report
-8. Run JMeter performance test
-9. Generate JMeter HTML dashboard
-10. Archive all reports as Jenkins artifacts
+6. Generate Allure report
+7. Run JMeter performance test
+8. Archive reports
 ```
 
-### Jenkins Artifacts
+Jenkins stable Pytest command:
 
-Jenkins archives:
+```bash
+pytest tests/ui tests/api tests/ai -m "not ai_live and not ai_api" \
+  --html=reports/report.html \
+  --self-contained-html \
+  --alluredir=reports/allure-results
+```
+
+Archived reports:
 
 ```text
 reports/report.html
@@ -542,38 +524,13 @@ reports/jmeter-results.jtl
 reports/logs/
 ```
 
-### Jenkins Credentials
-
-Secrets are stored securely in Jenkins Credentials, not hardcoded in shell scripts.
-
-Credentials include:
-
-```text
-BASE_URL
-API_BASE_URL
-ADMIN_EMAIL
-ADMIN_PASSWORD
-```
-
-Optional database credentials:
-
-```text
-DB_HOST
-DB_PORT
-DB_NAME
-DB_USER
-DB_PASSWORD
-```
-
 ---
 
-## GitHub Actions CI/CD
+## 18. GitHub Actions
 
-GitHub Actions runs tests automatically on push or pull request.
+GitHub Actions runs stable UI and API tests using repository secrets.
 
-Secrets are managed through GitHub repository secrets.
-
-Required GitHub secrets:
+Required secrets:
 
 ```text
 BASE_URL
@@ -587,191 +544,100 @@ DB_USER
 DB_PASSWORD
 ```
 
-GitHub Actions validates:
-
-* UI tests in headless browser
-* API tests
-* Pytest HTML report generation
-* Artifact upload
+AI provider keys should only be added if AI provider connectivity tests are required.
 
 ---
 
-## Logging
+## 19. Postman Collection
 
-A reusable logger is implemented in:
-
-```text
-utils/logger.py
-```
-
-Logs are generated in:
-
-```text
-reports/logs/
-```
-
-Logging covers:
-
-* Page navigation
-* Element waits
-* Element clicks
-* Text entry
-* API request execution
-* API response status
-* Order creation flow
-
-Example log output:
-
-```text
-INFO - Opening URL: https://bakebite-pos.cloudpos4u.com
-INFO - Clicking element: Login button
-INFO - Sending login API request
-INFO - Login API response status: 200
-INFO - Sending create order API request
-INFO - Create order API response status: 201
-```
-
----
-
-## Screenshots on Failure
-
-The framework captures screenshots automatically when a UI test fails.
-
-Screenshots are saved under:
-
-```text
-reports/screenshots/
-```
-
-Allure also attaches:
-
-* Failure screenshot
-* Current URL
-* Page source
-
-This helps with debugging failures in local runs, GitHub Actions, and Jenkins.
-
----
-
-## Database Testing
-
-Database validation is supported using PostgreSQL.
-
-Database test example:
-
-```text
-Create order through API
-→ Get order number from response
-→ Query PostgreSQL orders table
-→ Validate order number, customer name, payment method, payment status, and order type
-```
-
-DB tests are kept local/staging because production database access may be restricted in CI environments.
-
----
-
-## Key QA Concepts Demonstrated
-
-This project demonstrates:
-
-* Selenium WebDriver automation
-* Page Object Model
-* BasePage design pattern
-* Explicit waits
-* UI positive testing
-* UI negative testing
-* API positive testing
-* API negative testing
-* JWT authentication testing
-* Cookie-based authentication handling
-* Dynamic payload creation
-* Dynamic dish data extraction
-* Protected API validation
-* PostgreSQL validation
-* Pytest fixtures
-* Screenshot on failure
-* Allure reporting
-* Pytest HTML reporting
-* JMeter performance testing
-* Jenkins CI/CD
-* GitHub Actions CI/CD
-* Jenkins credentials management
-* Dockerized Jenkins setup
-* Logging
-* Report archiving
-
----
-
-## Postman Collection
-
-The repository includes a Postman collection for API validation:
+The repository includes Postman assets:
 
 ```text
 postman/
   CloudPOS4U_QA_API_Collection.json
   CloudPOS4U_Postman_Environment.json
 ```
+
+Covered API flows:
+
+* Login success
+* Login invalid password
+* Get all dishes
+* Create cash-paid order
+* Create order without authentication
+* AI endpoints where applicable
+
 ---
-##  Summary
 
-This framework demonstrates a full QA automation workflow on a real SaaS POS product.
+## 20. Logging
 
-It validates CloudPOS4U across multiple layers:
+Logs are generated under:
 
 ```text
-UI Layer
-API Layer
-Database Layer
-Performance Layer
-CI/CD Layer
-Reporting Layer
+reports/logs/
 ```
 
-The framework is designed to be:
+Logs include:
 
-* Maintainable
-* Reusable
-* Scalable
-* CI/CD-ready
-* User-friendly
-* Suitable for real QA engineering workflows
-
-A suitable User explanation:
-
-```text
-I built an end-to-end QA automation framework for CloudPOS4U, a restaurant POS SaaS platform. The framework includes Selenium UI automation, API automation with Python Requests and Postman, JMeter performance testing, PostgreSQL validation, Pytest HTML reports, Allure reporting with screenshots on failure, GitHub Actions, and Jenkins CI/CD. Jenkins runs UI, API, and performance tests, generates Pytest, Allure, and JMeter reports, and archives them as build artifacts.
-```
+* UI actions
+* API requests
+* Response status codes
+* AI endpoint calls
+* Error responses
 
 ---
 
-## GenAI QA Tests
+## 21. Known Defects
 
-The framework includes GenAI QA tests for AI order extraction output validation.
+The automation suite currently tracks known backend validation defects using `pytest.mark.xfail`.
 
-Covered areas:
+| Defect            | Current Behavior        | Expected Behavior                  |
+| ----------------- | ----------------------- | ---------------------------------- |
+| Empty order items | API returns 201 Created | API should return 400 or 422       |
+| Invalid dish ID   | API returns 201 Created | API should return 400, 404, or 422 |
 
-- JSON output parsing
-- Schema validation
-- Intent validation
-- Order type validation
-- Menu item extraction
-- Quantity extraction
-- Unavailable item handling
-- Optional live LM Studio validation
+These are marked as expected failures so CI remains stable while defect visibility is preserved.
 
-Run stable GenAI QA tests:
-
-```bash
-pytest tests/ai -m "not ai_live"
-```
 ---
 
+## 22. Key QA Concepts Demonstrated
 
-## Future Improvements
+This framework demonstrates:
 
-Planned improvements:
+* Selenium automation
+* Page Object Model
+* BasePage design pattern
+* Explicit waits
+* API automation
+* Modular API client design
+* Pytest fixtures
+* Negative API testing
+* Known defect tracking with `xfail`
+* Postman validation
+* JMeter performance testing
+* Allure reporting
+* Jenkins pipeline-as-code
+* GitHub Actions
+* GenAI prompt regression testing
+* LM Studio local model testing
+* Promptfoo dataset evaluation
+* LLM output parser validation
+* AI response schema validation
+* Real AI API testing
+* AI scope-control testing
+* Hallucination prevention checks
 
-* Suggest If you have something
+---
+
+## 23. Summary
+
+This framework validates CloudPOS4U across UI, API, performance, and GenAI layers.
+
+The stable CI suite covers deterministic UI/API/AI contract tests.
+The real AI API suite validates live CloudPOS4U AI endpoints.
+Promptfoo validates prompt and model behavior separately through dataset-driven GenAI regression testing.
+
+This demonstrates practical readiness for senior automation QA and GenAI QA responsibilities.
 
 ---
 
@@ -783,4 +649,4 @@ Planned improvements:
 Automation / QA / AI Systems professional focused on building practical automation frameworks, API workflows, CI/CD pipelines, and performance testing setups for real-world products.
 
 ```
-```
+

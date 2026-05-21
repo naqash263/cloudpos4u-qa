@@ -1,0 +1,390 @@
+./routes/loanInstallmentRoute.js:router.get("/upcoming", isVerifiedUser, getUpcomingPayments);
+./routes/loanInstallmentRoute.js:router.get("/overdue", isVerifiedUser, getOverduePayments);
+./routes/loanInstallmentRoute.js:router.post("/:loanId/generate", isVerifiedUser, generateInstallmentSchedule);
+./routes/loanInstallmentRoute.js:router.get("/:loanId/schedule", isVerifiedUser, getInstallmentSchedule);
+./routes/loanInstallmentRoute.js:router.get("/:loanId/history", isVerifiedUser, getScheduleHistory);
+./routes/loanInstallmentRoute.js:router.post("/:loanId/bulk-reschedule", isVerifiedUser, bulkRescheduleInstallments);
+./routes/loanInstallmentRoute.js:router.post("/installment/:installmentId/pay", isVerifiedUser, payInstallment);
+./routes/loanInstallmentRoute.js:router.put("/installment/:installmentId/reschedule", isVerifiedUser, rescheduleInstallment);
+./routes/publicRoutes.js:router.get("/branches", publicController.getAllActiveBranches);
+./routes/publicRoutes.js:router.get("/branch/:code", publicController.getBranchByCode);
+./routes/publicRoutes.js:router.get("/menu/:branchId", publicController.getPublicMenu);
+./routes/publicRoutes.js:router.get("/deals/:branchId", publicController.getActiveDeals);
+./routes/publicRoutes.js:router.post("/deals/evaluate", publicController.evaluateWebDeals);
+./routes/publicRoutes.js:router.get("/featured/:branchId", publicController.getFeaturedDishes);
+./routes/publicRoutes.js:router.post("/order", optionalCustomerAuth, publicController.createWebOrder);
+./routes/publicRoutes.js:router.get("/order/:orderIdentifier", publicController.getPublicOrder);
+./routes/publicRoutes.js:router.get("/stats/:branchId", publicController.getPublicBranchStats);
+./routes/publicRoutes.js:router.get("/firebase-config", publicController.getFirebaseConfig);
+./routes/publicRoutes.js:router.get("/table/:branchId/:tableNo", publicController.getTableByBranchAndNumber);
+./routes/publicRoutes.js:// router.get("/track/:orderId", publicController.trackOrder); 
+./routes/publicRoutes.js:router.get("/sitemap.xml", seoController.getSitemap);
+./routes/templateRoutes.js:router.get("/available", isVerifiedUser, templateController.getAvailable);
+./routes/templateRoutes.js:router.get("/preview/:id", isVerifiedUser, templateController.preview);
+./routes/templateRoutes.js:router.post("/apply/:id", isVerifiedUser, templateController.apply);
+./routes/templateRoutes.js:router.get("/admin", isVerifiedUser, templateController.getAllAdmin);
+./routes/templateRoutes.js:router.get("/:id", isVerifiedUser, templateController.getById);
+./routes/templateRoutes.js:router.post("/", isVerifiedUser, templateController.create);
+./routes/templateRoutes.js:router.put("/:id", isVerifiedUser, templateController.update);
+./routes/templateRoutes.js:router.delete("/:id", isVerifiedUser, templateController.remove);
+./routes/automationRoute.js:router.get("/workflows", getAllWorkflows);
+./routes/automationRoute.js:router.get("/workflows/:id", getWorkflowById);
+./routes/automationRoute.js:router.post("/workflows", createWorkflow);
+./routes/automationRoute.js:router.put("/workflows/:id", updateWorkflow);
+./routes/automationRoute.js:router.delete("/workflows/:id", deleteWorkflow);
+./routes/automationRoute.js:router.patch("/workflows/:id/toggle", toggleWorkflow);
+./routes/automationRoute.js:router.post("/workflows/:id/execute", executeWorkflow);
+./routes/automationRoute.js:router.get("/workflows/:id/executions", getWorkflowExecutions);
+./routes/automationRoute.js:router.get("/opportunities", getAutomationOpportunities);
+./routes/automationRoute.js:router.get("/communication/channels", getCommunicationChannels);
+./routes/automationRoute.js:router.get("/communication/channels/stats", getCommunicationChannelStats);
+./routes/automationRoute.js:router.post("/communication/channels", createCommunicationChannel);
+./routes/automationRoute.js:router.put("/communication/channels/:id", updateCommunicationChannel);
+./routes/automationRoute.js:router.post("/communication/channels/:id/test", testCommunicationChannel);
+./routes/blogRoutes.js:router.get("/", blogController.getBlogHome);
+./routes/blogRoutes.js:router.get("/:slug", blogController.getBlogPost);
+./routes/platformPaymentRoutes.js:router.post('/webhook/:gateway', platformPaymentController.handleWebhook);
+./routes/platformPaymentRoutes.js:router.get('/available-gateways', platformPaymentController.getAvailableGateways);
+./routes/platformPaymentRoutes.js:router.post('/validate-promo', platformPaymentController.validatePromo); // Made public for direct registration
+./routes/platformPaymentRoutes.js:router.get('/config', isVerifiedUser, platformPaymentController.getConfigs);
+./routes/platformPaymentRoutes.js:router.post('/config', isVerifiedUser, platformPaymentController.updateConfig);
+./routes/platformPaymentRoutes.js:router.get('/subscriptions', isVerifiedUser, platformPaymentController.getAllSubscriptions);
+./routes/platformPaymentRoutes.js:router.post('/admin/upgrade-plan', isVerifiedUser, platformPaymentController.adminUpgradePlan);
+./routes/platformPaymentRoutes.js:router.post('/admin/extend-trial', isVerifiedUser, platformPaymentController.adminExtendTrial);
+./routes/platformPaymentRoutes.js:router.post('/admin/cancel-subscription', isVerifiedUser, platformPaymentController.adminCancelSubscription);
+./routes/platformPaymentRoutes.js:router.get('/admin/tenant-history/:tenantId', isVerifiedUser, platformPaymentController.adminGetTenantHistory);
+./routes/platformPaymentRoutes.js:router.get('/my-subscription', isVerifiedUser, platformPaymentController.getMySubscription);
+./routes/platformPaymentRoutes.js:router.get('/my-usage', isVerifiedUser, platformPaymentController.getMyUsage);
+./routes/platformPaymentRoutes.js:router.post('/change-plan', isVerifiedUser, platformPaymentController.changePlan);
+./routes/platformPaymentRoutes.js:router.post('/revert-plan-change', isVerifiedUser, platformPaymentController.revertPlanChange);
+./routes/platformPaymentRoutes.js:router.post('/cancel-plan', isVerifiedUser, platformPaymentController.cancelPlan);
+./routes/platformPaymentRoutes.js:// router.post('/validate-promo', isVerifiedUser, platformPaymentController.validatePromo); // Moved to public
+./routes/globalSearchRoute.js:router.get("/", globalSearchController.globalSearch);
+./routes/apiTokenRoute.js:router.get("/", getAllTokens);
+./routes/apiTokenRoute.js:router.get("/stats", getTokenStats);
+./routes/apiTokenRoute.js:router.get("/:id", getTokenById);
+./routes/apiTokenRoute.js:router.post("/", createToken);
+./routes/apiTokenRoute.js:router.put("/:id", updateToken);
+./routes/apiTokenRoute.js:router.delete("/:id", deleteToken);
+./routes/apiTokenRoute.js:router.post("/:id/regenerate", regenerateToken);
+./routes/subscriptionWebhookRoutes.js:router.post('/:gateway', platformPaymentController.handleWebhook);
+./routes/fixedAssetRoute.js:router.post("/process-depreciation", isVerifiedUser, processDepreciation);
+./routes/fixedAssetRoute.js:router.post("/analyze-receipt", isVerifiedUser, memoryUpload.single("receipt"), analyzeReceipt);
+./routes/fixedAssetRoute.js:router.post("/:id/upload-receipt", isVerifiedUser, uploadReceiptMiddleware.single("receipt"), uploadReceipt);
+./routes/giftCardRoute.js:router.post("/issue", requireRole(["Admin", "Manager"]), giftCardController.issueCard);
+./routes/giftCardRoute.js:router.get("/all", requireRole(["Admin", "Manager"]), giftCardController.getAllCards);
+./routes/giftCardRoute.js:router.get("/customer/:customerId", requireRole(["Admin", "Manager", "Cashier", "Waiter"]), giftCardController.getCardsByCustomer);
+./routes/giftCardRoute.js:router.get("/:code", requireRole(["Admin", "Manager", "Cashier", "Waiter"]), giftCardController.getCard);
+./routes/giftCardRoute.js:router.post("/top-up", requireRole(["Admin", "Manager", "Cashier"]), giftCardController.topUpCard);
+./routes/giftCardRoute.js:router.post("/send-otp", requireRole(["Admin", "Manager", "Cashier", "Waiter"]), giftCardController.sendCardOTP);
+./routes/giftCardRoute.js:router.post("/verify-otp", requireRole(["Admin", "Manager", "Cashier", "Waiter"]), giftCardController.verifyCardOTP);
+./routes/giftCardRoute.js:router.post("/redeem", requireRole(["Admin", "Manager", "Cashier", "Waiter"]), giftCardController.redeemCard);
+./routes/tenantRoutes.js:router.post("/register", tenantController.register);
+./routes/tenantRoutes.js:router.post("/resend-verification", tenantController.resendVerification);
+./routes/tenantRoutes.js:router.get("/check-subdomain/:subdomain", tenantController.checkSubdomain);
+./routes/tenantRoutes.js:router.get("/", isVerifiedUser, tenantController.getAllTenants);
+./routes/tenantRoutes.js:router.get("/cleanable", isVerifiedUser, tenantController.getCleanableTenants);
+./routes/tenantRoutes.js:router.put("/:id/status", isVerifiedUser, tenantController.updateStatus);
+./routes/tenantRoutes.js:router.put("/:id/proxy", isVerifiedUser, tenantController.updateProxy);
+./routes/tenantRoutes.js:router.put("/:id/ai-settings", isVerifiedUser, tenantController.updateAISettings);
+./routes/tenantRoutes.js:router.put("/:id/domain", isVerifiedUser, tenantController.updateDomain);
+./routes/tenantRoutes.js:router.get("/:id/verify-domain", isVerifiedUser, tenantController.verifyDomain);
+./routes/tenantRoutes.js:router.delete("/:id", isVerifiedUser, tenantController.deleteTenant);
+./routes/tenantRoutes.js:router.delete("/:id/hard", isVerifiedUser, tenantController.hardDeleteTenant);
+./routes/tenantRoutes.js:router.post("/:id/force-cancel", isVerifiedUser, tenantController.forceCancelTenant);
+./routes/tenantRoutes.js:router.post("/:id/follow-up-email", isVerifiedUser, tenantController.sendFollowUp);
+./routes/tenantRoutes.js:router.get("/:id/stats", isVerifiedUser, tenantController.getStats);
+./routes/dishRoute.js:router.post("/upload-image", isVerifiedUser, requireModuleEnabled("orders"), requirePermission("canManageMenu"), checkStorageLimit, uploadDishImage.single("image"), uploadImage);
+./routes/platformSettingsRoute.js:router.get('/confirm-email', platformSettingsController.confirmEmail);
+./routes/platformSettingsRoute.js:router.get('/', isVerifiedUser, platformSettingsController.getSettings);
+./routes/platformSettingsRoute.js:router.post('/', isVerifiedUser, platformSettingsController.updateSetting);
+./routes/platformSettingsRoute.js:router.post('/test-email', isVerifiedUser, platformSettingsController.testEmailConfig);
+./routes/platformSettingsRoute.js:router.post('/test-firebase', isVerifiedUser, platformSettingsController.testFirebaseConfig);
+./routes/paymentGatewayRoute.js:router.get(
+./routes/paymentGatewayRoute.js:router.post(
+./routes/paymentGatewayRoute.js:router.put(
+./routes/paymentGatewayRoute.js:router.post(
+./routes/paymentGatewayRoute.js:router.delete(
+./routes/whatsappRoute.js:router.get('/status', isVerifiedUser, checkPlanFeature('WhatsApp Ordering'), checkWhatsAppApproved, async (req, res) => {
+./routes/whatsappRoute.js:router.get('/dashboard', isVerifiedUser, requirePermission("canManageSettings"), checkWhatsAppApproved, async (req, res) => {
+./routes/whatsappRoute.js:router.get('/qr', isVerifiedUser, checkPlanFeature('WhatsApp Ordering'), checkWhatsAppApproved, async (req, res) => {
+./routes/whatsappRoute.js:router.post('/connect', isVerifiedUser, requirePermission("canManageSettings"), checkWhatsAppApproved, async (req, res) => {
+./routes/whatsappRoute.js:router.post('/pair', isVerifiedUser, requirePermission("canManageSettings"), checkWhatsAppApproved, async (req, res) => {
+./routes/whatsappRoute.js:router.post('/restart', isVerifiedUser, requirePermission("canManageSettings"), checkWhatsAppApproved, async (req, res) => {
+./routes/whatsappRoute.js:router.post('/disconnect', isVerifiedUser, requirePermission("canManageSettings"), checkWhatsAppApproved, async (req, res) => {
+./routes/whatsappRoute.js:router.post('/logout', isVerifiedUser, requirePermission("canManageSettings"), checkWhatsAppApproved, async (req, res) => {
+./routes/whatsappRoute.js:router.post('/send', isVerifiedUser, checkPlanFeature('WhatsApp Ordering'), checkWhatsAppApproved, checkPlanLimit('whatsapp_messages_per_month', 'WhatsAppMessageLog', 'monthly'), async (req, res) => {
+./routes/whatsappRoute.js:router.post('/send-order-notification', isVerifiedUser, checkPlanFeature('WhatsApp Ordering'), checkPlanLimit('whatsapp_messages_per_month', 'WhatsAppMessageLog', 'monthly'), async (req, res) => {
+./routes/whatsappRoute.js:router.get('/logs', isVerifiedUser, requirePermission("canManageSettings"), whatsappLogController.getLogs);
+./routes/whatsappRoute.js:router.post('/verify-numbers', isVerifiedUser, requirePermission("canManageSettings"), checkWhatsAppApproved, async (req, res) => {
+./routes/whatsappRoute.js:router.get('/health', isVerifiedUser, async (req, res) => {
+./routes/whatsappRoute.js:router.post('/proxy/tenant', isVerifiedUser, async (req, res) => {
+./routes/whatsappRoute.js:router.post('/proxy/branch', isVerifiedUser, async (req, res) => {
+./routes/whatsappRoute.js:router.post('/approve-branch', isVerifiedUser, async (req, res) => {
+./routes/branchRoutes.js:router.post("/", requirePermission("canManageBranches"), checkPlanLimit("branches", "Branch"), branchController.createBranch);
+./routes/branchRoutes.js:router.get("/", requirePermission("canManageBranches"), branchController.getAllBranches);
+./routes/branchRoutes.js:router.get("/:id", requirePermission("canManageBranches"), branchController.getBranchById);
+./routes/branchRoutes.js:router.get("/:id/stats", requirePermission("canManageBranches"), branchController.getBranchStats);
+./routes/branchRoutes.js:router.post("/:id/calculate-distance", branchController.calculateDistance);
+./routes/branchRoutes.js:router.post("/:id/test-email", requirePermission("canManageBranches"), branchController.testBranchEmail);
+./routes/branchRoutes.js:router.put("/:id", requirePermission("canManageBranches"), branchController.updateBranch);
+./routes/branchRoutes.js:router.put("/:id/assign-manager", requirePermission("canManageBranches"), branchController.assignManager);
+./routes/branchRoutes.js:router.put("/:id/deactivate", requirePermission("canManageBranches"), branchController.deactivateBranch);
+./routes/branchRoutes.js:router.put("/:id/activate", requirePermission("canManageBranches"), branchController.activateBranch);
+./routes/branchRoutes.js:router.delete("/:id", requirePermission("canManageBranches"), branchController.deleteBranch);
+./routes/branchRoutes.js:router.post("/upload-image", requirePermission("canManageBranches"), checkStorageLimit, uploadBranchImage.single("image"), branchController.uploadImage);
+./routes/categoryBranchRoutes.js:router.post('/bulk-assign', bulkAssignCategoriesToBranches);
+./routes/categoryBranchRoutes.js:router.delete('/bulk-remove', bulkRemoveCategoriesFromBranches);
+./routes/categoryBranchRoutes.js:router.post('/:categoryId/branches', assignCategoryToBranches);
+./routes/categoryBranchRoutes.js:router.delete('/:categoryId/branches', removeCategoryFromBranches);
+./routes/categoryBranchRoutes.js:router.get('/:categoryId/branches', getCategoryBranches);
+./routes/categoryBranchRoutes.js:router.put('/:categoryId/branch/:branchId', updateCategoryBranchSettings);
+./routes/webhookRoute.js:router.post('/stripe', webhookController.handleStripeWebhook);
+./routes/webhookRoute.js:router.post('/mamopay', webhookController.handleMamoWebhook);
+./routes/webhookRoute.js:router.post('/telr', webhookController.handleTelrWebhook);
+./routes/webhookRoute.js:router.post('/paytabs', webhookController.handlePayTabsWebhook);
+./routes/feedbackRoutes.js:router.get('/branch/:branchId', feedbackController.getBranchFeedback);
+./routes/feedbackRoutes.js:router.post('/', (req, res, next) => {
+./routes/feedbackRoutes.js:router.get('/', authenticateUserOrN8N, feedbackController.getAllFeedback);
+./routes/feedbackRoutes.js:router.get('/analytics', authenticateUserOrN8N, feedbackController.getFeedbackAnalytics);
+./routes/feedbackRoutes.js:router.patch('/:id/status', authenticateUserOrN8N, feedbackController.updateFeedbackStatus);
+./routes/feedbackRoutes.js:router.put('/:id/status', authenticateUserOrN8N, feedbackController.updateFeedbackStatus);
+./routes/aiRoutes.js:router.get("/config", requirePermission("canManageSettings"), aiController.getAIConfig);
+./routes/aiRoutes.js:router.post("/config", requirePermission("canManageSettings"), aiController.updateAIConfig);
+./routes/aiRoutes.js:router.post("/test", requirePermission("canManageSettings"), aiController.testAIConnection);
+./routes/aiRoutes.js:router.post("/test-embedding", requirePermission("canManageSettings"), aiController.testEmbeddingConnection);
+./routes/aiRoutes.js:router.post("/ask", checkPlanFeature("AI Assistant"), checkPlanLimit("ai_queries_per_month", "AIQueryLog", "monthly"), aiController.askAI);
+./routes/aiRoutes.js:router.post("/ask-staff", checkPlanFeature("AI Assistant"), checkPlanLimit("ai_queries_per_month", "AIQueryLog", "monthly"), aiController.askStaffAssistant);
+./routes/aiRoutes.js:router.get("/forecast", checkPlanFeature("AI Insights"), checkPlanLimit("ai_queries_per_month", "AIQueryLog", "monthly"), aiController.getForecast);
+./routes/aiRoutes.js:router.get("/inventory-predictions", checkPlanFeature("AI Insights"), checkPlanLimit("ai_queries_per_month", "AIQueryLog", "monthly"), aiController.getInventoryPredictions);
+./routes/aiRoutes.js:router.get("/price-intelligence", checkPlanFeature("AI Insights"), checkPlanLimit("ai_queries_per_month", "AIQueryLog", "monthly"), aiController.getPriceIntelligence);
+./routes/aiRoutes.js:router.get("/product-performance", checkPlanFeature("AI Insights"), checkPlanLimit("ai_queries_per_month", "AIQueryLog", "monthly"), aiController.getProductPerformance);
+./routes/aiRoutes.js:router.get("/profit-analysis", checkPlanFeature("AI Insights"), checkPlanLimit("ai_queries_per_month", "AIQueryLog", "monthly"), aiController.getProfitAnalysis);
+./routes/aiRoutes.js:router.post("/inventory-intelligence", checkPlanFeature("AI Insights"), checkPlanLimit("ai_queries_per_month", "AIQueryLog", "monthly"), aiController.getInventoryIntelligence);
+./routes/customerProspectRoute.js:router.get("/", getAllProspects);
+./routes/customerProspectRoute.js:router.post("/merge", mergeProspects); // NEW: Merge duplicates
+./routes/customerProspectRoute.js:router.get("/statistics", getProspectStatistics);
+./routes/customerProspectRoute.js:router.get("/types", getCustomerTypes); // Get available customer types
+./routes/customerProspectRoute.js:router.get("/search-by-phone", searchByPhone); // Search customer by phone for auto-fill
+./routes/customerProspectRoute.js:router.get("/channel/:channel", getProspectsByChannel);
+./routes/customerProspectRoute.js:router.get("/:id", getProspectById);
+./routes/customerProspectRoute.js:router.post("/", checkPlanLimit("customers", "CustomerProspect"), createProspect);
+./routes/customerProspectRoute.js:router.put("/:id", updateProspect);
+./routes/customerProspectRoute.js:router.delete("/:id", deleteProspect);
+./routes/customerProspectRoute.js:router.put("/:id/types", updateCustomerTypes); // Update customer types (add/remove/set)
+./routes/customerProspectRoute.js:router.get("/:id/history", getProspectHistory); // Get prospect update history
+./routes/customerProspectRoute.js:router.get("/:id/transactions", getProspectTransactions); // Get prospect transactions summary
+./routes/customerProspectRoute.js:router.put("/:id/address", updateCustomerAddress);
+./routes/customerProspectRoute.js:router.delete("/:id/address/:addressId", deleteCustomerAddress);
+./routes/customerProspectRoute.js:router.post("/:id/interaction", addInteraction);
+./routes/customerProspectRoute.js:router.post("/:id/convert-to-order", convertToOrder);
+./routes/customerProspectRoute.js:router.post("/menu-inquiry", createMenuInquiry);
+./routes/userRoute.js:router.put("/:id/reset-password",
+./routes/dishBranchRoutes.js:router.post('/bulk-assign', bulkAssignDishesToBranches);
+./routes/dishBranchRoutes.js:router.delete('/bulk-remove', bulkRemoveDishesFromBranches);
+./routes/dishBranchRoutes.js:router.put('/bulk-update-pricing', bulkUpdateDishBranchPricing);
+./routes/dishBranchRoutes.js:router.post('/:dishId/branches', assignDishToBranches);
+./routes/dishBranchRoutes.js:router.delete('/:dishId/branches', removeDishFromBranches);
+./routes/dishBranchRoutes.js:router.get('/:dishId/branches', getDishBranches);
+./routes/dishBranchRoutes.js:router.put('/:dishId/branch/:branchId/price', updateDishBranchPrice);
+./routes/dishBranchRoutes.js:router.put('/:dishId/branch/:branchId/availability', updateDishBranchAvailability);
+./routes/dishBranchRoutes.js:router.put('/:dishId/branch/:branchId', updateDishBranchSettings);
+./routes/shiftTemplateRoute.js:router.post(
+./routes/shiftTemplateRoute.js:router.get(
+./routes/shiftTemplateRoute.js:router.put(
+./routes/shiftTemplateRoute.js:router.delete(
+./routes/leaveRoutes.js:router.get('/balances/:userId', isVerifiedUser, leaveController.getLeaveBalance);
+./routes/leaveRoutes.js:router.patch('/balances/:userId', isVerifiedUser, leaveController.updateLeaveBalance);
+./routes/leaveRoutes.js:router.get('/holidays', isVerifiedUser, leaveController.getHolidays);
+./routes/leaveRoutes.js:router.post('/holidays', isVerifiedUser, leaveController.createHoliday);
+./routes/leaveRoutes.js:router.patch('/holidays/:id', isVerifiedUser, leaveController.updateHoliday);
+./routes/leaveRoutes.js:router.delete('/holidays/:id', isVerifiedUser, leaveController.deleteHoliday);
+./routes/leaveRoutes.js:router.patch('/schedule/settings/:userId', isVerifiedUser, leaveController.updateEmployeeScheduleSettings);
+./routes/databaseSetupRoute.js:router.get("/check", checkDatabaseConfig);
+./routes/databaseSetupRoute.js:router.post("/test", testDatabaseConnection);
+./routes/databaseSetupRoute.js:router.post("/create", createDatabase);
+./routes/databaseSetupRoute.js:router.post("/save", saveDatabaseConfig);
+./routes/marketingCampaignRoutes.js:router.get("/", getCampaigns);
+./routes/marketingCampaignRoutes.js:router.get("/:id", getCampaignById);
+./routes/marketingCampaignRoutes.js:router.post("/", uploadMarketingImage.single("media"), createCampaign);
+./routes/marketingCampaignRoutes.js:router.put("/:id", uploadMarketingImage.single("media"), updateCampaign);
+./routes/marketingCampaignRoutes.js:router.delete("/:id", deleteCampaign);
+./routes/marketingCampaignRoutes.js:router.post("/preview-audience", previewAudience);
+./routes/marketingCampaignRoutes.js:router.post("/:id/launch", launchCampaign);
+./routes/marketingCampaignRoutes.js:router.post("/:id/pause", pauseCampaign);
+./routes/dealRoute.js:router.post("/evaluate", authenticateUserOrN8N, evaluateDeals);
+./routes/dealRoute.js:router.post("/apply", authenticateUserOrN8N, applyDeals);
+./routes/dealRoute.js:router.post("/", createDeal);
+./routes/dealRoute.js:router.get("/", getDeals);
+./routes/dealRoute.js:router.get("/:id/analytics", getDealAnalytics);
+./routes/dealRoute.js:router.get("/:id", getDealById);
+./routes/dealRoute.js:router.put("/:id", updateDeal);
+./routes/dealRoute.js:router.delete("/:id", deleteDeal);
+./routes/dealRoute.js:router.patch("/:id/toggle", toggleDealStatus);
+./routes/promoCodeRoutes.js:router.get("/public", promoCodeController.getPublicPromoCodes);
+./routes/promoCodeRoutes.js:router.get("/", isVerifiedUser, requireSuperAdmin, promoCodeController.getAllPromoCodes);
+./routes/promoCodeRoutes.js:router.post("/", isVerifiedUser, requireSuperAdmin, promoCodeController.createPromoCode);
+./routes/promoCodeRoutes.js:router.put("/:id", isVerifiedUser, requireSuperAdmin, promoCodeController.updatePromoCode);
+./routes/promoCodeRoutes.js:router.delete("/:id", isVerifiedUser, requireSuperAdmin, promoCodeController.deletePromoCode);
+./routes/aggregatorRoute.js:router.post("/deliverect", handleDeliverectWebhook);
+./routes/aggregatorRoute.js:router.post("/talabat", handleTalabatWebhook);
+./routes/aggregatorRoute.js:router.post("/otter", handleOtterWebhook);
+./routes/aggregatorRoute.js:router.post("/noon", handleNoonWebhook);
+./routes/aggregatorRoute.js:router.post("/careem", handleCareemWebhook);
+./routes/aggregatorRoute.js:router.post("/keeta", handleKeetaWebhook);
+./routes/aggregatorRoute.js:router.post("/deliveroo", handleDeliverooWebhook);
+./routes/aggregatorRoute.js:router.post("/smiles", handleSmilesWebhook);
+./routes/aggregatorRoute.js:router.get("/config/:branchId", getConfigs);
+./routes/aggregatorRoute.js:router.post("/config/:branchId", saveConfig);
+./routes/aggregatorRoute.js:router.post("/test/:branchId", testConnection);
+./routes/semanticCacheRoutes.js:router.get("/unverified", semanticCacheController.getUnverifiedCaches);
+./routes/semanticCacheRoutes.js:router.get("/verified", semanticCacheController.getVerifiedCaches);
+./routes/semanticCacheRoutes.js:router.get("/preview-context", semanticCacheController.getPreviewContext);
+./routes/semanticCacheRoutes.js:router.get("/get-branches", semanticCacheController.getTenantBranches);
+./routes/semanticCacheRoutes.js:router.post("/", semanticCacheController.createCache);
+./routes/semanticCacheRoutes.js:router.put("/:id/verify", semanticCacheController.verifyCache);
+./routes/semanticCacheRoutes.js:router.put("/:id/translate", semanticCacheController.translateCache);
+./routes/semanticCacheRoutes.js:router.put("/:id", semanticCacheController.updateCache);
+./routes/semanticCacheRoutes.js:router.delete("/:id", semanticCacheController.deleteCache);
+./routes/planRoutes.js:router.get("/active", planController.getActivePlans);
+./routes/planRoutes.js:router.get("/", isVerifiedUser, planController.getAllPlans);
+./routes/planRoutes.js:router.post("/", isVerifiedUser, requireSuperAdmin, planController.createPlan);
+./routes/planRoutes.js:router.put("/:id", isVerifiedUser, requireSuperAdmin, planController.updatePlan);
+./routes/planRoutes.js:router.delete("/:id", isVerifiedUser, requireSuperAdmin, planController.deletePlan);
+./routes/loyaltyRoute.js:router.get('/transactions', isVerifiedUser, (req, res, next) => {
+./routes/loyaltyRoute.js:router.get('/:customerId([0-9a-fA-F-]{36})', isVerifiedUser, (req, res, next) => {
+./routes/loyaltyRoute.js:router.get('/:customerId([0-9a-fA-F-]{36})/history', isVerifiedUser, loyaltyController.getLoyaltyHistory);
+./routes/loyaltyRoute.js:router.post('/redeem', isVerifiedUser, loyaltyController.redeemPoints);
+./routes/loyaltyRoute.js:router.post('/transfer', isVerifiedUser, loyaltyController.transferPoints);
+./routes/customerRoutes.js:router.post('/auth/request-otp', rateLimitRequestOtp, customerAuthController.requestOtp);
+./routes/customerRoutes.js:router.post('/auth/verify-otp', rateLimitVerifyOtp, customerAuthController.verifyOtp);
+./routes/customerRoutes.js:router.get('/profile', isVerifiedCustomer, customerAuthController.getProfile);
+./routes/customerRoutes.js:router.put('/profile', isVerifiedCustomer, customerAuthController.updateProfile);
+./routes/customerRoutes.js:router.get('/loyalty/summary', isVerifiedCustomer, customerLoyaltyController.getLoyaltySummary);
+./routes/customerRoutes.js:router.post('/loyalty/transfer', isVerifiedCustomer, customerLoyaltyController.transferPoints);
+./routes/customerRoutes.js:router.get('/orders', isVerifiedCustomer, customerOrderController.getOrders);
+./routes/customerRoutes.js:router.post('/orders', isVerifiedCustomer, customerOrderController.createOrder);
+./routes/customerRoutes.js:router.get('/gift-cards', isVerifiedCustomer, customerGiftCardController.getGiftCards);
+./routes/customerRoutes.js:router.post('/gift-cards/purchase', isVerifiedCustomer, customerGiftCardController.purchaseGiftCard);
+./routes/customerRoutes.js:router.get('/gift-cards/verify/:code', isVerifiedCustomer, customerGiftCardController.getCard);
+./routes/customerRoutes.js:router.post('/gift-cards/send-otp', isVerifiedCustomer, customerGiftCardController.sendCardOTP);
+./routes/customerRoutes.js:router.get('/menu', customerMenuController.getMenu);
+./routes/customerRoutes.js:router.get('/branches', customerMenuController.getBranches);
+./routes/customerRoutes.js:router.post('/branches/:branchId/calculate-distance', customerMenuController.calculateDistance);
+./routes/customerRoutes.js:router.get('/settings', customerAuthController.getSettings);
+./routes/customerRoutes.js:router.post('/payment/create-order', isVerifiedCustomer, paymentController.createOrder);
+./routes/customerRoutes.js:router.post('/verify-payment', isVerifiedCustomer, paymentController.verifyPayment);
+./routes/n8nRoute.js:router.get("/menu", async (req, res, next) => {
+./routes/n8nRoute.js:router.post("/prospect/interaction", async (req, res, next) => {
+./routes/n8nRoute.js:router.get("/prospect/:id", async (req, res, next) => {
+./routes/n8nRoute.js:router.get("/prospect", async (req, res, next) => {
+./routes/n8nRoute.js:router.get("/order/:id", async (req, res, next) => {
+./routes/n8nRoute.js:router.post("/webhook/confirmation", async (req, res, next) => {
+./routes/socialMediaRoute.js:router.post("/webhook", handleSocialMediaWebhook);
+./routes/socialMediaRoute.js:router.get("/connections", getAllConnections);
+./routes/socialMediaRoute.js:router.post("/:platform/connect", connectPlatform);
+./routes/socialMediaRoute.js:router.post("/:platform/disconnect", disconnectPlatform);
+./routes/socialMediaRoute.js:router.put("/:platform/config", updatePlatformConfig);
+./routes/socialMediaRoute.js:router.post("/post", postToSocialMedia);
+./routes/socialMediaRoute.js:router.post("/post/all", postToAllPlatforms);
+./routes/socialMediaRoute.js:router.get("/statistics", getSocialMediaStats);
+./routes/socialMediaRoute.js:router.get("/google/locations", getGoogleLocations);
+./routes/socialMediaRoute.js:router.post("/google/sync-menu", syncMenuToGoogle);
+./routes/systemLogRoute.js:router.get('/', isVerifiedUser, requireSuperAdmin, systemLogController.getLogFiles);
+./routes/systemLogRoute.js:router.get('/:filename', isVerifiedUser, requireSuperAdmin, systemLogController.readLogFile);
+./routes/cronRoute.js:router.get("/status", authenticateUserOrN8N, async (req, res) => {
+./routes/cronRoute.js:router.post("/process-recurring-expenses", authenticateUserOrN8N, async (req, res) => {
+./routes/cronRoute.js:router.post("/check-loan-reminders", authenticateUserOrN8N, async (req, res) => {
+./routes/cronRoute.js:router.post("/check-low-stock", authenticateUserOrN8N, async (req, res) => {
+./routes/cronRoute.js:router.post("/generate-daily-reports", authenticateUserOrN8N, async (req, res) => {
+./routes/cronRoute.js:router.post("/check-subscription-expiry", authenticateUserOrN8N, async (req, res) => {
+./routes/adminBlogRoutes.js:router.get("/", blogController.apiListPosts);
+./routes/adminBlogRoutes.js:router.get("/:id", blogController.apiGetPostById);
+./routes/adminBlogRoutes.js:router.post("/", blogController.apiCreatePost);
+./routes/adminBlogRoutes.js:router.put("/:id", blogController.apiUpdatePost);
+./routes/adminBlogRoutes.js:router.delete("/:id", blogController.apiDeletePost);
+./routes/adminBlogRoutes.js:router.post("/upload-image", uploadBlogImage.single("image"), blogController.apiUploadImage);
+./routes/floorRoute.js:router.get("/", getFloors);
+./routes/floorRoute.js:router.get("/all", getAllFloors);
+./routes/floorRoute.js:router.get("/:id", getFloorById);
+./routes/floorRoute.js:router.get("/:id/stats", getFloorStats);
+./routes/floorRoute.js:router.post("/", checkPlanLimit("floors", "Floor"), createFloor);
+./routes/floorRoute.js:router.put("/:id", updateFloor);
+./routes/floorRoute.js:router.delete("/:id", deleteFloor);
+./routes/floorRoute.js:router.post("/reorder", reorderFloors);
+./app.js:app.use(ejsLayouts);
+./app.js:app.use(helmet({
+./app.js:app.use((req, res, next) => {
+./app.js:app.use(globalLimiter);
+./app.js:app.use(cors({
+./app.js:app.use(express.json({
+./app.js:app.use(express.urlencoded({ 
+./app.js:app.use(express.text({
+./app.js:app.use((err, req, res, next) => {
+./app.js:app.use(cookieParser());
+./app.js:app.use(tenantResolver);
+./app.js:app.use(branchAccessMiddleware);
+./app.js:    app.use(express.static(frontendDistPath));
+./app.js:app.use((req, res, next) => {
+./app.js:app.use("/api/database-setup", require("./routes/databaseSetupRoute"));
+./app.js:app.use("/api/public", require("./routes/publicRoutes"));
+./app.js:app.use("/api/tenants", require("./routes/tenantRoutes"));
+./app.js:app.use("/api/plans", require("./routes/planRoutes")); // Plan Management
+./app.js:app.use("/api/promo-codes", require("./routes/promoCodeRoutes")); // Promo Code Management
+./app.js:app.use("/api/branch", require("./routes/branchRoutes"));
+./app.js:app.use("/api/floor", require("./routes/floorRoute"));
+./app.js:app.use("/api/user", require("./routes/userRoute"));
+./app.js:app.use("/api/order", require("./routes/orderRoute"));
+./app.js:app.use("/api/table", require("./routes/tableRoute"));
+./app.js:app.use("/api/payment", require("./routes/paymentRoute"));
+./app.js:app.use("/api/category", require("./routes/categoryRoute"));
+./app.js:app.use("/api/category-branch", require("./routes/categoryBranchRoutes")); // Multi-branch category management
+./app.js:app.use("/api/dish", require("./routes/dishRoute"));
+./app.js:app.use("/api/dish-branch", require("./routes/dishBranchRoutes")); // Multi-branch dish management
+./app.js:app.use("/api/dish-spice", require("./routes/dishSpiceRoute"));
+./app.js:app.use("/api/settings", require("./routes/settingsRoute"));
+./app.js:app.use("/api/vendor", require("./routes/vendorRoute"));
+./app.js:app.use("/api/inventory", require("./routes/inventoryRoute"));
+./app.js:app.use("/api/purchase-order", require("./routes/purchaseOrderRoute"));
+./app.js:app.use("/api/automation", require("./routes/automationRoute"));
+./app.js:app.use("/api/customer-prospect", require("./routes/customerProspectRoute"));
+./app.js:app.use("/api/customer", require("./routes/customerRoutes")); // Customer Portal routes
+./app.js:app.use("/api/social-media", require("./routes/socialMediaRoute"));
+./app.js:app.use("/api/n8n", require("./routes/n8nRoute")); // N8N API routes
+./app.js:app.use("/api/api-tokens", require("./routes/apiTokenRoute")); // API Token management
+./app.js:app.use("/api/expense", require("./routes/expenseRoute")); // Expense management
+./app.js:app.use("/api/loan", require("./routes/loanRoute")); // Loan management
+./app.js:app.use("/api/loan-installment", require("./routes/loanInstallmentRoute")); // Loan installment management
+./app.js:app.use("/api/financial-summary", require("./routes/financialSummaryRoute")); // Financial summary
+./app.js:app.use("/api/aging", require("./routes/agingRoute")); // AP/AR Aging List
+./app.js:app.use("/api/shift", require("./routes/shiftRoute")); // Shift/Opening-Closing management
+./app.js:app.use("/api/payroll", require("./routes/payrollRoute")); // Payroll management
+./app.js:app.use("/api/shift-template", require("./routes/shiftTemplateRoute")); // Shift Templates
+./app.js:app.use("/api/search", require("./routes/globalSearchRoute")); // Global Search
+./app.js:app.use("/api/ai", require("./routes/aiRoutes")); // AI Management
+./app.js:app.use("/api/semantic-cache", require("./routes/semanticCacheRoutes")); // Semantic Cache Management
+./app.js:app.use("/api/fixed-asset", require("./routes/fixedAssetRoute")); // Fixed Asset Registry
+./app.js:app.use("/api/blogs", require("./routes/adminBlogRoutes")); // Admin Blog management
+./app.js:app.use("/blog", require("./routes/blogRoutes"));
+./app.js:app.use("/api/department", require("./routes/departmentRoute")); // Department master data
+./app.js:app.use("/api/position", require("./routes/positionRoute")); // Position master data
+./app.js:app.use("/api/delivery-boy", require("./routes/deliveryBoyRoute")); // Delivery boy management
+./app.js:app.use("/api/deal", require("./routes/dealRoute")); // Deal/Promotion management
+./app.js:app.use("/api/leave", require("./routes/leaveRoutes")); // Leave & Holiday management
+./app.js:app.use("/api/expense-budget", require("./routes/expenseBudgetRoute")); // Expense budget management
+./app.js:app.use("/api/cron", require("./routes/cronRoute")); // Cron job endpoints (for external cron services)
+./app.js:app.use("/api/whatsapp", require("./routes/whatsappRoute")); // WhatsApp integration
+./app.js:app.use("/api/marketing-campaign", require("./routes/marketingCampaignRoutes")); // WhatsApp Marketing Campaigns
+./app.js:app.use("/api/payment-gateway", require("./routes/paymentGatewayRoute")); // Payment gateway configuration
+./app.js:app.use("/api/webhooks", require("./routes/webhookRoute"));
+./app.js:app.use("/api/webhooks/subscription", require("./routes/subscriptionWebhookRoutes"));
+./app.js:app.use("/api/platform-payments", require("./routes/platformPaymentRoutes")); // SaaS Billing
+./app.js:app.use("/api/aggregator", require("./routes/aggregatorRoute")); // Aggregator Webhooks
+./app.js:app.use("/api/loyalty", require("./routes/loyaltyRoute")); // Loyalty System
+./app.js:app.use("/api/gift-card", require("./routes/giftCardRoute")); // Gift Card System
+./app.js:app.use("/api/platform-settings", require("./routes/platformSettingsRoute")); // Platform Settings
+./app.js:app.use("/api/templates", require("./routes/templateRoutes")); // Restaurant Templates (Quick Setup)
+./app.js:app.use("/api/feedback", require("./routes/feedbackRoutes")); // Customer Feedback System
+./app.js:app.use("/api/system-logs", require("./routes/systemLogRoute")); // SuperAdmin Log Viewer
+./app.js:app.use("/uploads", express.static(path.join(__dirname, "uploads")));
+./app.js:app.use(globalErrorHandler);

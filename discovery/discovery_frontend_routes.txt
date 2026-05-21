@@ -1,0 +1,632 @@
+src/components/shared/Sidebar.jsx:                    {canViewDashboard && <NavItem icon={MdDashboard} label={t('sidebar.dashboard')} path="/dashboard" />}
+src/components/shared/Sidebar.jsx:                    {canManageMenu && <NavItem icon={MdLayers} label={t('sidebar.floor_plan')} path="/floor-plan" />}
+src/components/shared/Sidebar.jsx:                    {canManageMenu && <NavItem icon={MdRestaurantMenu} label={t('sidebar.pos')} path="/menu" />}
+src/components/shared/Sidebar.jsx:                    {canManageOrders && <NavItem icon={MdReceipt} label={t('sidebar.orders')} path="/orders" />}
+src/components/shared/Sidebar.jsx:                    {canManageTables && <NavItem icon={MdTableRestaurant} label={t('sidebar.tables')} path="/tables" />}
+src/components/shared/Sidebar.jsx:                    {canManageOrders && <NavItem icon={MdSoupKitchen} label={t('sidebar.kitchen_display')} path="/pos/kitchen" />}
+src/components/shared/Sidebar.jsx:                    {canManageOrders && <NavItem icon={MdRoomService} label={t('sidebar.waiter_display')} path="/pos/waiter" />}
+src/components/shared/Sidebar.jsx:                            {canManageSettings && <NavItem icon={MdRestaurantMenu} label={t('sidebar.deals')} path="/deals" />}
+src/components/shared/Sidebar.jsx:                            {hasFeature("Marketing Automation") && <NavItem icon={FiSend} label={t('sidebar.marketing', 'Marketing')} path="/automation?view=marketing" />}
+src/components/shared/Sidebar.jsx:                            {canProcessPayments && isLoyaltyEnabled && hasFeature("Customer Loyalty Program") && <NavItem icon={MdCardGiftcard} label={t('sidebar.loyalty', { defaultValue: 'Loyalty' })} path="/loyalty" />}
+src/components/shared/Sidebar.jsx:                            {canProcessPayments && isGiftCardEnabled && hasFeature("Gift Cards") && <NavItem icon={MdCardGiftcard} label={t('sidebar.gift_cards')} path="/gift-cards" />}
+src/components/shared/Sidebar.jsx:                            <NavItem icon={MdReceipt} label={t('sidebar.feedback', 'Customer Feedback')} path="/feedback" />
+src/components/shared/Sidebar.jsx:                            {canManageUsers && <NavItem icon={MdPeople} label={t('sidebar.users')} path="/users" />}
+src/components/shared/Sidebar.jsx:                            {canManageBranches && hasFeature("Multi-Branch Support") && <NavItem icon={MdBusiness} label={t('sidebar.branches')} path="/branches" />}
+src/components/shared/Sidebar.jsx:                            {canManageCustomerProspects && <NavItem icon={FiUsers} label={t('sidebar.customers')} path="/customer-prospects" />}
+src/components/shared/Sidebar.jsx:                            {canManageDeliveryBoys && <NavItem icon={MdLocalShipping} label={t('sidebar.delivery_boys')} path="/delivery-boys" />}
+src/components/shared/Sidebar.jsx:                            {canManageDepartments && <NavItem icon={MdBusiness} label={t('sidebar.departments')} path="/departments" />}
+src/components/shared/Sidebar.jsx:                            {canManagePositions && <NavItem icon={MdWork} label={t('sidebar.positions')} path="/positions" />}
+src/components/shared/Sidebar.jsx:                            {canManageMenu && <NavItem icon={MdDashboard} label={t('sidebar.management')} path="/management" />}
+src/components/shared/Sidebar.jsx:                        <NavItem icon={MdAccessTime} label={t('sidebar.attendance')} path="/mobile-attendance" />
+src/components/shared/Sidebar.jsx:                        <NavItem icon={MdEvent} label={t('sidebar.my_schedule')} path="/my-schedule" />
+src/components/shared/Sidebar.jsx:                        <NavItem icon={MdWork} label={t('sidebar.my_requests')} path="/employee-requests" />
+src/components/shared/Sidebar.jsx:                        <NavItem icon={MdAccountBalanceWallet} label={t('sidebar.my_payroll')} path="/my-payroll" />
+src/components/shared/Sidebar.jsx:                        {canViewOwnHistory && <NavItem icon={MdHistory} label={t('sidebar.my_history')} path="/my-history" />}
+src/components/shared/Sidebar.jsx:                                <NavItem icon={MdLocalShipping} label={t('sidebar.my_deliveries')} path="/my-deliveries" />
+src/components/shared/Sidebar.jsx:                                <NavItem icon={MdReceipt} label={t('sidebar.my_orders')} path="/orders" />
+src/components/shared/Sidebar.jsx:                            {canManageSettings && <NavItem icon={MdAttachMoney} label={t('sidebar.billing')} path="/billing" />}
+src/components/shared/Sidebar.jsx:                            <NavItem icon={MdAccountBalanceWallet} label={t('sidebar.payroll')} path="/payroll" />
+src/components/shared/Sidebar.jsx:                            <NavItem icon={MdBarChart} label={t('sidebar.payroll_reports')} path="/payroll?tab=reports" />
+src/components/shared/Sidebar.jsx:                            <NavItem icon={MdHistory} label={t('sidebar.payment_history', 'Payment History')} path="/payment-history" />
+src/components/shared/Sidebar.jsx:                            {hasFeature("AI Assistant") && <NavItem icon={MdSmartToy} label={t('sidebar.ai_assistant')} path="/ai-assistant" />}
+src/components/shared/Sidebar.jsx:                            {hasFeature("AI Insights") && <NavItem icon={MdSmartToy} label={t('sidebar.ai_insights')} path="/ai-insights" />}
+src/components/shared/Sidebar.jsx:                            {canManageSettings && <NavItem icon={MdScience} label={t('sidebar.ai_training')} path="/ai-training" />}
+src/components/shared/Sidebar.jsx:                            <NavItem icon={FiZap} label={t('sidebar.automation')} path="/automation" />
+src/components/shared/Sidebar.jsx:                        {canManageSettings && <NavItem icon={IoSettings} label={t('sidebar.settings')} path="/settings" />}
+src/components/shared/Sidebar.jsx:                        <NavItem icon={MdDisplaySettings} label={t('sidebar.display_board')} path="/pos/public/orders" isExternal />
+src/components/shared/Sidebar.jsx:                        <NavItem icon={MdTrackChanges} label={t('sidebar.track_orders')} path="/pos/track-order" isExternal />
+src/components/shared/Sidebar.jsx:                                <NavItem icon={MdBusiness} label={t('sidebar.tenants')} path="/super-admin/tenants" />
+src/components/shared/Sidebar.jsx:                                <NavItem icon={MdDashboardCustomize} label={t('sidebar.templates')} path="/super-admin/templates" />
+src/components/shared/Sidebar.jsx:                                <NavItem icon={MdSubscriptions} label={t('sidebar.subscriptions')} path="/super-admin/subscriptions" />
+src/components/shared/Sidebar.jsx:                                <NavItem icon={MdDashboardCustomize} label={t('sidebar.plans')} path="/super-admin/plans" />
+src/components/shared/Sidebar.jsx:                                <NavItem icon={MdArticle} label={t('sidebar.blog_manager', 'Blog Manager')} path="/super-admin/blog" />
+src/components/shared/Sidebar.jsx:                                <NavItem icon={MdLocalOffer} label={t('sidebar.promo_codes')} path="/super-admin/promo-codes" />
+src/components/shared/Sidebar.jsx:                                <NavItem icon={MdEmail} label={t('sidebar.email_settings')} path="/super-admin/email-settings" />
+src/components/shared/Sidebar.jsx:                                <NavItem icon={MdSmartToy} label={t('sidebar.global_ai_settings')} path="/super-admin/ai-settings" />
+src/components/shared/Sidebar.jsx:                                <NavItem icon={MdScience} label={t('sidebar.ai_training_center')} path="/super-admin/ai-training" />
+src/components/shared/Sidebar.jsx:                                <NavItem icon={IoSettings} label={t('sidebar.platform_settings', 'Platform Settings')} path="/super-admin/platform-settings" />
+src/components/shared/Sidebar.jsx:                                <NavItem icon={IoSettings} label={t('sidebar.gateway_config')} path="/super-admin/gateways" />
+src/components/shared/Sidebar.jsx:                                <NavItem icon={MdTrackChanges} label={t('sidebar.whatsapp_health', 'WhatsApp Health')} path="/super-admin/whatsapp-health" />
+src/components/shared/Sidebar.jsx:                                <NavItem icon={MdTerminal} label={t('sidebar.system_logs', 'System Logs')} path="/super-admin/system-logs" />
+src/components/delivery/DeliveryTrackingMap.jsx:    return `https://maps.googleapis.com/maps/api/staticmap?center=${centerLat},${centerLng}&zoom=${zoom}&size=600x400&markers=${markers}&path=color:0x0000ff|weight:5|${currentLocation.latitude},${currentLocation.longitude}|${orderInfo.deliveryLatitude},${orderInfo.deliveryLongitude}`;
+src/App.jsx:          path="/"
+src/App.jsx:        <Route path="/home" element={<ProtectedRoutes><Home /></ProtectedRoutes>} />
+src/App.jsx:          path="/auth"
+src/App.jsx:        <Route path="/secure-admin-login-8822" element={<Auth allowSuperAdmin={true} />} />
+src/App.jsx:          path="/register"
+src/App.jsx:        <Route path="/landing" element={<MarketingLanding />} />
+src/App.jsx:        <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+src/App.jsx:        <Route path="/terms-conditions" element={<TermsAndConditions />} />
+src/App.jsx:        <Route path="/confirm-email" element={<ConfirmEmail />} />
+src/App.jsx:        <Route path="/blog" element={<Blog />} />
+src/App.jsx:        <Route path="/blog/:slug" element={<BlogPostDetail />} />
+src/App.jsx:        <Route path="/customer/orders" element={<CustomerOrderView />} />
+src/App.jsx:        <Route path="/track-order" element={<CustomerOrderView />} />
+src/App.jsx:        <Route path="/display" element={<Navigate to="/public/orders" replace />} />
+src/App.jsx:        <Route path="/public/orders" element={<PublicOrderDisplay />} />
+src/App.jsx:        <Route path="/pos/cfd" element={<CustomerFacingDisplay />} />
+src/App.jsx:          path="/pos/kitchen"
+src/App.jsx:          path="/pos/waiter"
+src/App.jsx:          path="/guides/aggregator-reconciliation"
+src/App.jsx:          path="/orders"
+src/App.jsx:          path="/payment-history"
+src/App.jsx:          path="/tables"
+src/App.jsx:          path="/menu"
+src/App.jsx:          path="/dashboard"
+src/App.jsx:          path="/setup-wizard"
+src/App.jsx:          path="/management"
+src/App.jsx:          path="/floor-plan"
+src/App.jsx:          path="/settings"
+src/App.jsx:          path="/billing"
+src/App.jsx:          path="/billing/success"
+src/App.jsx:          path="/users"
+src/App.jsx:          path="/branches"
+src/App.jsx:          path="/branches/:id/settings"
+src/App.jsx:          path="/floors"
+src/App.jsx:          path="/vendors"
+src/App.jsx:          path="/inventory"
+src/App.jsx:          path="/purchase-orders"
+src/App.jsx:          path="/automation"
+src/App.jsx:          path="/customer-prospects"
+src/App.jsx:          path="/gift-cards"
+src/App.jsx:          path="/loyalty"
+src/App.jsx:          path="/expenses"
+src/App.jsx:          path="/loans"
+src/App.jsx:          path="/reconciliation"
+src/App.jsx:          path="/aggregator-reconciliation"
+src/App.jsx:          path="/consolidated-pl"
+src/App.jsx:          path="/fixed-asset-registry"
+src/App.jsx:          path="/financial-dashboard"
+src/App.jsx:          path="/shifts"
+src/App.jsx:          path="/payroll/*"
+src/App.jsx:          path="/employee-requests"
+src/App.jsx:          path="/departments"
+src/App.jsx:          path="/positions"
+src/App.jsx:          path="/delivery-boys"
+src/App.jsx:          path="/my-deliveries"
+src/App.jsx:          path="/delivery-performance"
+src/App.jsx:          path="/my-history"
+src/App.jsx:          path="/my-payroll"
+src/App.jsx:          path="/mobile-attendance"
+src/App.jsx:          path="/deals"
+src/App.jsx:          path="/ai-insights"
+src/App.jsx:          path="/ai-assistant"
+src/App.jsx:          path="/feedback"
+src/App.jsx:          path="/super-admin/tenants"
+src/App.jsx:          path="/super-admin/templates"
+src/App.jsx:          path="/super-admin/plans"
+src/App.jsx:          path="/super-admin/promo-codes"
+src/App.jsx:          path="/super-admin/subscriptions"
+src/App.jsx:          path="/super-admin/gateways"
+src/App.jsx:          path="/super-admin/email-settings"
+src/App.jsx:          path="/super-admin/ai-settings"
+src/App.jsx:          path="/super-admin/platform-settings"
+src/App.jsx:          path="/super-admin/blog"
+src/App.jsx:          path="/super-admin/blog/new"
+src/App.jsx:          path="/super-admin/blog/edit/:id"
+src/App.jsx:          path="/ai-training"
+src/App.jsx:          path="/super-admin/whatsapp-health"
+src/App.jsx:          path="/super-admin/system-logs"
+src/App.jsx:          path="/super-admin/ai-training"
+src/App.jsx:          path="/my-schedule"
+src/App.jsx:        <Route path="*" element={<NotFound />} />
+src/https/index.js:// Delivery Tracking Routes
+src/https/index.js:// Payroll Settings Routes
+src/https/index.js:// Advance Salary Routes
+src/https/index.js:// Employee Request Routes
+src/https/index.js:// Payroll Export Routes
+src/https/index.js:// Employee Self-Service Routes (Employees can view their own payroll data)
+src/https/index.js:// Employee Shift Routes
+src/locales/en/delivery_boy.json:    "route_history": "Route History",
+src/components/settings/WhatsAppSettings.jsx:                        <label className="block text-xs font-bold uppercase tracking-wider text-[#666] mb-2">Route</label>
+src/components/settings/WhatsAppSettings.jsx:                            <option value="customer">Consumer Route</option>
+src/components/settings/WhatsAppSettings.jsx:                            <option value="internal">Operational Route</option>
+src/components/shared/ProtectedRoute.jsx:const ProtectedRoute = ({ children, permission, fallbackPermission, feature }) => {
+src/components/shared/ProtectedRoute.jsx:export default ProtectedRoute;
+src/components/delivery/DeliveryTrackingMap.jsx:                    alt="Delivery Route"
+src/hooks/useLoadData.js:  const publicRoutes = ["/", "/auth", "/landing", "/register", "/shop", "/customer/orders", "/track-order", "/display", "/public/orders", "/secure-admin-login-8822", "/terms-conditions", "/privacy-policy", "/guides"];
+src/hooks/useLoadData.js:      const shouldSkipAuth = publicRoutes.some(route =>
+src/App.jsx:  BrowserRouter as Router,
+src/App.jsx:  Routes,
+src/App.jsx:  Route,
+src/App.jsx:import ProtectedRoute from "./components/shared/ProtectedRoute";
+src/App.jsx:const hideHeaderRoutes = ["/auth", "/login", "/register", "/landing", "/blog", "/privacy-policy", "/terms-conditions", "/confirm-email", "/track-order", "/display", "/public/orders", "/guides/aggregator-reconciliation", "/pos/cfd"];
+src/App.jsx:      {isAuth && !hideHeaderRoutes.includes(location.pathname) && !(location.pathname === '/' && !isAuth) && (
+src/App.jsx:        <Routes>
+src/App.jsx:        <Route
+src/App.jsx:              <ProtectedRoutes>
+src/App.jsx:              </ProtectedRoutes>
+src/App.jsx:        <Route path="/home" element={<ProtectedRoutes><Home /></ProtectedRoutes>} />
+src/App.jsx:        <Route
+src/App.jsx:        {/* Secret Super Admin Route - Allow access even if authenticated to enable re-login/admin access */}
+src/App.jsx:        <Route path="/secure-admin-login-8822" element={<Auth allowSuperAdmin={true} />} />
+src/App.jsx:        <Route
+src/App.jsx:        <Route path="/landing" element={<MarketingLanding />} />
+src/App.jsx:        <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+src/App.jsx:        <Route path="/terms-conditions" element={<TermsAndConditions />} />
+src/App.jsx:        <Route path="/confirm-email" element={<ConfirmEmail />} />
+src/App.jsx:        <Route path="/blog" element={<Blog />} />
+src/App.jsx:        <Route path="/blog/:slug" element={<BlogPostDetail />} />
+src/App.jsx:        <Route path="/customer/orders" element={<CustomerOrderView />} />
+src/App.jsx:        <Route path="/track-order" element={<CustomerOrderView />} />
+src/App.jsx:        <Route path="/display" element={<Navigate to="/public/orders" replace />} />
+src/App.jsx:        <Route path="/public/orders" element={<PublicOrderDisplay />} />
+src/App.jsx:        <Route path="/pos/cfd" element={<CustomerFacingDisplay />} />
+src/App.jsx:        <Route
+src/App.jsx:            <ProtectedRoutes>
+src/App.jsx:            </ProtectedRoutes>
+src/App.jsx:        <Route
+src/App.jsx:            <ProtectedRoutes>
+src/App.jsx:            </ProtectedRoutes>
+src/App.jsx:        <Route
+src/App.jsx:        <Route
+src/App.jsx:            <ProtectedRoutes>
+src/App.jsx:              <ProtectedRoute permission="canManageOrders">
+src/App.jsx:              </ProtectedRoute>
+src/App.jsx:            </ProtectedRoutes>
+src/App.jsx:        <Route
+src/App.jsx:            <ProtectedRoutes>
+src/App.jsx:              <ProtectedRoute permission="canViewReports">
+src/App.jsx:              </ProtectedRoute>
+src/App.jsx:            </ProtectedRoutes>
+src/App.jsx:        <Route
+src/App.jsx:            <ProtectedRoutes>
+src/App.jsx:              <ProtectedRoute permission="canManageTables">
+src/App.jsx:              </ProtectedRoute>
+src/App.jsx:            </ProtectedRoutes>
+src/App.jsx:        <Route
+src/App.jsx:            <ProtectedRoutes>
+src/App.jsx:              <ProtectedRoute permission="canManageMenu" fallbackPermission="canCreateOrders">
+src/App.jsx:              </ProtectedRoute>
+src/App.jsx:            </ProtectedRoutes>
+src/App.jsx:        <Route
+src/App.jsx:            <ProtectedRoutes>
+src/App.jsx:              <ProtectedRoute permission="canViewDashboard">
+src/App.jsx:              </ProtectedRoute>
+src/App.jsx:            </ProtectedRoutes>
+src/App.jsx:        <Route
+src/App.jsx:            <ProtectedRoutes>
+src/App.jsx:              <ProtectedRoute permission="canManageSettings">
+src/App.jsx:              </ProtectedRoute>
+src/App.jsx:            </ProtectedRoutes>
+src/App.jsx:        <Route
+src/App.jsx:            <ProtectedRoutes>
+src/App.jsx:            </ProtectedRoutes>
+src/App.jsx:        <Route
+src/App.jsx:            <ProtectedRoutes>
+src/App.jsx:            </ProtectedRoutes>
+src/App.jsx:        <Route
+src/App.jsx:            <ProtectedRoutes>
+src/App.jsx:              <ProtectedRoute permission="canManageSettings">
+src/App.jsx:              </ProtectedRoute>
+src/App.jsx:            </ProtectedRoutes>
+src/App.jsx:        <Route
+src/App.jsx:            <ProtectedRoutes>
+src/App.jsx:            </ProtectedRoutes>
+src/App.jsx:        <Route
+src/App.jsx:        <Route
+src/App.jsx:            <ProtectedRoutes>
+src/App.jsx:              <ProtectedRoute permission="canManageUsers">
+src/App.jsx:              </ProtectedRoute>
+src/App.jsx:            </ProtectedRoutes>
+src/App.jsx:        <Route
+src/App.jsx:            <ProtectedRoutes>
+src/App.jsx:              <ProtectedRoute permission="canManageBranches" feature="Multi-Branch Support">
+src/App.jsx:              </ProtectedRoute>
+src/App.jsx:            </ProtectedRoutes>
+src/App.jsx:        <Route
+src/App.jsx:            <ProtectedRoutes>
+src/App.jsx:              <ProtectedRoute permission="canManageBranches" feature="Multi-Branch Support">
+src/App.jsx:              </ProtectedRoute>
+src/App.jsx:            </ProtectedRoutes>
+src/App.jsx:        <Route
+src/App.jsx:            <ProtectedRoutes>
+src/App.jsx:              <ProtectedRoute permission="canManageTables">
+src/App.jsx:              </ProtectedRoute>
+src/App.jsx:            </ProtectedRoutes>
+src/App.jsx:        <Route
+src/App.jsx:            <ProtectedRoutes>
+src/App.jsx:              <ProtectedRoute permission="canManageVendors">
+src/App.jsx:              </ProtectedRoute>
+src/App.jsx:            </ProtectedRoutes>
+src/App.jsx:        <Route
+src/App.jsx:            <ProtectedRoutes>
+src/App.jsx:              <ProtectedRoute permission="canManageInventory">
+src/App.jsx:              </ProtectedRoute>
+src/App.jsx:            </ProtectedRoutes>
+src/App.jsx:        <Route
+src/App.jsx:            <ProtectedRoutes>
+src/App.jsx:              <ProtectedRoute permission="canManagePurchaseOrders">
+src/App.jsx:              </ProtectedRoute>
+src/App.jsx:            </ProtectedRoutes>
+src/App.jsx:        <Route
+src/App.jsx:            <ProtectedRoutes>
+src/App.jsx:              <ProtectedRoute permission="canManageSettings">
+src/App.jsx:              </ProtectedRoute>
+src/App.jsx:            </ProtectedRoutes>
+src/App.jsx:        <Route
+src/App.jsx:            <ProtectedRoutes>
+src/App.jsx:              <ProtectedRoute permission="canManageCustomerProspects">
+src/App.jsx:              </ProtectedRoute>
+src/App.jsx:            </ProtectedRoutes>
+src/App.jsx:        <Route
+src/App.jsx:            <ProtectedRoutes>
+src/App.jsx:              <ProtectedRoute permission="canProcessPayments" feature="Gift Cards">
+src/App.jsx:              </ProtectedRoute>
+src/App.jsx:            </ProtectedRoutes>
+src/App.jsx:        <Route
+src/App.jsx:            <ProtectedRoutes>
+src/App.jsx:              <ProtectedRoute permission="canProcessPayments" feature="Customer Loyalty Program">
+src/App.jsx:              </ProtectedRoute>
+src/App.jsx:            </ProtectedRoutes>
+src/App.jsx:        <Route
+src/App.jsx:            <ProtectedRoutes>
+src/App.jsx:              <ProtectedRoute permission="canManageVendors">
+src/App.jsx:              </ProtectedRoute>
+src/App.jsx:            </ProtectedRoutes>
+src/App.jsx:        <Route
+src/App.jsx:            <ProtectedRoutes>
+src/App.jsx:              <ProtectedRoute permission="canManageVendors">
+src/App.jsx:              </ProtectedRoute>
+src/App.jsx:            </ProtectedRoutes>
+src/App.jsx:        <Route
+src/App.jsx:            <ProtectedRoutes>
+src/App.jsx:              <ProtectedRoute permission="canViewDashboard">
+src/App.jsx:              </ProtectedRoute>
+src/App.jsx:            </ProtectedRoutes>
+src/App.jsx:        <Route
+src/App.jsx:            <ProtectedRoutes>
+src/App.jsx:              <ProtectedRoute permission="canViewDashboard">
+src/App.jsx:              </ProtectedRoute>
+src/App.jsx:            </ProtectedRoutes>
+src/App.jsx:        <Route
+src/App.jsx:            <ProtectedRoutes>
+src/App.jsx:              <ProtectedRoute permission="canViewDashboard">
+src/App.jsx:              </ProtectedRoute>
+src/App.jsx:            </ProtectedRoutes>
+src/App.jsx:        <Route
+src/App.jsx:            <ProtectedRoutes>
+src/App.jsx:              <ProtectedRoute permission="canViewDashboard">
+src/App.jsx:              </ProtectedRoute>
+src/App.jsx:            </ProtectedRoutes>
+src/App.jsx:        <Route
+src/App.jsx:            <ProtectedRoutes>
+src/App.jsx:              <ProtectedRoute permission="canViewDashboard">
+src/App.jsx:              </ProtectedRoute>
+src/App.jsx:            </ProtectedRoutes>
+src/App.jsx:        <Route
+src/App.jsx:            <ProtectedRoutes>
+src/App.jsx:              <ProtectedRoute permission="canViewDashboard">
+src/App.jsx:              </ProtectedRoute>
+src/App.jsx:            </ProtectedRoutes>
+src/App.jsx:        <Route
+src/App.jsx:            <ProtectedRoutes>
+src/App.jsx:              <ProtectedRoute permission="canManagePayroll">
+src/App.jsx:              </ProtectedRoute>
+src/App.jsx:            </ProtectedRoutes>
+src/App.jsx:        <Route
+src/App.jsx:            <ProtectedRoutes>
+src/App.jsx:            </ProtectedRoutes>
+src/App.jsx:        <Route
+src/App.jsx:            <ProtectedRoutes>
+src/App.jsx:              <ProtectedRoute permission="canManageDepartments">
+src/App.jsx:              </ProtectedRoute>
+src/App.jsx:            </ProtectedRoutes>
+src/App.jsx:        <Route
+src/App.jsx:            <ProtectedRoutes>
+src/App.jsx:              <ProtectedRoute permission="canManagePositions">
+src/App.jsx:              </ProtectedRoute>
+src/App.jsx:            </ProtectedRoutes>
+src/App.jsx:        <Route
+src/App.jsx:            <ProtectedRoutes>
+src/App.jsx:              <ProtectedRoute permission="canManageDeliveryBoys">
+src/App.jsx:              </ProtectedRoute>
+src/App.jsx:            </ProtectedRoutes>
+src/App.jsx:        <Route
+src/App.jsx:            <ProtectedRoutes>
+src/App.jsx:            </ProtectedRoutes>
+src/App.jsx:        <Route
+src/App.jsx:            <ProtectedRoutes>
+src/App.jsx:              <ProtectedRoute permission="canViewReports">
+src/App.jsx:              </ProtectedRoute>
+src/App.jsx:            </ProtectedRoutes>
+src/App.jsx:        <Route
+src/App.jsx:            <ProtectedRoutes>
+src/App.jsx:              <ProtectedRoute permission="canViewOwnHistory">
+src/App.jsx:              </ProtectedRoute>
+src/App.jsx:            </ProtectedRoutes>
+src/App.jsx:        <Route
+src/App.jsx:            <ProtectedRoutes>
+src/App.jsx:            </ProtectedRoutes>
+src/App.jsx:        <Route
+src/App.jsx:            <ProtectedRoutes>
+src/App.jsx:            </ProtectedRoutes>
+src/App.jsx:        <Route
+src/App.jsx:            <ProtectedRoutes>
+src/App.jsx:              <ProtectedRoute permission="canManageMenu">
+src/App.jsx:              </ProtectedRoute>
+src/App.jsx:            </ProtectedRoutes>
+src/App.jsx:        <Route
+src/App.jsx:            <ProtectedRoutes>
+src/App.jsx:              <ProtectedRoute permission="canViewReports" feature="AI Insights">
+src/App.jsx:              </ProtectedRoute>
+src/App.jsx:            </ProtectedRoutes>
+src/App.jsx:        <Route
+src/App.jsx:            <ProtectedRoutes>
+src/App.jsx:              <ProtectedRoute permission="canViewReports" feature="AI Assistant">
+src/App.jsx:              </ProtectedRoute>
+src/App.jsx:            </ProtectedRoutes>
+src/App.jsx:        <Route
+src/App.jsx:            <ProtectedRoutes>
+src/App.jsx:              <ProtectedRoute permission="canViewDashboard">
+src/App.jsx:              </ProtectedRoute>
+src/App.jsx:            </ProtectedRoutes>
+src/App.jsx:        <Route
+src/App.jsx:            <ProtectedRoutes>
+src/App.jsx:            </ProtectedRoutes>
+src/App.jsx:        <Route
+src/App.jsx:            <ProtectedRoutes>
+src/App.jsx:            </ProtectedRoutes>
+src/App.jsx:        <Route
+src/App.jsx:            <ProtectedRoutes>
+src/App.jsx:            </ProtectedRoutes>
+src/App.jsx:        <Route
+src/App.jsx:            <ProtectedRoutes>
+src/App.jsx:            </ProtectedRoutes>
+src/App.jsx:        <Route
+src/App.jsx:            <ProtectedRoutes>
+src/App.jsx:            </ProtectedRoutes>
+src/App.jsx:        <Route
+src/App.jsx:            <ProtectedRoutes>
+src/App.jsx:            </ProtectedRoutes>
+src/App.jsx:        <Route
+src/App.jsx:            <ProtectedRoutes>
+src/App.jsx:            </ProtectedRoutes>
+src/App.jsx:        <Route
+src/App.jsx:            <ProtectedRoutes>
+src/App.jsx:            </ProtectedRoutes>
+src/App.jsx:        <Route
+src/App.jsx:            <ProtectedRoutes>
+src/App.jsx:            </ProtectedRoutes>
+src/App.jsx:        <Route
+src/App.jsx:            <ProtectedRoutes>
+src/App.jsx:            </ProtectedRoutes>
+src/App.jsx:        <Route
+src/App.jsx:            <ProtectedRoutes>
+src/App.jsx:            </ProtectedRoutes>
+src/App.jsx:        <Route
+src/App.jsx:            <ProtectedRoutes>
+src/App.jsx:            </ProtectedRoutes>
+src/App.jsx:        <Route
+src/App.jsx:            <ProtectedRoutes>
+src/App.jsx:              <ProtectedRoute permission="canManageSettings">
+src/App.jsx:              </ProtectedRoute>
+src/App.jsx:            </ProtectedRoutes>
+src/App.jsx:        <Route
+src/App.jsx:            <ProtectedRoutes>
+src/App.jsx:            </ProtectedRoutes>
+src/App.jsx:        <Route
+src/App.jsx:            <ProtectedRoutes>
+src/App.jsx:            </ProtectedRoutes>
+src/App.jsx:        <Route
+src/App.jsx:            <ProtectedRoutes>
+src/App.jsx:            </ProtectedRoutes>
+src/App.jsx:        <Route
+src/App.jsx:            <ProtectedRoutes>
+src/App.jsx:            </ProtectedRoutes>
+src/App.jsx:        <Route path="*" element={<NotFound />} />
+src/App.jsx:      </Routes>
+src/App.jsx:const ProtectedRoutes = ({ children }) => {
+src/App.jsx:    <Router basename="/">
+src/App.jsx:    </Router>
+src/pages/SuperAdmin/AISettings.jsx:                                            { id: "openrouter", name: "OpenRouter", desc: "Aggregated LLM API" },
+src/pages/SuperAdmin/AISettings.jsx:                                                { id: "openrouter", name: "OpenRouter", desc: "4o-Audio" }
+src/pages/SuperAdmin/AISettings.jsx:                                            <label className="block text-xs text-gray-500 mb-2 uppercase tracking-widest font-bold">OpenRouter Preset (Optional)</label>
+src/components/home/DriverStatus.jsx:              navigate("/delivery-boys");
+src/components/home/PayrollWidget.jsx:          onClick={() => navigate("/payroll")}
+src/components/home/PayrollWidget.jsx:              onClick={() => navigate("/payroll")}
+src/components/home/QuickActions.jsx:      onClick: () => navigate("/orders")
+src/components/home/QuickActions.jsx:      onClick: () => navigate("/orders")
+src/components/home/QuickActions.jsx:      onClick: () => navigate("/orders")
+src/components/home/QuickActions.jsx:      onClick: () => navigate("/inventory")
+src/components/home/QuickActions.jsx:      onClick: () => navigate("/orders")
+src/components/home/QuickActions.jsx:      onClick: () => navigate("/users")
+src/components/home/QuickActions.jsx:      onClick: () => navigate("/settings")
+src/components/home/InventoryStatus.jsx:              navigate("/inventory");
+src/components/home/ExpensesWidget.jsx:          onClick={() => navigate("/expenses")}
+src/components/home/ExpensesWidget.jsx:              onClick={() => navigate("/expenses")}
+src/components/home/BestSellingWidget.jsx:              navigate("/dashboard");
+src/components/home/ActiveOrdersWidget.jsx:          onClick={() => navigate("/orders")}
+src/components/home/ActiveOrdersWidget.jsx:                onClick={() => navigate("/orders")}
+src/components/home/WaitingPaymentsWidget.jsx:          onClick={() => navigate("/orders")}
+src/components/home/WaitingPaymentsWidget.jsx:                onClick={() => navigate("/orders")}
+src/components/home/POReceivingStatus.jsx:          onClick={() => navigate("/purchase-orders")}
+src/components/home/POReceivingStatus.jsx:                  onClick={() => navigate("/purchase-orders")}
+src/components/home/AttendanceWidget.jsx:          onClick={() => navigate("/payroll/attendance")}
+src/components/home/AttendanceWidget.jsx:                onClick={() => navigate("/payroll/attendance")}
+src/components/home/RecentOrders.jsx:            onClick={() => navigate("/orders")}
+src/components/home/MostDemandedWidget.jsx:          onClick={() => navigate("/dashboard")}
+src/components/home/LoansWidget.jsx:          onClick={() => navigate("/loans")}
+src/components/home/LoansWidget.jsx:              onClick={() => navigate("/loans")}
+src/components/home/ActiveOrdersList.jsx:          onClick={() => navigate("/orders")}
+src/components/home/ActiveOrdersList.jsx:                onClick={() => navigate("/orders")}
+src/components/home/PaymentsStatus.jsx:              navigate("/orders");
+src/components/home/ActiveDeliveriesWidget.jsx:          onClick={() => navigate("/orders")}
+src/components/home/ActiveDeliveriesWidget.jsx:                onClick={() => navigate("/orders")}
+src/components/tables/TableCard.jsx:    navigate(`/menu`);
+src/components/auth/Login.jsx:        navigate("/my-deliveries");
+src/components/auth/Login.jsx:        navigate("/menu");
+src/components/auth/Login.jsx:        navigate("/orders", { state: { defaultStatus: "progress" } });
+src/components/auth/Login.jsx:        navigate("/");
+src/components/shared/Header.jsx:      navigate("/auth");
+src/components/shared/Header.jsx:        <div onClick={() => navigate("/")} className="flex items-center gap-1.5 cursor-pointer hover:opacity-80 transition-opacity me-auto md:me-0">
+src/components/shared/Header.jsx:          onClick={() => navigate('/setup-wizard')}
+src/components/shared/BranchSelector.jsx:        navigate('/users?action=transfer');
+src/components/shared/BranchSelector.jsx:        navigate('/users?branch=' + currentBranch?.id);
+src/components/shared/BranchSelector.jsx:                        onClick={() => navigate('/users?branch=' + (displayBranch?.id || branches[0].id))}
+src/components/shared/GlobalSearch.jsx:            navigate("/orders", { state: { selectedOrderId: result.id, highlightOrder: true } });
+src/components/shared/GlobalSearch.jsx:            navigate("/customer-prospects", { state: { selectedCustomerId: result.id, customerName: result.title, highlightCustomer: true } });
+src/components/shared/GlobalSearch.jsx:            navigate("/menu", { state: { selectedDishId: result.id, dishName: result.title, highlightDish: true } });
+src/components/shared/GlobalSearch.jsx:            navigate("/users", { state: { selectedUserId: result.id, userName: result.title, highlightUser: true } });
+src/components/shared/GlobalSearch.jsx:            navigate("/branches", { state: { selectedBranchId: result.id, branchName: result.title, highlightBranch: true } });
+src/components/shared/GlobalSearch.jsx:            navigate("/purchase-orders", { state: { selectedPOId: result.id, poNumber: result.title, highlightPO: true } });
+src/components/shared/GlobalSearch.jsx:            navigate("/vendors", { state: { selectedVendorId: result.id, vendorName: result.title, highlightVendor: true } });
+src/components/shared/GlobalSearch.jsx:            navigate("/inventory", { state: { selectedItemId: result.id, itemName: result.title, highlightItem: true } });
+src/components/shared/GlobalSearch.jsx:            navigate("/delivery-boys", { state: { selectedDeliveryBoyId: result.id, deliveryBoyName: result.title, highlightDeliveryBoy: true } });
+src/components/shared/GlobalSearch.jsx:            navigate(result.link);
+src/components/shared/Sidebar.jsx:                    navigate(path);
+src/components/shared/Sidebar.jsx:            navigate("/auth");
+src/components/shared/BackButton.jsx:    <button onClick={() => navigate(-1)} className='bg-[#025cca] p-2 text-xl font-bold rounded-full text-white '> 
+src/components/shared/BottomNav.jsx:    navigate("/tables");
+src/components/shared/BottomNav.jsx:            onClick={() => navigate("/")}
+src/components/shared/BottomNav.jsx:              onClick={() => navigate("/orders")}
+src/components/shared/BottomNav.jsx:              onClick={() => navigate("/tables")}
+src/components/shared/BottomNav.jsx:              onClick={() => navigate("/menu")}
+src/components/dashboard/DeliveryOperationsWidget.jsx:          onClick={() => navigate("/delivery-boys")}
+src/components/dashboard/DeliveryOperationsWidget.jsx:                  onClick={() => navigate("/orders")}
+src/components/dashboard/Payments.jsx:          onClick={() => navigate("/financial-dashboard")}
+src/components/dashboard/RecentOrders.jsx:          onClick={() => navigate("/orders")}
+src/components/dashboard/RecentOrders.jsx:                onClick={() => navigate("/orders")}
+src/components/dashboard/menu/FloorsSection.jsx:                    onClick={() => currentBranch?.id !== 'all' && navigate("/floors")}
+src/components/dashboard/menu/FloorsSection.jsx:                        onClick={() => currentBranch?.id !== 'all' && navigate("/floors")}
+src/components/dashboard/DeliveryPayoutsWidget.jsx:                                    onClick={() => navigate("/expenses", {
+src/components/dashboard/DeliveryPayoutsWidget.jsx:                onClick={() => navigate("/delivery-boys")}
+src/components/dashboard/TableManagementWidget.jsx:          onClick={() => navigate("/tables")}
+src/components/dashboard/TableManagementWidget.jsx:                  onClick={() => navigate("/tables")}
+src/components/dashboard/TableManagementWidget.jsx:                onClick={() => navigate("/tables")}
+src/components/dashboard/MenuFloorManagement.jsx.backup:              onClick={() => navigate("/floors")}
+src/components/dashboard/MenuFloorManagement.jsx.backup:                onClick={() => navigate("/floors")}
+src/components/dashboard/QuickSetupWizard.jsx:                            navigate("/dashboard");
+src/components/dashboard/QuickSetupWizard.jsx:                                    navigate("/dashboard");
+src/components/dashboard/Management.jsx:            onClick={() => navigate("/inventory")}
+src/components/dashboard/Management.jsx:            onClick={() => navigate("/vendors")}
+src/components/dashboard/Management.jsx:            onClick={() => navigate("/purchase-orders")}
+src/components/dashboard/Management.jsx:            onClick={() => navigate("/customer-prospects")}
+src/components/dashboard/Management.jsx:            onClick={() => navigate("/financial-dashboard")}
+src/components/dashboard/Management.jsx:            onClick={() => navigate("/expenses")}
+src/components/dashboard/Management.jsx:            onClick={() => navigate("/loans")}
+src/components/dashboard/Management.jsx:            onClick={() => navigate("/shifts")}
+src/components/dashboard/Management.jsx:            onClick={() => navigate("/users")}
+src/components/dashboard/Management.jsx:            onClick={() => navigate("/payroll")}
+src/components/dashboard/Management.jsx:            onClick={() => navigate("/mobile-attendance")}
+src/components/delivery/DeliveryBoyDetail.jsx:                            navigate("/expenses", {
+src/pages/Loyalty.jsx:                    onClick={() => navigate(-1)}
+src/pages/BranchManagement.jsx:        navigate(`/branches/${branch.id}/settings`);
+src/pages/ConfirmEmail.jsx:            navigate("/login");
+src/pages/ConfirmEmail.jsx:                                    onClick={() => navigate("/")}
+src/pages/Blog.jsx:                    <div onClick={() => navigate('/')} className="cursor-pointer">
+src/pages/Blog.jsx:                        onClick={() => navigate('/register')}
+src/pages/Blog.jsx:                                        onClick={() => navigate(`/blog/${post.slug}`)}
+src/pages/MarketingLanding.jsx:            navigate(`/register?plan=${planId}`);
+src/pages/MarketingLanding.jsx:            navigate("/register");
+src/pages/MarketingLanding.jsx:                        <button onClick={() => navigate("/register")} className="bg-gradient-to-r from-yellow-400 to-orange-500 text-black font-bold px-5 py-3 md:px-6 md:py-3 rounded-xl text-sm md:text-base hover:shadow-lg hover:shadow-yellow-400/20 transition-all whitespace-nowrap">
+src/pages/MarketingLanding.jsx:                                <button className="flex items-center gap-2 text-yellow-400 font-black uppercase tracking-widest text-sm hover:gap-4 transition-all" onClick={() => navigate('/register')}>
+src/pages/MarketingLanding.jsx:                        <a onClick={() => navigate('/privacy-policy')} className="hover:text-white transition-colors cursor-pointer">{t('marketing.footer.privacy')}</a>
+src/pages/MarketingLanding.jsx:                        <a onClick={() => navigate('/terms-conditions')} className="hover:text-white transition-colors cursor-pointer">{t('marketing.footer.terms')}</a>
+src/pages/MarketingLanding.jsx:                        <a onClick={() => navigate('/guides/aggregator-reconciliation')} className="hover:text-yellow-400 font-bold transition-colors cursor-pointer flex items-center gap-1">
+src/pages/BranchSettings.jsx:                navigate('/branches');
+src/pages/AggregatorGuide.jsx:                    <div className="flex items-center gap-2 md:gap-4 cursor-pointer" onClick={() => navigate('/')}>
+src/pages/AggregatorGuide.jsx:                            onClick={() => navigate('/landing')}
+src/pages/AggregatorGuide.jsx:                        onClick={() => navigate('/register')}
+src/pages/SuperAdmin/PostEditor.jsx:            navigate("/super-admin/blog");
+src/pages/SuperAdmin/PostEditor.jsx:                            onClick={() => navigate("/super-admin/blog")}
+src/pages/SuperAdmin/BlogManagement.jsx:                                                onClick={() => navigate(`/super-admin/blog/edit/${post.id}`)}
+src/pages/TermsAndConditions.jsx:                    onClick={() => navigate(-1)}
+src/pages/GiftCards.jsx:                    onClick={() => navigate(-1)}
+src/pages/PrivacyPolicy.jsx:                    onClick={() => navigate(-1)}
+src/pages/BillingSuccess.jsx:                        navigate("/dashboard");
+src/pages/BillingSuccess.jsx:                                    onClick={() => navigate("/auth")}
+src/pages/BillingSuccess.jsx:                                    onClick={() => navigate("/dashboard")}
+src/pages/DatabaseSetup.jsx:      navigate("/auth");
+src/pages/DatabaseSetup.jsx:        navigate("/auth");
+src/pages/EmployeeRequests.jsx:                    onClick={() => navigate("/payroll")}
+src/pages/EmployeeRequests.jsx:                    onClick={() => navigate("/payroll-settings")}
+src/pages/EmployeeRequests.jsx:                    onClick={() => navigate("/payroll-reports")}
+src/pages/DeliveryBoys.jsx:                  onClick={() => navigate("/users")}
+src/pages/BlogPostDetail.jsx:                    onClick={() => navigate('/blog')}
+src/pages/BlogPostDetail.jsx:                    <div onClick={() => navigate('/')} className="cursor-pointer">
+src/pages/BlogPostDetail.jsx:                        onClick={() => navigate('/register')}
+src/pages/BlogPostDetail.jsx:                        onClick={() => navigate('/blog')}
+src/pages/BlogPostDetail.jsx:                                        onClick={() => navigate('/register')}
+src/pages/Home.jsx:      navigate("/my-deliveries", { replace: true });
+src/pages/Home.jsx:      navigate("/menu", { replace: true });
+src/pages/Home.jsx:      navigate("/pos/kitchen", { replace: true });
+src/pages/TenantRegister.jsx:                                <button onClick={() => navigate('/login')} className="text-white/30 hover:text-white transition-all text-xs font-bold flex items-center justify-center gap-2 group">
+src/pages/TenantRegister.jsx:                                        onClick={() => navigate('/')}
+src/components/settings/tabs/BranchGeneralTab.jsx:                                        <li>Go to <a href="https://console.cloud.google.com" target="_blank" rel="noopener noreferrer" className="text-blue-400 underline">console.cloud.google.com</a></li>
+src/components/settings/SettingsTabs.jsx:                    <a href="https://naqashthaheem.com" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-sm text-[#ababab] hover:text-yellow-400 transition-colors">
+src/components/settings/SettingsTabs.jsx:                    <a href="mailto:contact@naqashthaheem.com" className="flex items-center gap-2 text-sm text-[#ababab] hover:text-yellow-400 transition-colors">
+src/components/settings/WhatsAppSettings.jsx:                                    href="https://wa.me/971543868100?text=Hello,%20I%20would%20like%20to%20request%20WhatsApp%20approval%20for%20my%20branch." 
+src/components/settings/WhatsAppSettings.jsx:                                    href="tel:+971543868100" 
+src/components/home/PopularDishes.jsx:          <a href="/orders" className="text-[#025cca] text-sm font-semibold">
+src/components/branch/BranchFormModal.jsx:                                                <li>Go to <a href="https://console.cloud.google.com" target="_blank" rel="noopener noreferrer" className="text-blue-400 underline">console.cloud.google.com</a></li>
+src/components/shared/FileViewerModal.jsx:              href={fullUrl}
+src/components/shared/FileViewerModal.jsx:                href={fullUrl}
+src/components/shared/SEO.jsx:            <link rel="canonical" href={url} />
+src/components/shared/SEO.jsx:            <link rel="alternate" hrefLang="en" href={`${siteUrl}`} />
+src/components/shared/SEO.jsx:            <link rel="alternate" hrefLang="ar" href={`${siteUrl}`} />
+src/components/shared/SEO.jsx:            <link rel="alternate" hrefLang="ur" href={`${siteUrl}`} />
+src/components/shared/SEO.jsx:            <link rel="alternate" hrefLang="fr" href={`${siteUrl}`} />
+src/components/shared/SEO.jsx:            <link rel="alternate" hrefLang="de" href={`${siteUrl}`} />
+src/components/shared/SEO.jsx:            <link rel="alternate" hrefLang="hi" href={`${siteUrl}`} />
+src/components/shared/SEO.jsx:            <link rel="alternate" hrefLang="x-default" href={`${siteUrl}`} />
+src/components/delivery/DeliveryBoyDashboardComponents.jsx:                                <a href={`tel:${deliveryBoy.phone}`} className="flex items-center gap-2 text-blue-400 font-bold text-sm hover:underline">
+src/components/delivery/DeliveryBoyOrderManagement.jsx:                        <a href={`tel:${order.customerDetails.phone}`} className="inline-flex items-center gap-2 bg-[#1a1a1a] px-3 py-1.5 rounded-lg text-blue-400 text-xs font-bold border border-[#333] hover:bg-[#222]">
+src/components/delivery/DeliveryTrackingMap.jsx:                          href={`tel:${deliveryBoy.phone}`}
+src/components/delivery/DeliveryTrackingMap.jsx:                  href={getGoogleMapsUrl()}
+src/pages/Settings/AggregatorSettings.jsx:                        <a href={platformInfo[selectedPlatform].docs} target="_blank" rel="noopener noreferrer" className="help-link">
+src/pages/Settings/PaymentGatewaySettings.jsx:                                    <a href={info.docs} target="_blank" rel="noopener noreferrer" onClick={(e) => e.stopPropagation()}>
+src/pages/CustomerOrderView.jsx:        href="https://cloudpos4u.com"
+src/pages/ConfirmEmail.jsx:                                                <a href={urls.loginUrl} target="_blank" rel="noopener noreferrer" className="bg-yellow-400 text-black p-2 rounded-xl hover:scale-105 transition-transform shrink-0">
+src/pages/ConfirmEmail.jsx:                                                <a href={urls.customerUrl} target="_blank" rel="noopener noreferrer" className="bg-blue-400 text-white p-2 rounded-xl hover:scale-105 transition-transform shrink-0">
+src/pages/MarketingLanding.jsx:                        <a href="#features" className="text-[#ababab] hover:text-white transition-colors p-2 text-base">{t('marketing.nav.features')}</a>
+src/pages/MarketingLanding.jsx:                        <a href="#pricing" className="text-[#ababab] hover:text-white transition-colors p-2 text-base">{t('marketing.nav.pricing')}</a>
+src/pages/MarketingLanding.jsx:                        <a href="#why-us" className="text-[#ababab] hover:text-white transition-colors p-2 text-base">{t('marketing.nav.why_us')}</a>
+src/pages/MarketingLanding.jsx:                        <a href="/blog" className="text-[#ababab] hover:text-white transition-colors p-2 text-base">{t('marketing.nav.blog')}</a>
+src/pages/MarketingLanding.jsx:                        <a href="#features" className="hover:text-white transition-colors">{t('marketing.nav.features')}</a>
+src/pages/MarketingLanding.jsx:                        <a href="#pricing" className="hover:text-white transition-colors">{t('marketing.nav.pricing')}</a>
+src/pages/MarketingLanding.jsx:                            href="https://wa.me/971543868100" 
+src/pages/MarketingLanding.jsx:                        <a href="/blog" className="hover:text-white transition-colors">
+src/pages/MarketingLanding.jsx:                            <a href="https://topbusinesssoftware.com/products/Cloud-POS-4U/reviews/" target="_blank" rel="noopener noreferrer" className="text-[10px] text-[#555] hover:text-white transition-colors">Cloud POS 4U Reviews</a>
+src/pages/MarketingLanding.jsx:                                <a href="https://facebook.com/cloudpos4u" target="_blank" rel="noopener noreferrer" className="text-[#555] hover:text-blue-500 transition-colors"><FaFacebook size={18} /></a>
+src/pages/MarketingLanding.jsx:                                <a href="https://instagram.com/cloudpos4u" target="_blank" rel="noopener noreferrer" className="text-[#555] hover:text-pink-500 transition-colors"><FaInstagram size={18} /></a>
+src/pages/MarketingLanding.jsx:                                <a href="https://x.com/cloudpos4u" target="_blank" rel="noopener noreferrer" className="text-[#555] hover:text-white transition-colors"><FaTwitter size={18} /></a>
+src/pages/MarketingLanding.jsx:                                <a href="https://linkedin.com/company/cloudpos4u/" target="_blank" rel="noopener noreferrer" className="text-[#555] hover:text-blue-400 transition-colors"><FaLinkedin size={18} /></a>
+src/pages/MarketingLanding.jsx:                                <a href="https://www.youtube.com/@CloudPOS4u" target="_blank" rel="noopener noreferrer" className="text-[#555] hover:text-red-600 transition-colors"><FaYoutube size={18} /></a>
+src/pages/MarketingLanding.jsx:                    href="https://wa.me/971543868100"
+src/pages/SuperAdmin/PostEditor.jsx:            return `<li style="${indent}margin:0.35rem 0;"><a href="#${h.id}" style="color:#facc15;text-decoration:none;font-size:0.9rem;">${level === "h3" ? "↳ " : ""}${h.textContent.trim()}</a></li>`;
+src/pages/SuperAdmin/TenantDashboard.jsx:                                    href={`https://${statsData.tenant.slug}-pos.cloudpos4u.com`}
+src/pages/SuperAdmin/WhatsAppHealthDashboard.jsx:                                <a href={`https://${session.tenantUrl}`} target="_blank" rel="noopener noreferrer"
+src/pages/SuperAdmin/PlatformSettings.jsx:                                Go to the <a href="https://console.firebase.google.com/" target="_blank" rel="noreferrer" className="text-blue-400 hover:underline">Firebase Console</a>, select your project, and click the <strong>Settings (cog)</strong> icon.
+src/pages/SuperAdmin/BlogManagement.jsx:                                                href={`https://cloudpos4u.com/blog/${post.slug}`} 
+src/pages/PublicOrderDisplay.jsx:        href="https://cloudpos4u.com"
+src/pages/BillingSuccess.jsx:                                    href="https://mail.google.com"
+src/pages/Auth.jsx:                <a href="https://topbusinesssoftware.com/products/Cloud-POS-4U/reviews/" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">Cloud POS 4U Reviews</a>
+src/pages/Auth.jsx:              <a href="https://naqashthaheem.com" target="_blank" rel="noreferrer" className="text-white/20 hover:text-white transition-colors">
+src/pages/Auth.jsx:              <a href="mailto:contact@naqashthaheem.com" className="text-white/20 hover:text-white transition-colors">
+src/pages/Auth.jsx:              <a href="https://wa.me/971544747121" target="_blank" rel="noreferrer" className="text-white/20 hover:text-white transition-colors">
+src/pages/TenantRegister.jsx:                                        href={registrationData?.loginUrl} target="_blank" rel="noopener noreferrer" 
+src/pages/TenantRegister.jsx:                                        href={registrationData?.customerUrl} target="_blank" rel="noopener noreferrer" 
+src/pages/TenantRegister.jsx:                                        href={checkoutUrl} target="_blank" rel="noopener noreferrer"
+src/pages/TenantRegister.jsx:                                        href={registrationData?.loginUrl} target="_blank" rel="noopener noreferrer"
+src/pages/TenantRegister.jsx:                            <a href="https://topbusinesssoftware.com/products/Cloud-POS-4U/reviews/" target="_blank" rel="noopener noreferrer" className="text-[10px] text-white/30 hover:text-white transition-colors">Cloud POS 4U Reviews</a>

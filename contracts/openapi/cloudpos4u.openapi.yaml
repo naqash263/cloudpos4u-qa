@@ -30,6 +30,10 @@ paths:
       responses:
         "200":
           description: Successful login
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/LoginSuccessResponse"
         "401":
           description: Invalid credentials
 
@@ -54,6 +58,10 @@ paths:
       responses:
         "200":
           description: Dishes returned successfully
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DishListResponse"
         "401":
           description: Unauthorized
 
@@ -104,6 +112,10 @@ paths:
       responses:
         "201":
           description: Order created successfully
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/OrderCreatedResponse"
         "400":
           description: Validation error
         "401":
@@ -115,3 +127,104 @@ components:
       type: http
       scheme: bearer
       bearerFormat: JWT
+  schemas:
+    LoginSuccessResponse:
+      type: object
+      required:
+        - success
+        - message
+        - accessToken
+        - data
+      properties:
+        success:
+          type: boolean
+        message:
+          type: string
+        accessToken:
+          type: string
+        data:
+          type: object
+          required:
+            - id
+            - email
+            - role
+            - status
+            - branchId
+          properties:
+            id:
+              type: string
+            email:
+              type: string
+            role:
+              type: string
+            status:
+              type: string
+            branchId:
+              type: string
+
+    DishListResponse:
+      type: object
+      required:
+        - success
+        - data
+      properties:
+        success:
+          type: boolean
+        data:
+          type: array
+          items:
+            type: object
+            required:
+              - id
+              - name
+              - price
+              - isAvailable
+              - branchId
+            properties:
+              id:
+                type: string
+              name:
+                type: string
+              price:
+                type: number
+              isAvailable:
+                type: boolean
+              branchId:
+                type: string
+
+    OrderCreatedResponse:
+      type: object
+      required:
+        - success
+        - message
+        - data
+      properties:
+        success:
+          type: boolean
+        message:
+          type: string
+        data:
+          type: object
+          required:
+            - id
+            - orderNumber
+            - orderType
+            - paymentMethod
+            - paymentStatus
+            - branchId
+            - items
+          properties:
+            id:
+              type: string
+            orderNumber:
+              type: string
+            orderType:
+              type: string
+            paymentMethod:
+              type: string
+            paymentStatus:
+              type: string
+            branchId:
+              type: string
+            items:
+              type: array

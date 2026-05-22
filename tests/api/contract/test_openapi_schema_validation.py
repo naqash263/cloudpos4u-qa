@@ -2,7 +2,7 @@ import yaml
 import pytest
 import allure
 from pathlib import Path
-from openapi_spec_validator import validate_spec
+from openapi_spec_validator import validate
 
 
 OPENAPI_FILE = Path("contracts/openapi/cloudpos4u.openapi.yaml")
@@ -21,7 +21,7 @@ def test_openapi_spec_is_valid():
             spec = yaml.safe_load(file)
 
     with allure.step("Validate OpenAPI schema format"):
-        validate_spec(spec)
+        validate(spec)
 
 
 @pytest.mark.api

@@ -64,3 +64,6 @@ class CloudPOSAPIClient:
             headers=headers,
             cookies=cookies
         )
+
+    def get_endpoint(self, endpoint):
+        return self.menu.get(endpoint)

@@ -1,0 +1,12 @@
+[
+  {
+    "route": "/dashboard",
+    "expected_url_contains": "dashboard",
+    "module": "Dashboard"
+  },
+  {
+    "route": "/menu",
+    "expected_url_contains": "menu",
+    "module": "POS Menu"
+  }
+]

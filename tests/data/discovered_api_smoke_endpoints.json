@@ -1,0 +1,8 @@
+[
+  {
+    "method": "GET",
+    "endpoint": "/dish/all",
+    "expected_status": 200,
+    "module": "Menu"
+  }
+]

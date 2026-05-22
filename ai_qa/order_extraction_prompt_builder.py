@@ -1,13 +1,34 @@
-from pathlib import Path
+class OrderExtractionPromptBuilder:
 
+    @staticmethod
+    def build(user_message):
+        return f"""
+Extract restaurant order details from the customer message.
 
-PROMPT_FILE = Path("ai_qa/promptfoo/prompts/order_extraction_prompt.txt")
+Customer message:
+{user_message}
 
+Return only valid JSON using this exact schema:
 
-def build_order_extraction_prompt(customer_message: str) -> str:
-    prompt_template = PROMPT_FILE.read_text(encoding="utf-8")
+{{
+  "intent": "create_order",
+  "orderType": "Takeaway",
+  "paymentMethod": "Unknown",
+  "items": [
+    {{
+      "name": "Item name",
+      "quantity": 1
+    }}
+  ],
+  "unavailableItems": [],
+  "needsConfirmation": true
+}}
 
-    return prompt_template.replace(
-        "{{customer_message}}",
-        customer_message
-    )
+Rules:
+- intent must be one of: create_order, menu_query, cancel_order, unknown
+- orderType must be one of: Takeaway, Dine-in, Delivery, Unknown
+- paymentMethod must be one of: Cash, Card, Online, Unknown
+- quantity must be integer
+- needsConfirmation must be true unless user clearly confirms final order
+- Return JSON only
+"""

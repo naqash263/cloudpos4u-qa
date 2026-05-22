@@ -1,40 +1,35 @@
-import requests
+import os
+from openai import OpenAI
 
 
 class LMStudioClient:
-    def __init__(
-        self,
-        base_url="http://localhost:1234/v1",
-        model="google/gemma-4-e4b",
-        timeout=60
-    ):
-        self.base_url = base_url.rstrip("/")
-        self.model = model
-        self.timeout = timeout
+    def __init__(self):
+        self.base_url = os.getenv("LM_STUDIO_BASE_URL", "http://localhost:1234/v1")
+        self.model = os.getenv("LM_STUDIO_MODEL", "local-model")
 
-    def chat(self, prompt):
-        response = requests.post(
-            f"{self.base_url}/chat/completions",
-            headers={
-                "Content-Type": "application/json",
-                "Authorization": "Bearer lm-studio"
-            },
-            json={
-                "model": self.model,
-                "messages": [
-                    {
-                        "role": "user",
-                        "content": prompt
-                    }
-                ],
-                "temperature": 0,
-                "max_tokens": 800
-            },
-            timeout=self.timeout
+        self.client = OpenAI(
+            base_url=self.base_url,
+            api_key="lm-studio"
         )
 
-        response.raise_for_status()
+    def chat(self, prompt, temperature=0.1, max_tokens=1000):
+        response = self.client.chat.completions.create(
+            model=self.model,
+            messages=[
+                {
+                    "role": "system",
+                    "content": (
+                        "You are an AI order extraction assistant for a restaurant POS system. "
+                        "Return only valid JSON. Do not include explanation or markdown."
+                    )
+                },
+                {
+                    "role": "user",
+                    "content": prompt
+                }
+            ],
+            temperature=temperature,
+            max_tokens=max_tokens
+        )
 
-        data = response.json()
-
-        return data["choices"][0]["message"]["content"]
+        return response.choices[0].message.content

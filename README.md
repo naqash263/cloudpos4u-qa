@@ -590,6 +590,8 @@ DB_PORT
 DB_NAME
 DB_USER
 DB_PASSWORD
+
+DB validation tests are tenant-schema aware. The framework uses `DB_SCHEMA` from environment variables and safely queries tenant tables using PostgreSQL identifiers. DB tests require an active SSH tunnel and `RUN_DB_TESTS=true`.
 ```
 
 AI provider keys should only be added if AI provider connectivity tests are required.

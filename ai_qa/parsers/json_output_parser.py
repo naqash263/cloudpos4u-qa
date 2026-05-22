@@ -1,42 +1,55 @@
 import json
+import re
 
 
 class JSONOutputParser:
-    """
-    Extracts and validates JSON object from LLM output.
-
-    This is useful because local LLMs sometimes return:
-    - reasoning text before JSON
-    - markdown code fences
-    - explanation after JSON
-    """
+    @staticmethod
+    def parse(raw_output):
+        return JSONOutputParser.extract_json(raw_output)
 
     @staticmethod
-    def extract_json(raw_output: str) -> dict:
+    def extract_json(raw_output):
         if not raw_output or not raw_output.strip():
             raise ValueError("LLM output is empty")
 
-        cleaned = raw_output.strip()
+        cleaned_output = raw_output.strip()
 
-        cleaned = cleaned.replace("```json", "")
-        cleaned = cleaned.replace("```", "")
-        cleaned = cleaned.strip()
+        # Case 1: clean JSON
+        try:
+            return json.loads(cleaned_output)
+        except json.JSONDecodeError:
+            pass
 
-        start_index = cleaned.find("{")
-        end_index = cleaned.rfind("}")
+        # Case 2: markdown json code block
+        code_block_match = re.search(
+            r"```(?:json)?\s*(\{.*?\})\s*```",
+            cleaned_output,
+            re.DOTALL
+        )
 
-        if start_index == -1 or end_index == -1:
+        if code_block_match:
+            json_text = code_block_match.group(1)
+
+            try:
+                return json.loads(json_text)
+            except json.JSONDecodeError as error:
+                raise ValueError(f"Invalid JSON output: {error}") from error
+
+        # Case 3: reasoning text before/after JSON
+        json_match = re.search(r"\{.*\}", cleaned_output, re.DOTALL)
+
+        if not json_match:
             raise ValueError("No JSON object found in LLM output")
 
-        json_text = cleaned[start_index:end_index + 1]
+        json_text = json_match.group(0)
 
         try:
             return json.loads(json_text)
         except json.JSONDecodeError as error:
-            raise ValueError(f"Invalid JSON extracted from LLM output: {error}")
+            raise ValueError(f"Invalid JSON output: {error}") from error
 
     @staticmethod
-    def validate_order_extraction_schema(parsed_json: dict) -> bool:
+    def validate_order_extraction_schema(data):
         required_fields = [
             "intent",
             "orderType",
@@ -47,26 +60,44 @@ class JSONOutputParser:
         ]
 
         for field in required_fields:
-            if field not in parsed_json:
+            if field not in data:
                 raise ValueError(f"Missing required field: {field}")
 
-        if not isinstance(parsed_json["items"], list):
-            raise ValueError("items must be a list")
+        if not isinstance(data["intent"], str):
+            raise ValueError("Field 'intent' must be a string")
 
-        if not isinstance(parsed_json["unavailableItems"], list):
-            raise ValueError("unavailableItems must be a list")
+        if not isinstance(data["orderType"], str):
+            raise ValueError("Field 'orderType' must be a string")
 
-        if not isinstance(parsed_json["needsConfirmation"], bool):
-            raise ValueError("needsConfirmation must be boolean")
+        if not isinstance(data["paymentMethod"], str):
+            raise ValueError("Field 'paymentMethod' must be a string")
 
-        for item in parsed_json["items"]:
+        if not isinstance(data["items"], list):
+            raise ValueError("Field 'items' must be a list")
+
+        if len(data["items"]) == 0:
+            raise ValueError("Field 'items' must not be empty")
+
+        if not isinstance(data["unavailableItems"], list):
+            raise ValueError("Field 'unavailableItems' must be a list")
+
+        if not isinstance(data["needsConfirmation"], bool):
+            raise ValueError("Field 'needsConfirmation' must be a boolean")
+
+        for index, item in enumerate(data["items"]):
             if "name" not in item:
-                raise ValueError("Each item must contain name")
+                raise ValueError(f"Missing item name at index {index}")
 
             if "quantity" not in item:
-                raise ValueError("Each item must contain quantity")
+                raise ValueError(f"Missing item quantity at index {index}")
+
+            if not isinstance(item["name"], str):
+                raise ValueError(f"Item name must be string at index {index}")
 
             if not isinstance(item["quantity"], int):
-                raise ValueError("Item quantity must be integer")
+                raise ValueError(f"Item quantity must be integer at index {index}")
+
+            if item["quantity"] <= 0:
+                raise ValueError(f"Item quantity must be greater than zero at index {index}")
 
         return True

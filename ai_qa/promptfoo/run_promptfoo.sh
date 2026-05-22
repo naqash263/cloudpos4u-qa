@@ -1,6 +1,6 @@
 #!/bin/bash
 
-PROVIDER=${1:-openai}
+PROVIDER=${1:-lmstudio}
 CACHE_MODE=${2:-cache}
 
 cd "$(dirname "$0")"

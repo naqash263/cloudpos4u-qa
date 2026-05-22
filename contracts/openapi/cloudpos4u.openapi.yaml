@@ -1,0 +1,117 @@
+openapi: 3.0.3
+info:
+  title: CloudPOS4U API Contract
+  version: 1.0.0
+  description: Initial OpenAPI contract for CloudPOS4U QA automation.
+
+servers:
+  - url: https://bakebite-pos.cloudpos4u.com/api
+
+paths:
+  /user/login:
+    post:
+      summary: Admin user login
+      tags:
+        - Authentication
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - email
+                - password
+              properties:
+                email:
+                  type: string
+                password:
+                  type: string
+      responses:
+        "200":
+          description: Successful login
+        "401":
+          description: Invalid credentials
+
+  /dish/all:
+    get:
+      summary: Get all dishes
+      tags:
+        - Menu
+      security:
+        - bearerAuth: []
+      parameters:
+        - in: header
+          name: x-branch-id
+          required: true
+          schema:
+            type: string
+        - in: header
+          name: x-branch-code
+          required: false
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Dishes returned successfully
+        "401":
+          description: Unauthorized
+
+  /order/:
+    post:
+      summary: Create POS order
+      tags:
+        - Orders
+      security:
+        - bearerAuth: []
+      parameters:
+        - in: header
+          name: x-branch-id
+          required: true
+          schema:
+            type: string
+        - in: header
+          name: x-branch-code
+          required: false
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - customerDetails
+                - orderType
+                - bills
+                - items
+                - paymentMethod
+                - paymentStatus
+              properties:
+                customerDetails:
+                  type: object
+                orderType:
+                  type: string
+                bills:
+                  type: object
+                items:
+                  type: array
+                paymentMethod:
+                  type: string
+                paymentStatus:
+                  type: string
+      responses:
+        "201":
+          description: Order created successfully
+        "400":
+          description: Validation error
+        "401":
+          description: Unauthorized
+
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT

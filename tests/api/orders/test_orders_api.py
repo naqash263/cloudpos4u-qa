@@ -31,6 +31,7 @@ def test_create_cash_paid_order_api(authenticated_api_client, available_dish):
     assert data["data"]["branchId"] == authenticated_api_client.branch_id
     assert len(data["data"]["items"]) > 0
 
+
 @pytest.mark.api
 @pytest.mark.negative
 @pytest.mark.regression
@@ -38,12 +39,13 @@ def test_create_cash_paid_order_api(authenticated_api_client, available_dish):
 @allure.story("Create Order Without Authentication")
 @allure.severity(allure.severity_level.CRITICAL)
 def test_create_order_without_auth_should_fail(authenticated_api_client, available_dish):
+
     payload = PayloadBuilder.cash_paid_order(
         available_dish,
         customer_name="Unauthorized Test Customer"
     )
 
-    authenticated_api_client.token = None
+    authenticated_api_client.clear_auth_context()
 
     response = authenticated_api_client.create_order(payload)
 

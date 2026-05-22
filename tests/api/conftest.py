@@ -1,17 +1,17 @@
 import pytest
 
 from utils.config import Config
-from utils.api_client import APIClient
+from utils.api.cloudpos_api_client import CloudPOSAPIClient
 
 
 @pytest.fixture
 def api_client():
-    return APIClient(Config.API_BASE_URL)
+    return CloudPOSAPIClient(Config.API_BASE_URL)
 
 
 @pytest.fixture
 def authenticated_api_client():
-    api = APIClient(Config.API_BASE_URL)
+    api = CloudPOSAPIClient(Config.API_BASE_URL)
 
     response = api.login(
         Config.ADMIN_EMAIL,

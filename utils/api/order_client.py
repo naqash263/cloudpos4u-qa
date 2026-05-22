@@ -1,17 +1,16 @@
-class OrderClient:
+from utils.api.base_client import BaseClient
+
+
+class OrderClient(BaseClient):
     def create_order(self, payload):
-        return self.request(
-            method="post",
-            endpoint="/order/",
-            json=payload
-        )
+        self.logger.info("Sending create order API request")
+        return self.post("/order/", payload=payload)
 
     def create_order_with_custom_headers(self, payload, headers=None, cookies=None):
-        return self.request(
-            method="post",
-            endpoint="/order/",
-            json=payload,
+        self.logger.info("Sending create order API request with custom headers")
+        return self.post(
+            "/order/",
+            payload=payload,
             headers=headers or {},
-            cookies=cookies or {},
-            auth=False
+            cookies=cookies or {}
         )

@@ -1,7 +1,8 @@
 import allure
 import pytest
 from utils.config import Config
-from utils.api_client import APIClient
+
+from utils.api.cloudpos_api_client import CloudPOSAPIClient
 
 @pytest.mark.api
 @pytest.mark.smoke
@@ -10,7 +11,7 @@ from utils.api_client import APIClient
 @allure.story("Login API Success")
 @allure.severity(allure.severity_level.CRITICAL)
 def test_login_api_success():
-    api = APIClient(Config.API_BASE_URL)
+    api = CloudPOSAPIClient(Config.API_BASE_URL)
 
     with allure.step("Send valid login API request"):
         response = api.login(
@@ -37,7 +38,7 @@ def test_login_api_success():
 @allure.story("Login API Invalid Password")
 @allure.severity(allure.severity_level.NORMAL)
 def test_login_api_invalid_password():
-    api = APIClient(Config.API_BASE_URL)
+    api = CloudPOSAPIClient(Config.API_BASE_URL)
 
     with allure.step("Send login API request with invalid password"):
         response = api.login(

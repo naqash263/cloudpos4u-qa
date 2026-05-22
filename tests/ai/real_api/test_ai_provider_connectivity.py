@@ -2,7 +2,7 @@ import allure
 import pytest
 
 from utils.config import Config
-from utils.api_client import APIClient
+from utils.api.cloudpos_api_client import CloudPOSAPIClient
 
 
 @allure.feature("Real Project GenAI QA")
@@ -13,7 +13,7 @@ def test_ai_provider_connectivity():
     if not Config.AI_TEST_PROVIDER:
         pytest.skip("AI_TEST_PROVIDER is not configured")
 
-    api = APIClient(Config.API_BASE_URL)
+    api = CloudPOSAPIClient(Config.API_BASE_URL)
 
     login_response = api.login(
         Config.ADMIN_EMAIL,
@@ -44,7 +44,7 @@ def test_embedding_provider_connectivity():
     if not Config.AI_EMBEDDING_API_KEY:
         pytest.skip("AI_EMBEDDING_API_KEY is not configured")
 
-    api = APIClient(Config.API_BASE_URL)
+    api = CloudPOSAPIClient(Config.API_BASE_URL)
 
     login_response = api.login(
         Config.ADMIN_EMAIL,

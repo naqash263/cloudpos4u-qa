@@ -1,78 +1,68 @@
-from datetime import datetime, timezone
-from utils.api_client import APIClient
-from utils.db_client import DBClient
+import pytest
+import allure
 from utils.config import Config
+from utils.api.cloudpos_api_client import cloudpos_api_client
+from utils.payload_builder import PayloadBuilder
+from utils.db_client import DBClient
 
 
-def test_order_saved_in_database():
-    api = APIClient(Config.API_BASE_URL)
+@pytest.mark.db
+@pytest.mark.api
+@pytest.mark.regression
+@allure.feature("Database Validation")
+@allure.story("Order Created Through API Exists In Database")
+@allure.severity(allure.severity_level.CRITICAL)
+def test_order_created_api_should_exist_in_database():
+    api = cloudpos_api_client(Config.API_BASE_URL)
 
-    login_response = api.login(
-        Config.ADMIN_EMAIL,
-        Config.ADMIN_PASSWORD
-    )
+    with allure.step("Login and get access token"):
+        login_response = api.login(
+            Config.ADMIN_EMAIL,
+            Config.ADMIN_PASSWORD
+        )
 
-    assert login_response.status_code == 200
+        assert login_response.status_code == 200
 
-    dishes_response = api.get_all_dishes()
-    dishes = dishes_response.json()["data"]
+    with allure.step("Fetch available dishes"):
+        dishes_response = api.get_all_dishes()
+        assert dishes_response.status_code == 200
 
-    dish = dishes[0]
+        dishes = dishes_response.json()["data"]
 
-    payload = {
-        "customerDetails": {
-            "name": "DB Test Customer",
-            "phone": "971500000000",
-            "email": "dbtest@example.com",
-            "guests": 1,
-            "addresses": []
-        },
-        "sourceChannel": "Walk-in",
-        "orderType": "Takeaway",
-        "tipAmount": 0,
-        "orderStatus": "In Progress",
-        "orderDate": datetime.now(timezone.utc).isoformat(),
-        "bills": {
-            "subtotal": dish["price"],
-            "discountAmount": 0,
-            "total": dish["price"],
-            "tax": 0,
-            "totalWithTax": dish["price"],
-            "tipAmount": 0
-        },
-        "appliedDeals": [],
-        "items": [
-            {
-                "id": dish["id"],
-                "dishId": dish["id"],
-                "name": dish["name"],
-                "price": dish["price"],
-                "pricePerQuantity": dish["price"],
-                "quantity": 1
-            }
-        ],
-        "paymentMethod": "Cash",
-        "paymentStatus": "Paid",
-        "paymentData": {},
-        "notes": "DB validation test"
-    }
+        available_dishes = [
+            dish for dish in dishes
+            if dish["isAvailable"] is True and dish["branchId"] == api.branch_id
+        ]
 
-    response = api.create_order(payload)
+        assert len(available_dishes) > 0
 
-    assert response.status_code == 201
+    with allure.step("Create order through API"):
+        payload = PayloadBuilder.cash_paid_order(
+            available_dishes[0],
+            customer_name="DB Validation Customer"
+        )
 
-    order_data = response.json()["data"]
-    order_number = order_data["orderNumber"]
+        response = api.create_order(payload)
 
-    db = DBClient()
+        assert response.status_code == 201
 
-    db_order = db.get_order_by_order_number(order_number)
+        order_data = response.json()["data"]
+        order_number = order_data["orderNumber"]
 
-    assert db_order is not None
-    assert db_order[1] == order_number
-    assert db_order[2] == "DB Test Customer"
-    assert db_order[3] == "Cash"
-    assert db_order[4] == "Paid"
-    assert db_order[5] == "Takeaway"
+    with allure.step("Verify order exists in PostgreSQL database"):
+        db = DBClient()
 
-    db.close()
+        try:
+            db_order = db.get_order_by_order_number(order_number)
+
+            assert db_order is not None
+
+            assert db_order[1] == order_number
+            assert db_order[2] == "DB Validation Customer"
+            assert db_order[5] == "Takeaway"
+            assert db_order[6] == "Cash"
+            assert db_order[7] == "Paid"
+            assert db_order[8] == api.branch_id
+
+        finally:
+            db.close()

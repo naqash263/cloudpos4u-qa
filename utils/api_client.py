@@ -1,1 +1,1 @@
-from utils.api.cloudpos_api_client import APIClient
+from utils.api.cloudpos_api_client import CloudPOSAPIClient
